@@ -17,7 +17,9 @@ from dump import dump
 from tests import run_tests
 from utils import get_full_dataset  # noqa: F401
 from utils import get_lite_dataset  # noqa: F401
-from utils import get_devin_instance_ids, get_plausible, load_predictions, pick_winner
+from utils import get_devin_instance_ids, get_plausible, load_predictions, pick_winner, TemporaryDirectory
+
+import traceback
 
 REPOS_DNAME = Path("repos")
 CHAT_LOGS_DNAME = Path("chat-logs")
@@ -242,7 +244,7 @@ def process_one_instance(entry, num_tries, models, temperature, model_name_or_pa
         for model in models:
             dump(attempt, model)
 
-            with tempfile.TemporaryDirectory(dir="/mnt/aider") as git_tempdir:
+            with TemporaryDirectory() as git_tempdir:
                 dump(git_tempdir)
                 checkout_repo(git_tempdir, entry)
 
@@ -281,6 +283,7 @@ Propose changes to update the repo to fix the problem below.
                 except Exception as coder_err:
                     # swallow any exceptions during benchmarking
                     dump(coder_err)
+                    traceback.print_exc()                    
                     continue
 
                 # Take note of which files aider added to the chat for stats later
@@ -485,8 +488,9 @@ def main():
     # models = ["gpt-4o", "openrouter/anthropic/claude-3-opus"]
     # models = ["openrouter/anthropic/claude-3-opus"]
     # models = ["gpt-4o"]
+    models = ["gpt-4o-mini"]
     # models = ["gpt-4-1106-preview"]
-    models = ["openrouter/anthropic/claude-3.5-sonnet"]
+    # models = ["openrouter/anthropic/claude-3.5-sonnet"]
     # models = ["claude-3-5-sonnet-20240620"]
 
     # How many attempts per model to try and find a plausible solutions?
@@ -512,7 +516,8 @@ def main():
         dataset = {instance_id: dataset[instance_id]}
 
     # How many threads to use for attempting instances in parallel
-    threads = 10
+    # threads = 10
+    threads = 1
 
     # Any predictions/ dirs provided on the command line are treated
     # as earlier, higher priority runs.  If a plausible solution was

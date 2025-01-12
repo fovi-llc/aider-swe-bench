@@ -2,6 +2,7 @@ import datetime
 import json
 import shutil
 from pathlib import Path
+import tempfile
 
 from datasets import load_dataset
 
@@ -215,3 +216,15 @@ def choose_predictions(dnames, model_name_or_path=None, copy_md=False, devin_onl
 
     dump(len(chosen))
     return chosen
+
+
+class TemporaryDirectory:
+    def __init__(self, suffix=None, prefix=None, dir="/tmp/aider"):
+        self.name = tempfile.mkdtemp(suffix=suffix, prefix=prefix, dir=dir)
+
+    def __enter__(self):
+        return self.name
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        # Do not delete the directory on exit
+        pass

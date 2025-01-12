@@ -1,4 +1,4 @@
 lox
-aider-chat
+aider-chat==0.40.6
 swebench==1.1.5
 pre-commit
