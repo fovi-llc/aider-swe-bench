@@ -23,6 +23,8 @@ REPOS_DNAME = Path("repos")
 CHAT_LOGS_DNAME = Path("chat-logs")
 PREDS_DNAME = Path("predictions")
 
+USE_NEW_AIDER = False
+
 
 def diff_versus_commit(git_dname, commit):
     """
@@ -139,6 +141,8 @@ def get_coder(model, git_dname, chat_history_file, test_cmd, temperature, oracle
 
     If `oracle_files` are provided, they are added to the aider chat automatically.
     """
+    global USE_NEW_AIDER
+
     if oracle_files and git_dname:
         oracle_files = [Path(git_dname) / fname for fname in oracle_files]
 
@@ -151,23 +155,38 @@ def get_coder(model, git_dname, chat_history_file, test_cmd, temperature, oracle
     )
 
     dump(git_dname)
-    repo = GitRepo(io,  fnames=None, git_dname=git_dname,models=model.commit_message_models()) 
 
+    if USE_NEW_AIDER:
+        repo = GitRepo(io,  fnames=None, git_dname=git_dname, models=model.commit_message_models())
 
-    coder = Coder.create(
-        main_model=model,
-        io=io,
-        repo=repo,
-        map_tokens=2048,  # Use 2k tokens for the repo map
-        stream=False,
-        auto_commits=False,  # Don't bother git committing changes
-        fnames=oracle_files,
-        auto_test=True,  # Automatically run the test_cmd after making changes
-        test_cmd=test_cmd,
-        # verbose=True,
-        # edit_format="udiff",
-        # max_chat_history_tokens=8*1024,
-    )
+        coder = Coder.create(
+            main_model=model,
+            io=io,
+            repo=repo,
+            map_tokens=2048,  # Use 2k tokens for the repo map
+            stream=False,
+            auto_commits=False,  # Don't bother git committing changes
+            fnames=oracle_files,
+            auto_test=True,  # Automatically run the test_cmd after making changes
+            test_cmd=test_cmd,
+            # verbose=True,
+            # edit_format="udiff",
+        )
+    else:
+        coder = Coder.create(
+            main_model=model,
+            io=io,
+            git_dname=git_dname,
+            map_tokens=2048,  # Use 2k tokens for the repo map
+            stream=False,
+            auto_commits=False,  # Don't bother git committing changes
+            fnames=oracle_files,
+            auto_test=True,  # Automatically run the test_cmd after making changes
+            test_cmd=test_cmd,
+            # verbose=True,
+            # edit_format="udiff",
+            max_chat_history_tokens=(8 * 1024),
+        )
     coder.temperature = temperature
 
     # Take at most 4 steps before giving up.
@@ -487,7 +506,10 @@ def main():
         devin_insts = get_devin_instance_ids()
         dataset = dict((inst, entry) for inst, entry in dataset.items() if inst in devin_insts)
 
-    #dataset = {"sympy__sympy-18532" : dataset["sympy__sympy-18532"]}
+    instance_id = None
+    instance_id = "sympy__sympy-18532"
+    if instance_id:
+        dataset = {instance_id: dataset[instance_id]}
 
     # How many threads to use for attempting instances in parallel
     threads = 10
