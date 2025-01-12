@@ -26,6 +26,7 @@ CHAT_LOGS_DNAME = Path("chat-logs")
 PREDS_DNAME = Path("predictions")
 
 USE_NEW_AIDER = False
+INTERACTIVE = False
 
 
 def diff_versus_commit(git_dname, commit):
@@ -388,6 +389,8 @@ def process_instances(
                    If they contain a plausible solution for an instance,
                    don't continue looking.
     """
+    global INTERACTIVE
+
     models_slug = "--".join(model.replace("/", "-") for model in models)
     model_name_or_path = "aider--" + models_slug
     models_slug = prefix + "--" + models_slug
@@ -430,8 +433,9 @@ def process_instances(
     dump(len(remaining_instances))
 
     print()
-    print("press enter...")
-    input()
+    if INTERACTIVE:
+        print("press enter...")
+        input()
 
     if not CHAT_LOGS_DNAME.exists():
         CHAT_LOGS_DNAME.mkdir()
