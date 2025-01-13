@@ -1,4 +1,6 @@
 lox
+# aider-chat 0.47.1 won't fail from git_dname but will hang after running test.
+# 0.48.0 will fail from git_dname.
 aider-chat==0.40.6
 swebench==1.1.5
 pre-commit
