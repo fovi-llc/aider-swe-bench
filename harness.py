@@ -488,7 +488,8 @@ def main():
     #
     # Configure 1 or more models to use to try and find plausible solutions
     #
-    models = ["deepseek/deepseek-coder"]
+    models = ["ollama_chat/deepseek-r1:14b"]
+    # models = ["deepseek/deepseek-coder"]
     # models = ["openrouter/deepseek/deepseek-chat"]
     # models = ["gpt-4o", "openrouter/anthropic/claude-3-opus"]
     # models = ["openrouter/anthropic/claude-3-opus"]
