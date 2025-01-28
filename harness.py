@@ -4,7 +4,7 @@ import json
 import random
 import subprocess
 import sys
-import tempfile
+import argparse
 from pathlib import Path
 
 import lox
@@ -20,6 +20,7 @@ from utils import get_lite_dataset  # noqa: F401
 from utils import get_devin_instance_ids, get_plausible, load_predictions, pick_winner, TemporaryDirectory
 
 import traceback
+import re
 
 REPOS_DNAME = Path("repos")
 CHAT_LOGS_DNAME = Path("chat-logs")
@@ -472,6 +473,47 @@ def process_instances(
 
 
 def main():
+    parser = argparse.ArgumentParser(description="Process SWE Bench instances with LLM models.")
+    parser.add_argument("--prefix", type=str, default="terse-udiff", help="Prefix for predictions subdir name.")
+    parser.add_argument("--models", type=str, nargs='+', default=["ollama_chat/deepseek-r1:14b"], help="List of models to use.")
+    parser.add_argument("--num_tries", type=int, default=1, help="Number of attempts per model.")
+    parser.add_argument("--temperature", type=float, default=0, help="Temperature for chat completions.")
+    parser.add_argument("--dataset", type=str, choices=["full", "lite"], default="lite", help="Dataset to use.")
+    parser.add_argument("--just_devin_570", action="store_true", help="Filter to the Devin 570 instances.")
+    parser.add_argument("--instance_ids", "--id", "-i", type=str, nargs='+', help="Specific instance ID(s) to process.")
+    parser.add_argument("--filter", "--id_filter", "-f", type=str, help="Regex to filter instance IDs.")
+    parser.add_argument("--threads", type=int, default=1, help="Number of threads for parallel processing.")
+    parser.add_argument("prior_dnames", nargs='*', help="Prior predictions directories.")
+
+    args = parser.parse_args()
+
+    prefix = args.prefix
+    models = args.models
+    num_tries = args.num_tries
+    temperature = args.temperature
+
+    # TODO: Add "verified" dataset
+    if args.dataset == "full":
+        dataset = get_full_dataset()
+    else:
+        dataset = get_lite_dataset()
+
+    if args.filter:
+        pattern = re.compile(args.filter)
+        dataset = {inst: entry for inst, entry in dataset.items() if pattern.match(inst)}
+
+    just_devin_570 = args.just_devin_570
+
+    if just_devin_570:
+        devin_insts = get_devin_instance_ids()
+        dataset = dict((inst, entry) for inst, entry in dataset.items() if inst in devin_insts)
+
+    if args.instance_ids:
+        dataset = {inst_id: dataset[inst_id] for inst_id in args.instance_ids if inst_id in dataset}
+
+    threads = args.threads
+    prior_dnames = args.prior_dnames
+
     models_json = Path(".aider.models.json")
     if models_json.exists():
         print(f"Registering {models_json}")
@@ -483,12 +525,12 @@ def main():
     # prefix = "lite025"
     # prefix = "full-"
     # prefix = "full025-"
-    prefix = "terse-udiff"
+    # prefix = "terse-udiff"
 
     #
     # Configure 1 or more models to use to try and find plausible solutions
     #
-    models = ["ollama_chat/deepseek-r1:14b"]
+    # models = ["ollama_chat/deepseek-r1:14b"]
     # models = ["deepseek/deepseek-coder"]
     # models = ["openrouter/deepseek/deepseek-chat"]
     # models = ["gpt-4o", "openrouter/anthropic/claude-3-opus"]
@@ -500,36 +542,36 @@ def main():
     # models = ["claude-3-5-sonnet-20240620"]
 
     # How many attempts per model to try and find a plausible solutions?
-    num_tries = 1
+    # num_tries = 1
 
     # What temperature to use during chat completions
-    temperature = 0
+    # temperature = 0
 
     # Load the SWE Bench dataset
     # dataset = get_full_dataset()
-    dataset = get_lite_dataset()
+    # dataset = get_lite_dataset()
 
-    just_devin_570 = False
+    # just_devin_570 = False
 
-    if just_devin_570:
-        # Filter it to the Devin 570
-        devin_insts = get_devin_instance_ids()
-        dataset = dict((inst, entry) for inst, entry in dataset.items() if inst in devin_insts)
+    # if just_devin_570:
+    #     # Filter it to the Devin 570
+    #     devin_insts = get_devin_instance_ids()
+    #     dataset = dict((inst, entry) for inst, entry in dataset.items() if inst in devin_insts)
 
-    instance_id = None
-    instance_id = "sympy__sympy-18532"
-    if instance_id:
-        dataset = {instance_id: dataset[instance_id]}
+    # instance_id = None
+    # instance_id = "sympy__sympy-18532"
+    # if instance_id:
+    #   dataset = {instance_id: dataset[instance_id]}
 
     # How many threads to use for attempting instances in parallel
     # threads = 10
-    threads = 1
+    # threads = 1
 
     # Any predictions/ dirs provided on the command line are treated
     # as earlier, higher priority runs.  If a plausible solution was
     # found for an instance already, we don't need to keep looking in
     # this run.
-    prior_dnames = sys.argv[1:]
+    # prior_dnames = sys.argv[1:]
 
     process_instances(
         prefix, dataset, models, num_tries, temperature, threads, prior_dnames, just_devin_570
