@@ -1,0 +1,63 @@
+{
+    "instance_id": "django__django-15790",
+    "model_name_or_path": "aider--ollama_chat-mistral-small",
+    "model_patch": "diff --git a/### File: django_app/apps.py b/### File: django_app/apps.py\nnew file mode 100644\nindex 0000000000..203bd626d7\n--- /dev/null\n+++ b/### File: django_app/apps.py\t\n@@ -0,0 +1,8 @@\n+from django.apps import AppConfig\n+\n+class DjangoAppConfig(AppConfig):\n+    name = 'django_app'\n+\n+    def ready(self):\n+        # Import checks to register them\n+        from .checks import check_for_template_tags_with_the_same_name\ndiff --git a/### File: django_app/checks.py b/### File: django_app/checks.py\nnew file mode 100644\nindex 0000000000..45610b3197\n--- /dev/null\n+++ b/### File: django_app/checks.py\t\n@@ -0,0 +1,23 @@\n+from django.core.checks import Error, register\n+\n+@register()\n+def check_for_template_tags_with_the_same_name(app_configs, **kwargs):\n+    errors = []\n+    seen_names = set()\n+\n+    for app_config in app_configs:\n+        if hasattr(app_config, 'template_tag_libraries'):\n+            for library in app_config.template_tag_libraries:\n+                if library.name in seen_names:\n+                    errors.append(\n+                        Error(\n+                            f\"Template tag module '{library.name}' is used for multiple template tag modules: {', '.join(seen_names)}\",\n+                            hint=\"Ensure that each template tag module has a unique name.\",\n+                            obj=app_config,\n+                            id='templates.E003',\n+                        )\n+                    )\n+                else:\n+                    seen_names.add(library.name)\n+\n+    return errors\ndiff --git a/### File: django_app/templatetags/my_tags.py b/### File: django_app/templatetags/my_tags.py\nnew file mode 100644\nindex 0000000000..9f4876783e\n--- /dev/null\n+++ b/### File: django_app/templatetags/my_tags.py\t\n@@ -0,0 +1,7 @@\n+from django import template\n+\n+register = template.Library()\n+\n+@register.simple_tag\n+def my_tag():\n+    return \"This is a tag\"\ndiff --git a/### File: templates/someapp/templatetags/my_tags.py b/### File: templates/someapp/templatetags/my_tags.py\nnew file mode 100644\nindex 0000000000..a1d1f4b44f\n--- /dev/null\n+++ b/### File: templates/someapp/templatetags/my_tags.py\t\n@@ -0,0 +1,7 @@\n+from django import template\n+\n+register = template.Library()\n+\n+@register.simple_tag\n+def my_other_tag():\n+    return \"This is another tag\"\ndiff --git a/### New File: docs/template_tags.rst b/### New File: docs/template_tags.rst\nnew file mode 100644\nindex 0000000000..e3bbfed7e8\n--- /dev/null\n+++ b/### New File: docs/template_tags.rst\t\n@@ -0,0 +1,6 @@\n+Template Tags Documentation\n+==========================\n+\n+When adding template tag libraries to `TEMPLATES['OPTIONS']['libraries']`, ensure that each library has a unique name. Duplicate names will result in an error, and you should provide unique names for each template tag module.\n+\n+Example:\ndiff --git a/] b/]\nnew file mode 100644\nindex 0000000000..e69de29bb2\n",
+    "model": "ollama_chat/mistral-small",
+    "temperature": 0,
+    "cost": 0.0,
+    "added_files": [
+        "### File: django_app/apps.py",
+        "### File: django_app/checks.py",
+        "### File: django_app/templatetags/my_tags.py",
+        "### File: templates/someapp/templatetags/my_tags.py",
+        "### New File: docs/template_tags.rst",
+        "]"
+    ],
+    "gold_files": [
+        "django/core/checks/templates.py"
+    ],
+    "edited_files": [
+        "### File: django_app/apps.py\t",
+        "### File: django_app/checks.py\t",
+        "### File: django_app/templatetags/my_tags.py\t",
+        "### File: templates/someapp/templatetags/my_tags.py\t",
+        "### New File: docs/template_tags.rst\t"
+    ],
+    "edit_outcome": true,
+    "lint_outcome": true,
+    "test_outcome": true,
+    "try": 1,
+    "tries": 1,
+    "all_results": [
+        {
+            "instance_id": "django__django-15790",
+            "model_name_or_path": "aider--ollama_chat-mistral-small",
+            "model_patch": "diff --git a/### File: django_app/apps.py b/### File: django_app/apps.py\nnew file mode 100644\nindex 0000000000..203bd626d7\n--- /dev/null\n+++ b/### File: django_app/apps.py\t\n@@ -0,0 +1,8 @@\n+from django.apps import AppConfig\n+\n+class DjangoAppConfig(AppConfig):\n+    name = 'django_app'\n+\n+    def ready(self):\n+        # Import checks to register them\n+        from .checks import check_for_template_tags_with_the_same_name\ndiff --git a/### File: django_app/checks.py b/### File: django_app/checks.py\nnew file mode 100644\nindex 0000000000..45610b3197\n--- /dev/null\n+++ b/### File: django_app/checks.py\t\n@@ -0,0 +1,23 @@\n+from django.core.checks import Error, register\n+\n+@register()\n+def check_for_template_tags_with_the_same_name(app_configs, **kwargs):\n+    errors = []\n+    seen_names = set()\n+\n+    for app_config in app_configs:\n+        if hasattr(app_config, 'template_tag_libraries'):\n+            for library in app_config.template_tag_libraries:\n+                if library.name in seen_names:\n+                    errors.append(\n+                        Error(\n+                            f\"Template tag module '{library.name}' is used for multiple template tag modules: {', '.join(seen_names)}\",\n+                            hint=\"Ensure that each template tag module has a unique name.\",\n+                            obj=app_config,\n+                            id='templates.E003',\n+                        )\n+                    )\n+                else:\n+                    seen_names.add(library.name)\n+\n+    return errors\ndiff --git a/### File: django_app/templatetags/my_tags.py b/### File: django_app/templatetags/my_tags.py\nnew file mode 100644\nindex 0000000000..9f4876783e\n--- /dev/null\n+++ b/### File: django_app/templatetags/my_tags.py\t\n@@ -0,0 +1,7 @@\n+from django import template\n+\n+register = template.Library()\n+\n+@register.simple_tag\n+def my_tag():\n+    return \"This is a tag\"\ndiff --git a/### File: templates/someapp/templatetags/my_tags.py b/### File: templates/someapp/templatetags/my_tags.py\nnew file mode 100644\nindex 0000000000..a1d1f4b44f\n--- /dev/null\n+++ b/### File: templates/someapp/templatetags/my_tags.py\t\n@@ -0,0 +1,7 @@\n+from django import template\n+\n+register = template.Library()\n+\n+@register.simple_tag\n+def my_other_tag():\n+    return \"This is another tag\"\ndiff --git a/### New File: docs/template_tags.rst b/### New File: docs/template_tags.rst\nnew file mode 100644\nindex 0000000000..e3bbfed7e8\n--- /dev/null\n+++ b/### New File: docs/template_tags.rst\t\n@@ -0,0 +1,6 @@\n+Template Tags Documentation\n+==========================\n+\n+When adding template tag libraries to `TEMPLATES['OPTIONS']['libraries']`, ensure that each library has a unique name. Duplicate names will result in an error, and you should provide unique names for each template tag module.\n+\n+Example:\ndiff --git a/] b/]\nnew file mode 100644\nindex 0000000000..e69de29bb2\n",
+            "model": "ollama_chat/mistral-small",
+            "temperature": 0,
+            "cost": 0.0,
+            "added_files": [
+                "### File: django_app/apps.py",
+                "### File: django_app/checks.py",
+                "### File: django_app/templatetags/my_tags.py",
+                "### File: templates/someapp/templatetags/my_tags.py",
+                "### New File: docs/template_tags.rst",
+                "]"
+            ],
+            "gold_files": [
+                "django/core/checks/templates.py"
+            ],
+            "edited_files": [
+                "### File: django_app/apps.py\t",
+                "### File: django_app/checks.py\t",
+                "### File: django_app/templatetags/my_tags.py\t",
+                "### File: templates/someapp/templatetags/my_tags.py\t",
+                "### New File: docs/template_tags.rst\t"
+            ],
+            "edit_outcome": true,
+            "lint_outcome": true,
+            "test_outcome": true,
+            "try": 1
+        }
+    ]
+}

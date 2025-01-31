@@ -1,0 +1,37 @@
+{
+    "instance_id": "scikit-learn__scikit-learn-25500",
+    "model_name_or_path": "aider--ollama_chat-mistral-small",
+    "model_patch": "",
+    "model": "ollama_chat/mistral-small",
+    "temperature": 0,
+    "cost": 0.0,
+    "added_files": [],
+    "gold_files": [
+        "sklearn/isotonic.py"
+    ],
+    "edited_files": [],
+    "edit_outcome": false,
+    "lint_outcome": null,
+    "test_outcome": null,
+    "try": 1,
+    "tries": 1,
+    "all_results": [
+        {
+            "instance_id": "scikit-learn__scikit-learn-25500",
+            "model_name_or_path": "aider--ollama_chat-mistral-small",
+            "model_patch": "",
+            "model": "ollama_chat/mistral-small",
+            "temperature": 0,
+            "cost": 0.0,
+            "added_files": [],
+            "gold_files": [
+                "sklearn/isotonic.py"
+            ],
+            "edited_files": [],
+            "edit_outcome": false,
+            "lint_outcome": null,
+            "test_outcome": null,
+            "try": 1
+        }
+    ]
+}

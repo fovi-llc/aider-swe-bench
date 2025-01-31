@@ -1,0 +1,51 @@
+{
+    "instance_id": "django__django-11019",
+    "model_name_or_path": "aider--ollama_chat-mistral-small",
+    "model_patch": "diff --git a/projects/django/django/forms/widgets.py b/projects/django/django/forms/widgets.py\nnew file mode 100644\nindex 0000000000..2d87c2ffc9\n--- /dev/null\n+++ b/projects/django/django/forms/widgets.py\n@@ -0,0 +1,25 @@\n+# Django\n+from django.forms import Media\n+\n+class Media:\n+    def __init__(self, css=None, js=None):\n+        self._css = {'all': []} if css is None else css\n+        self._js = [] if js is None else js\n+\n+    @property\n+    def css(self):\n+        return self._css\n+\n+    @property\n+    def js(self):\n+        return self._js\n+\n+    def merge_media(self, other):\n+        merged_css = {key: list(set(self.css.get(key, []) + other.css.get(key, []))) for key in set(self.css) | set(other.css)}\n+        merged_js = list(set(self.js + other.js))\n+        return Media(css=merged_css, js=merged_js)\n+\n+    def __add__(self, other):\n+        if not isinstance(other, Media):\n+            return NotImplemented\n+        return self.merge_media(other)\ndiff --git a/projects/django/myapp/forms.py b/projects/django/myapp/forms.py\nnew file mode 100644\nindex 0000000000..b250a6a547\n--- /dev/null\n+++ b/projects/django/myapp/forms.py\n@@ -0,0 +1,22 @@\n+from django import forms\n+\n+class ColorPicker(forms.Widget):\n+    class Media:\n+        js = ['color-picker.js']\n+\n+class SimpleTextWidget(forms.Widget):\n+    class Media:\n+        js = ['text-editor.js']\n+\n+class FancyTextWidget(forms.Widget):\n+    class Media:\n+        js = ['text-editor.js', 'text-editor-extras.js', 'color-picker.js']\n+\n+class MyForm(forms.Form):\n+    background_color = forms.CharField(widget=ColorPicker())\n+    intro = forms.CharField(widget=SimpleTextWidget())\n+    body = forms.CharField(widget=FancyTextWidget())\n+\n+    def __init__(self, *args, **kwargs):\n+        super().__init__(*args, **kwargs)\n+        self.media = self.background_color.media + self.intro.media + self.body.media\n",
+    "model": "ollama_chat/mistral-small",
+    "temperature": 0,
+    "cost": 0.0,
+    "added_files": [
+        "django/forms/widgets.py",
+        "projects/django/django/forms/widgets.py",
+        "projects/django/myapp/forms.py"
+    ],
+    "gold_files": [
+        "django/forms/widgets.py"
+    ],
+    "edited_files": [
+        "projects/django/django/forms/widgets.py",
+        "projects/django/myapp/forms.py"
+    ],
+    "edit_outcome": true,
+    "lint_outcome": true,
+    "test_outcome": true,
+    "try": 1,
+    "tries": 1,
+    "all_results": [
+        {
+            "instance_id": "django__django-11019",
+            "model_name_or_path": "aider--ollama_chat-mistral-small",
+            "model_patch": "diff --git a/projects/django/django/forms/widgets.py b/projects/django/django/forms/widgets.py\nnew file mode 100644\nindex 0000000000..2d87c2ffc9\n--- /dev/null\n+++ b/projects/django/django/forms/widgets.py\n@@ -0,0 +1,25 @@\n+# Django\n+from django.forms import Media\n+\n+class Media:\n+    def __init__(self, css=None, js=None):\n+        self._css = {'all': []} if css is None else css\n+        self._js = [] if js is None else js\n+\n+    @property\n+    def css(self):\n+        return self._css\n+\n+    @property\n+    def js(self):\n+        return self._js\n+\n+    def merge_media(self, other):\n+        merged_css = {key: list(set(self.css.get(key, []) + other.css.get(key, []))) for key in set(self.css) | set(other.css)}\n+        merged_js = list(set(self.js + other.js))\n+        return Media(css=merged_css, js=merged_js)\n+\n+    def __add__(self, other):\n+        if not isinstance(other, Media):\n+            return NotImplemented\n+        return self.merge_media(other)\ndiff --git a/projects/django/myapp/forms.py b/projects/django/myapp/forms.py\nnew file mode 100644\nindex 0000000000..b250a6a547\n--- /dev/null\n+++ b/projects/django/myapp/forms.py\n@@ -0,0 +1,22 @@\n+from django import forms\n+\n+class ColorPicker(forms.Widget):\n+    class Media:\n+        js = ['color-picker.js']\n+\n+class SimpleTextWidget(forms.Widget):\n+    class Media:\n+        js = ['text-editor.js']\n+\n+class FancyTextWidget(forms.Widget):\n+    class Media:\n+        js = ['text-editor.js', 'text-editor-extras.js', 'color-picker.js']\n+\n+class MyForm(forms.Form):\n+    background_color = forms.CharField(widget=ColorPicker())\n+    intro = forms.CharField(widget=SimpleTextWidget())\n+    body = forms.CharField(widget=FancyTextWidget())\n+\n+    def __init__(self, *args, **kwargs):\n+        super().__init__(*args, **kwargs)\n+        self.media = self.background_color.media + self.intro.media + self.body.media\n",
+            "model": "ollama_chat/mistral-small",
+            "temperature": 0,
+            "cost": 0.0,
+            "added_files": [
+                "django/forms/widgets.py",
+                "projects/django/django/forms/widgets.py",
+                "projects/django/myapp/forms.py"
+            ],
+            "gold_files": [
+                "django/forms/widgets.py"
+            ],
+            "edited_files": [
+                "projects/django/django/forms/widgets.py",
+                "projects/django/myapp/forms.py"
+            ],
+            "edit_outcome": true,
+            "lint_outcome": true,
+            "test_outcome": true,
+            "try": 1
+        }
+    ]
+}

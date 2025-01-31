@@ -1,0 +1,45 @@
+{
+    "instance_id": "django__django-12284",
+    "model_name_or_path": "aider--ollama_chat-mistral-small",
+    "model_patch": "diff --git a/models.py b/models.py\nnew file mode 100644\nindex 0000000000..45f0f32e70\n--- /dev/null\n+++ b/models.py\n@@ -0,0 +1,19 @@\n+from django.db import models\n+\n+class A(models.Model):\n+    foo_choice = [(\"A\", \"output1\"), (\"B\", \"output2\")]\n+    field_foo = models.CharField(max_length=254, choices=foo_choice)\n+\n+    class Meta:\n+        abstract = True\n+\n+class B(A):\n+    foo_choice = [(\"A\", \"output1\"), (\"B\", \"output2\"), (\"C\", \"output3\")]\n+\n+    def get_field_foo_display(self):\n+        for value, display in self.foo_choice:\n+            if value == self.field_foo:\n+                return display\n+        return self.field_foo\n+\n+    field_foo = models.CharField(max_length=254, choices=foo_choice)\n",
+    "model": "ollama_chat/mistral-small",
+    "temperature": 0,
+    "cost": 0.0,
+    "added_files": [
+        "models.py"
+    ],
+    "gold_files": [
+        "django/db/models/fields/__init__.py"
+    ],
+    "edited_files": [
+        "models.py"
+    ],
+    "edit_outcome": true,
+    "lint_outcome": true,
+    "test_outcome": true,
+    "try": 1,
+    "tries": 1,
+    "all_results": [
+        {
+            "instance_id": "django__django-12284",
+            "model_name_or_path": "aider--ollama_chat-mistral-small",
+            "model_patch": "diff --git a/models.py b/models.py\nnew file mode 100644\nindex 0000000000..45f0f32e70\n--- /dev/null\n+++ b/models.py\n@@ -0,0 +1,19 @@\n+from django.db import models\n+\n+class A(models.Model):\n+    foo_choice = [(\"A\", \"output1\"), (\"B\", \"output2\")]\n+    field_foo = models.CharField(max_length=254, choices=foo_choice)\n+\n+    class Meta:\n+        abstract = True\n+\n+class B(A):\n+    foo_choice = [(\"A\", \"output1\"), (\"B\", \"output2\"), (\"C\", \"output3\")]\n+\n+    def get_field_foo_display(self):\n+        for value, display in self.foo_choice:\n+            if value == self.field_foo:\n+                return display\n+        return self.field_foo\n+\n+    field_foo = models.CharField(max_length=254, choices=foo_choice)\n",
+            "model": "ollama_chat/mistral-small",
+            "temperature": 0,
+            "cost": 0.0,
+            "added_files": [
+                "models.py"
+            ],
+            "gold_files": [
+                "django/db/models/fields/__init__.py"
+            ],
+            "edited_files": [
+                "models.py"
+            ],
+            "edit_outcome": true,
+            "lint_outcome": true,
+            "test_outcome": true,
+            "try": 1
+        }
+    ]
+}

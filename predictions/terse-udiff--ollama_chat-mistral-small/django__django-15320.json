@@ -1,0 +1,45 @@
+{
+    "instance_id": "django__django-15320",
+    "model_name_or_path": "aider--ollama_chat-mistral-small",
+    "model_patch": "diff --git a/django/db/models/querysets.py b/django/db/models/querysets.py\nnew file mode 100644\nindex 0000000000..539dc69f68\n--- /dev/null\n+++ b/django/db/models/querysets.py\n@@ -0,0 +1,6 @@\n+from django.db.models import QuerySet\n+\n+class Subquery(QuerySet):\n+    def __init__(self, model=None, query=None, using=None, hints=None):\n+        super().__init__(model=model, query=query, using=using, hints=hints)\n+        self.query.subquery = True\n",
+    "model": "ollama_chat/mistral-small",
+    "temperature": 0,
+    "cost": 0.0,
+    "added_files": [
+        "django/db/models/querysets.py"
+    ],
+    "gold_files": [
+        "django/db/models/expressions.py"
+    ],
+    "edited_files": [
+        "django/db/models/querysets.py"
+    ],
+    "edit_outcome": true,
+    "lint_outcome": true,
+    "test_outcome": true,
+    "try": 1,
+    "tries": 1,
+    "all_results": [
+        {
+            "instance_id": "django__django-15320",
+            "model_name_or_path": "aider--ollama_chat-mistral-small",
+            "model_patch": "diff --git a/django/db/models/querysets.py b/django/db/models/querysets.py\nnew file mode 100644\nindex 0000000000..539dc69f68\n--- /dev/null\n+++ b/django/db/models/querysets.py\n@@ -0,0 +1,6 @@\n+from django.db.models import QuerySet\n+\n+class Subquery(QuerySet):\n+    def __init__(self, model=None, query=None, using=None, hints=None):\n+        super().__init__(model=model, query=query, using=using, hints=hints)\n+        self.query.subquery = True\n",
+            "model": "ollama_chat/mistral-small",
+            "temperature": 0,
+            "cost": 0.0,
+            "added_files": [
+                "django/db/models/querysets.py"
+            ],
+            "gold_files": [
+                "django/db/models/expressions.py"
+            ],
+            "edited_files": [
+                "django/db/models/querysets.py"
+            ],
+            "edit_outcome": true,
+            "lint_outcome": true,
+            "test_outcome": true,
+            "try": 1
+        }
+    ]
+}

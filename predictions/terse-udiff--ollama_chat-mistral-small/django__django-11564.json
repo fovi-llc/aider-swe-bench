@@ -1,0 +1,65 @@
+{
+    "instance_id": "django__django-11564",
+    "model_name_or_path": "aider--ollama_chat-mistral-small",
+    "model_patch": "diff --git a/### File: django/contrib/staticfiles/management/commands/runserver.py b/### File: django/contrib/staticfiles/management/commands/runserver.py\nnew file mode 100644\nindex 0000000000..a9fd0f6269\n--- /dev/null\n+++ b/### File: django/contrib/staticfiles/management/commands/runserver.py\t\n@@ -0,0 +1,7 @@\n+from django.core.management.commands.runserver import Command as RunServerCommand\n+from django.conf import settings\n+\n+class Command(RunServerCommand):\n+    def get_handler(self, *args, **options):\n+        script_name = getattr(settings, 'SCRIPT_NAME', '')\n+        return super().get_handler(*args, **options)\ndiff --git a/### File: django/contrib/staticfiles/storage.py b/### File: django/contrib/staticfiles/storage.py\nnew file mode 100644\nindex 0000000000..de2c235ae6\n--- /dev/null\n+++ b/### File: django/contrib/staticfiles/storage.py\t\n@@ -0,0 +1,11 @@\n+from django.core.files.storage import FileSystemStorage\n+from django.conf import settings\n+\n+class StaticFilesStorage(FileSystemStorage):\n+    def __init__(self, location=settings.STATIC_ROOT, base_url=None, file_overwrite=False,\n+                 directory_permissions=None, file_permissions=None):\n+        super().__init__(location, base_url, file_overwrite, directory_permissions, file_permissions)\n+\n+    def url(self, name):\n+        script_name = getattr(settings, 'SCRIPT_NAME', '')\n+        return f\"{script_name}{super().url(name)}\"\ndiff --git a/### File: django/contrib/staticfiles/views.py b/### File: django/contrib/staticfiles/views.py\nnew file mode 100644\nindex 0000000000..6d29ac1050\n--- /dev/null\n+++ b/### File: django/contrib/staticfiles/views.py\t\n@@ -0,0 +1,7 @@\n+from django.conf import settings\n+from django.http import HttpResponseRedirect\n+from django.views.static import serve\n+\n+def static_serve(request, path, document_root=None, show_indexes=False):\n+    script_name = getattr(settings, 'SCRIPT_NAME', '')\n+    return serve(request, f\"{script_name}{path}\", document_root, show_indexes)\ndiff --git a/### File: django/core/files/storage.py b/### File: django/core/files/storage.py\nnew file mode 100644\nindex 0000000000..422644e8b7\n--- /dev/null\n+++ b/### File: django/core/files/storage.py\t\n@@ -0,0 +1,10 @@\n+from django.conf import settings\n+\n+class FileSystemStorage:\n+    def __init__(self, location=None, base_url=None):\n+        self.location = location or getattr(settings, 'MEDIA_ROOT', None)\n+        self.base_url = base_url or getattr(settings, 'MEDIA_URL', None)\n+\n+    def url(self, name):\n+        script_name = getattr(settings, 'SCRIPT_NAME', '')\n+        return f\"{script_name}{super().url(name)}\"\ndiff --git a/### File: django/template/defaulttags.py b/### File: django/template/defaulttags.py\nnew file mode 100644\nindex 0000000000..3a711f35d6\n--- /dev/null\n+++ b/### File: django/template/defaulttags.py\t\n@@ -0,0 +1,19 @@\n+from django.template import Library, Node\n+\n+register = Library()\n+\n+class StaticNode(Node):\n+    def __init__(self, path, var_name=None):\n+        self.path = path\n+        self.var_name = var_name\n+\n+    def render(self, context):\n+        url = self.url(context)\n+        # Updating url here with request.META['SCRIPT_NAME']\n+        if 'request' in context:\n+            script_name = context['request'].META.get('SCRIPT_NAME', '')\n+            url = f\"{script_name}{url}\"\n+        if self.var_name is None:\n+            return url\n+        context[self.var_name] = url\n+        return ''\ndiff --git a/#### File: `tests/settings_tests/tests.py b/#### File: `tests/settings_tests/tests.py\nnew file mode 100644\nindex 0000000000..ef618fd5da\n--- /dev/null\n+++ b/#### File: `tests/settings_tests/tests.py\t\n@@ -0,0 +1,27 @@\n+# tests/settings_tests/tests.py\n+\n+import unittest\n+from django.conf import settings\n+from django.test.utils import override_settings\n+\n+class SettingsTests(unittest.TestCase):\n+\n+    def test_override(self):\n+        with override_settings(ALLOWED_HOSTS=['example.com']):\n+            self.assertTrue(settings.is_overridden('ALLOWED_HOSTS'))\n+\n+    def test_settings_delete(self):\n+        with self.settings(TEST=None):\n+            with self.assertRaises(AttributeError) as cm:\n+                getattr(settings, 'TEST')\n+            expected_message = \"'Settings' object has no attribute 'TEST'\"\n+            self.assertIn(expected_message, str(cm.exception))\n+\n+class IsOverriddenTest(unittest.TestCase):\n+\n+    def test_override(self):\n+        with override_settings(ALLOWED_HOSTS=['example.com']):\n+            self.assertTrue(settings.is_overridden('ALLOWED_HOSTS'))\n+\n+if __name__ == '__main__':\n+    unittest.main()\n",
+    "model": "ollama_chat/mistral-small",
+    "temperature": 0,
+    "cost": 0.0,
+    "added_files": [
+        "### File: django/contrib/staticfiles/management/commands/runserver.py",
+        "### File: django/contrib/staticfiles/storage.py",
+        "### File: django/contrib/staticfiles/views.py",
+        "### File: django/core/files/storage.py",
+        "### File: django/template/defaulttags.py",
+        "#### File: `tests/settings_tests/tests.py"
+    ],
+    "gold_files": [
+        "django/conf/__init__.py"
+    ],
+    "edited_files": [
+        "### File: django/contrib/staticfiles/management/commands/runserver.py\t",
+        "### File: django/contrib/staticfiles/storage.py\t",
+        "### File: django/contrib/staticfiles/views.py\t",
+        "### File: django/core/files/storage.py\t",
+        "### File: django/template/defaulttags.py\t",
+        "#### File: `tests/settings_tests/tests.py\t"
+    ],
+    "edit_outcome": false,
+    "lint_outcome": true,
+    "test_outcome": false,
+    "try": 1,
+    "tries": 1,
+    "all_results": [
+        {
+            "instance_id": "django__django-11564",
+            "model_name_or_path": "aider--ollama_chat-mistral-small",
+            "model_patch": "diff --git a/### File: django/contrib/staticfiles/management/commands/runserver.py b/### File: django/contrib/staticfiles/management/commands/runserver.py\nnew file mode 100644\nindex 0000000000..a9fd0f6269\n--- /dev/null\n+++ b/### File: django/contrib/staticfiles/management/commands/runserver.py\t\n@@ -0,0 +1,7 @@\n+from django.core.management.commands.runserver import Command as RunServerCommand\n+from django.conf import settings\n+\n+class Command(RunServerCommand):\n+    def get_handler(self, *args, **options):\n+        script_name = getattr(settings, 'SCRIPT_NAME', '')\n+        return super().get_handler(*args, **options)\ndiff --git a/### File: django/contrib/staticfiles/storage.py b/### File: django/contrib/staticfiles/storage.py\nnew file mode 100644\nindex 0000000000..de2c235ae6\n--- /dev/null\n+++ b/### File: django/contrib/staticfiles/storage.py\t\n@@ -0,0 +1,11 @@\n+from django.core.files.storage import FileSystemStorage\n+from django.conf import settings\n+\n+class StaticFilesStorage(FileSystemStorage):\n+    def __init__(self, location=settings.STATIC_ROOT, base_url=None, file_overwrite=False,\n+                 directory_permissions=None, file_permissions=None):\n+        super().__init__(location, base_url, file_overwrite, directory_permissions, file_permissions)\n+\n+    def url(self, name):\n+        script_name = getattr(settings, 'SCRIPT_NAME', '')\n+        return f\"{script_name}{super().url(name)}\"\ndiff --git a/### File: django/contrib/staticfiles/views.py b/### File: django/contrib/staticfiles/views.py\nnew file mode 100644\nindex 0000000000..6d29ac1050\n--- /dev/null\n+++ b/### File: django/contrib/staticfiles/views.py\t\n@@ -0,0 +1,7 @@\n+from django.conf import settings\n+from django.http import HttpResponseRedirect\n+from django.views.static import serve\n+\n+def static_serve(request, path, document_root=None, show_indexes=False):\n+    script_name = getattr(settings, 'SCRIPT_NAME', '')\n+    return serve(request, f\"{script_name}{path}\", document_root, show_indexes)\ndiff --git a/### File: django/core/files/storage.py b/### File: django/core/files/storage.py\nnew file mode 100644\nindex 0000000000..422644e8b7\n--- /dev/null\n+++ b/### File: django/core/files/storage.py\t\n@@ -0,0 +1,10 @@\n+from django.conf import settings\n+\n+class FileSystemStorage:\n+    def __init__(self, location=None, base_url=None):\n+        self.location = location or getattr(settings, 'MEDIA_ROOT', None)\n+        self.base_url = base_url or getattr(settings, 'MEDIA_URL', None)\n+\n+    def url(self, name):\n+        script_name = getattr(settings, 'SCRIPT_NAME', '')\n+        return f\"{script_name}{super().url(name)}\"\ndiff --git a/### File: django/template/defaulttags.py b/### File: django/template/defaulttags.py\nnew file mode 100644\nindex 0000000000..3a711f35d6\n--- /dev/null\n+++ b/### File: django/template/defaulttags.py\t\n@@ -0,0 +1,19 @@\n+from django.template import Library, Node\n+\n+register = Library()\n+\n+class StaticNode(Node):\n+    def __init__(self, path, var_name=None):\n+        self.path = path\n+        self.var_name = var_name\n+\n+    def render(self, context):\n+        url = self.url(context)\n+        # Updating url here with request.META['SCRIPT_NAME']\n+        if 'request' in context:\n+            script_name = context['request'].META.get('SCRIPT_NAME', '')\n+            url = f\"{script_name}{url}\"\n+        if self.var_name is None:\n+            return url\n+        context[self.var_name] = url\n+        return ''\ndiff --git a/#### File: `tests/settings_tests/tests.py b/#### File: `tests/settings_tests/tests.py\nnew file mode 100644\nindex 0000000000..ef618fd5da\n--- /dev/null\n+++ b/#### File: `tests/settings_tests/tests.py\t\n@@ -0,0 +1,27 @@\n+# tests/settings_tests/tests.py\n+\n+import unittest\n+from django.conf import settings\n+from django.test.utils import override_settings\n+\n+class SettingsTests(unittest.TestCase):\n+\n+    def test_override(self):\n+        with override_settings(ALLOWED_HOSTS=['example.com']):\n+            self.assertTrue(settings.is_overridden('ALLOWED_HOSTS'))\n+\n+    def test_settings_delete(self):\n+        with self.settings(TEST=None):\n+            with self.assertRaises(AttributeError) as cm:\n+                getattr(settings, 'TEST')\n+            expected_message = \"'Settings' object has no attribute 'TEST'\"\n+            self.assertIn(expected_message, str(cm.exception))\n+\n+class IsOverriddenTest(unittest.TestCase):\n+\n+    def test_override(self):\n+        with override_settings(ALLOWED_HOSTS=['example.com']):\n+            self.assertTrue(settings.is_overridden('ALLOWED_HOSTS'))\n+\n+if __name__ == '__main__':\n+    unittest.main()\n",
+            "model": "ollama_chat/mistral-small",
+            "temperature": 0,
+            "cost": 0.0,
+            "added_files": [
+                "### File: django/contrib/staticfiles/management/commands/runserver.py",
+                "### File: django/contrib/staticfiles/storage.py",
+                "### File: django/contrib/staticfiles/views.py",
+                "### File: django/core/files/storage.py",
+                "### File: django/template/defaulttags.py",
+                "#### File: `tests/settings_tests/tests.py"
+            ],
+            "gold_files": [
+                "django/conf/__init__.py"
+            ],
+            "edited_files": [
+                "### File: django/contrib/staticfiles/management/commands/runserver.py\t",
+                "### File: django/contrib/staticfiles/storage.py\t",
+                "### File: django/contrib/staticfiles/views.py\t",
+                "### File: django/core/files/storage.py\t",
+                "### File: django/template/defaulttags.py\t",
+                "#### File: `tests/settings_tests/tests.py\t"
+            ],
+            "edit_outcome": false,
+            "lint_outcome": true,
+            "test_outcome": false,
+            "try": 1
+        }
+    ]
+}

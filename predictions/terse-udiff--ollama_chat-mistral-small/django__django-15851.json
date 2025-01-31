@@ -1,0 +1,57 @@
+{
+    "instance_id": "django__django-15851",
+    "model_name_or_path": "aider--ollama_chat-mistral-small",
+    "model_patch": "diff --git a/### File: myapp/management/commands/__init__.py b/### File: myapp/management/commands/__init__.py\nnew file mode 100644\nindex 0000000000..9508dc7120\n--- /dev/null\n+++ b/### File: myapp/management/commands/__init__.py\t\n@@ -0,0 +1 @@\n+# This file can be empty or contain initialization code for the commands module.\ndiff --git a/### File: myapp/management/commands/dbshell.py b/### File: myapp/management/commands/dbshell.py\nnew file mode 100644\nindex 0000000000..7bfe62b48c\n--- /dev/null\n+++ b/### File: myapp/management/commands/dbshell.py\t\n@@ -0,0 +1,20 @@\n+from django.core.management.base import BaseCommand, CommandError\n+import subprocess\n+\n+class Command(BaseCommand):\n+    help = 'Runs the database shell.'\n+\n+    def handle(self, *args, **options):\n+        try:\n+            # Get the database name from settings\n+            db_name = options['database']\n+        except KeyError:\n+            raise CommandError('Database name not specified.')\n+\n+        # Construct the command with additional parameters before the database name\n+        command = ['psql', '-d', db_name] + list(args)\n+\n+        try:\n+            subprocess.run(command, check=True)\n+        except subprocess.CalledProcessError as e:\n+            raise CommandError(f'Error running dbshell: {e}')\ndiff --git a/django/core/management/commands/dbshell.py b/django/core/management/commands/dbshell.py\nindex 30d2765afb..41daa0ad3c 100644\n--- a/django/core/management/commands/dbshell.py\n+++ b/django/core/management/commands/dbshell.py\n@@ -27,7 +27,9 @@ class Command(BaseCommand):\n     def handle(self, **options):\n         connection = connections[options[\"database\"]]\n         try:\n-            connection.client.runshell(options[\"parameters\"])\n+            # Ensure parameters are passed before the database name\n+            command = [connection.client.executable_name] + options[\"parameters\"]\n+            subprocess.run(command, check=True)\n         except FileNotFoundError:\n             # Note that we're assuming the FileNotFoundError relates to the\n             # command missing. It could be raised for some other reason, in\ndiff --git a/myapp/management/commands/dbshell.py b/myapp/management/commands/dbshell.py\nnew file mode 100644\nindex 0000000000..7bfe62b48c\n--- /dev/null\n+++ b/myapp/management/commands/dbshell.py\n@@ -0,0 +1,20 @@\n+from django.core.management.base import BaseCommand, CommandError\n+import subprocess\n+\n+class Command(BaseCommand):\n+    help = 'Runs the database shell.'\n+\n+    def handle(self, *args, **options):\n+        try:\n+            # Get the database name from settings\n+            db_name = options['database']\n+        except KeyError:\n+            raise CommandError('Database name not specified.')\n+\n+        # Construct the command with additional parameters before the database name\n+        command = ['psql', '-d', db_name] + list(args)\n+\n+        try:\n+            subprocess.run(command, check=True)\n+        except subprocess.CalledProcessError as e:\n+            raise CommandError(f'Error running dbshell: {e}')\n",
+    "model": "ollama_chat/mistral-small",
+    "temperature": 0,
+    "cost": 0.0,
+    "added_files": [
+        "### File: myapp/management/commands/__init__.py",
+        "### File: myapp/management/commands/dbshell.py",
+        "django/core/management/commands/dbshell.py",
+        "myapp/management/commands/dbshell.py"
+    ],
+    "gold_files": [
+        "django/db/backends/postgresql/client.py"
+    ],
+    "edited_files": [
+        "### File: myapp/management/commands/__init__.py\t",
+        "### File: myapp/management/commands/dbshell.py\t",
+        "django/core/management/commands/dbshell.py",
+        "myapp/management/commands/dbshell.py"
+    ],
+    "edit_outcome": true,
+    "lint_outcome": true,
+    "test_outcome": true,
+    "try": 1,
+    "tries": 1,
+    "all_results": [
+        {
+            "instance_id": "django__django-15851",
+            "model_name_or_path": "aider--ollama_chat-mistral-small",
+            "model_patch": "diff --git a/### File: myapp/management/commands/__init__.py b/### File: myapp/management/commands/__init__.py\nnew file mode 100644\nindex 0000000000..9508dc7120\n--- /dev/null\n+++ b/### File: myapp/management/commands/__init__.py\t\n@@ -0,0 +1 @@\n+# This file can be empty or contain initialization code for the commands module.\ndiff --git a/### File: myapp/management/commands/dbshell.py b/### File: myapp/management/commands/dbshell.py\nnew file mode 100644\nindex 0000000000..7bfe62b48c\n--- /dev/null\n+++ b/### File: myapp/management/commands/dbshell.py\t\n@@ -0,0 +1,20 @@\n+from django.core.management.base import BaseCommand, CommandError\n+import subprocess\n+\n+class Command(BaseCommand):\n+    help = 'Runs the database shell.'\n+\n+    def handle(self, *args, **options):\n+        try:\n+            # Get the database name from settings\n+            db_name = options['database']\n+        except KeyError:\n+            raise CommandError('Database name not specified.')\n+\n+        # Construct the command with additional parameters before the database name\n+        command = ['psql', '-d', db_name] + list(args)\n+\n+        try:\n+            subprocess.run(command, check=True)\n+        except subprocess.CalledProcessError as e:\n+            raise CommandError(f'Error running dbshell: {e}')\ndiff --git a/django/core/management/commands/dbshell.py b/django/core/management/commands/dbshell.py\nindex 30d2765afb..41daa0ad3c 100644\n--- a/django/core/management/commands/dbshell.py\n+++ b/django/core/management/commands/dbshell.py\n@@ -27,7 +27,9 @@ class Command(BaseCommand):\n     def handle(self, **options):\n         connection = connections[options[\"database\"]]\n         try:\n-            connection.client.runshell(options[\"parameters\"])\n+            # Ensure parameters are passed before the database name\n+            command = [connection.client.executable_name] + options[\"parameters\"]\n+            subprocess.run(command, check=True)\n         except FileNotFoundError:\n             # Note that we're assuming the FileNotFoundError relates to the\n             # command missing. It could be raised for some other reason, in\ndiff --git a/myapp/management/commands/dbshell.py b/myapp/management/commands/dbshell.py\nnew file mode 100644\nindex 0000000000..7bfe62b48c\n--- /dev/null\n+++ b/myapp/management/commands/dbshell.py\n@@ -0,0 +1,20 @@\n+from django.core.management.base import BaseCommand, CommandError\n+import subprocess\n+\n+class Command(BaseCommand):\n+    help = 'Runs the database shell.'\n+\n+    def handle(self, *args, **options):\n+        try:\n+            # Get the database name from settings\n+            db_name = options['database']\n+        except KeyError:\n+            raise CommandError('Database name not specified.')\n+\n+        # Construct the command with additional parameters before the database name\n+        command = ['psql', '-d', db_name] + list(args)\n+\n+        try:\n+            subprocess.run(command, check=True)\n+        except subprocess.CalledProcessError as e:\n+            raise CommandError(f'Error running dbshell: {e}')\n",
+            "model": "ollama_chat/mistral-small",
+            "temperature": 0,
+            "cost": 0.0,
+            "added_files": [
+                "### File: myapp/management/commands/__init__.py",
+                "### File: myapp/management/commands/dbshell.py",
+                "django/core/management/commands/dbshell.py",
+                "myapp/management/commands/dbshell.py"
+            ],
+            "gold_files": [
+                "django/db/backends/postgresql/client.py"
+            ],
+            "edited_files": [
+                "### File: myapp/management/commands/__init__.py\t",
+                "### File: myapp/management/commands/dbshell.py\t",
+                "django/core/management/commands/dbshell.py",
+                "myapp/management/commands/dbshell.py"
+            ],
+            "edit_outcome": true,
+            "lint_outcome": true,
+            "test_outcome": true,
+            "try": 1
+        }
+    ]
+}

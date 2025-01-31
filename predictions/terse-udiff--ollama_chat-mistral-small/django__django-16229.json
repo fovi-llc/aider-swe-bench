@@ -1,0 +1,49 @@
+{
+    "instance_id": "django__django-16229",
+    "model_name_or_path": "aider--ollama_chat-mistral-small",
+    "model_patch": "diff --git a/### admin.py b/### admin.py\nnew file mode 100644\nindex 0000000000..93c05f3fe0\n--- /dev/null\n+++ b/### admin.py\t\n@@ -0,0 +1,23 @@\n+from django import forms\n+from django.contrib import admin\n+from django.core.exceptions import ValidationError\n+from .models import Thing, RelatedModel\n+\n+class RelatedModelForm(forms.ModelForm):\n+    def __init__(self, *args, **kwargs):\n+        super().__init__(*args, **kwargs)\n+        self.fields['plop'].show_hidden_initial = False\n+\n+    def clean(self):\n+        raise ValidationError(\"whatever\")\n+\n+class RelatedModelInline(admin.TabularInline):\n+    form = RelatedModelForm\n+    model = RelatedModel\n+    extra = 1\n+\n+@admin.register(Thing)\n+class ThingAdmin(admin.ModelAdmin):\n+    inlines = [\n+        RelatedModelInline,\n+    ]\ndiff --git a/### models.py b/### models.py\nnew file mode 100644\nindex 0000000000..97ccc7e1d1\n--- /dev/null\n+++ b/### models.py\t\n@@ -0,0 +1,12 @@\n+from django.db import models\n+from django.contrib.postgres.fields import ArrayField\n+\n+class Thing(models.Model):\n+    pass\n+\n+class RelatedModel(models.Model):\n+    thing = models.ForeignKey(Thing, on_delete=models.CASCADE)\n+    plop = ArrayField(\n+        models.CharField(max_length=42),\n+        default=list,\n+    )\n",
+    "model": "ollama_chat/mistral-small",
+    "temperature": 0,
+    "cost": 0.0,
+    "added_files": [
+        "### admin.py",
+        "### models.py"
+    ],
+    "gold_files": [
+        "django/forms/boundfield.py"
+    ],
+    "edited_files": [
+        "### admin.py\t",
+        "### models.py\t"
+    ],
+    "edit_outcome": true,
+    "lint_outcome": true,
+    "test_outcome": true,
+    "try": 1,
+    "tries": 1,
+    "all_results": [
+        {
+            "instance_id": "django__django-16229",
+            "model_name_or_path": "aider--ollama_chat-mistral-small",
+            "model_patch": "diff --git a/### admin.py b/### admin.py\nnew file mode 100644\nindex 0000000000..93c05f3fe0\n--- /dev/null\n+++ b/### admin.py\t\n@@ -0,0 +1,23 @@\n+from django import forms\n+from django.contrib import admin\n+from django.core.exceptions import ValidationError\n+from .models import Thing, RelatedModel\n+\n+class RelatedModelForm(forms.ModelForm):\n+    def __init__(self, *args, **kwargs):\n+        super().__init__(*args, **kwargs)\n+        self.fields['plop'].show_hidden_initial = False\n+\n+    def clean(self):\n+        raise ValidationError(\"whatever\")\n+\n+class RelatedModelInline(admin.TabularInline):\n+    form = RelatedModelForm\n+    model = RelatedModel\n+    extra = 1\n+\n+@admin.register(Thing)\n+class ThingAdmin(admin.ModelAdmin):\n+    inlines = [\n+        RelatedModelInline,\n+    ]\ndiff --git a/### models.py b/### models.py\nnew file mode 100644\nindex 0000000000..97ccc7e1d1\n--- /dev/null\n+++ b/### models.py\t\n@@ -0,0 +1,12 @@\n+from django.db import models\n+from django.contrib.postgres.fields import ArrayField\n+\n+class Thing(models.Model):\n+    pass\n+\n+class RelatedModel(models.Model):\n+    thing = models.ForeignKey(Thing, on_delete=models.CASCADE)\n+    plop = ArrayField(\n+        models.CharField(max_length=42),\n+        default=list,\n+    )\n",
+            "model": "ollama_chat/mistral-small",
+            "temperature": 0,
+            "cost": 0.0,
+            "added_files": [
+                "### admin.py",
+                "### models.py"
+            ],
+            "gold_files": [
+                "django/forms/boundfield.py"
+            ],
+            "edited_files": [
+                "### admin.py\t",
+                "### models.py\t"
+            ],
+            "edit_outcome": true,
+            "lint_outcome": true,
+            "test_outcome": true,
+            "try": 1
+        }
+    ]
+}

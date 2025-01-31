@@ -1,0 +1,51 @@
+{
+    "instance_id": "pylint-dev__pylint-7114",
+    "model_name_or_path": "aider--ollama_chat-mistral-small",
+    "model_patch": "diff --git a/astroid/manager.py b/astroid/manager.py\nnew file mode 100644\nindex 000000000..2febdead1\n--- /dev/null\n+++ b/astroid/manager.py\n@@ -0,0 +1,32 @@\n+# astroid/manager.py\n+import os\n+from astroid import nodes, util\n+\n+class Module(nodes.Module):\n+    def __init__(self, name, file_path=None, parent=None):\n+        super().__init__()\n+        self.name = name\n+        self.file_path = file_path\n+        self.parent = parent\n+        self._load_module()\n+\n+    def _load_module(self):\n+        if not self.file_path:\n+            return\n+\n+        # Check if the module directory contains a file with the same name as the module\n+        dir_name, base_name = os.path.split(self.file_path)\n+        if base_name == self.name + '.py':\n+            self._parse_file(self.file_path)\n+        else:\n+            init_file = os.path.join(dir_name, '__init__.py')\n+            if os.path.exists(init_file):\n+                self._parse_file(init_file)\n+\n+    def _parse_file(self, file_path):\n+        with open(file_path, 'r') as f:\n+            source_code = f.read()\n+        tree = util.parse(source_code)\n+        self.body = tree.body\n+\n+# Rest of the code...\ndiff --git a/pylint/checkers/base.py b/pylint/checkers/base.py\nnew file mode 100644\nindex 000000000..40cdfdc27\n--- /dev/null\n+++ b/pylint/checkers/base.py\n@@ -0,0 +1,22 @@\n+# pylint/checkers/base.py\n+import os  # Import the os module\n+\n+from astroid import nodes\n+\n+class BaseChecker(object):\n+    def __init__(self, linter=None):\n+        self.linter = linter\n+\n+    def visit_module(self, node):\n+        if isinstance(node, nodes.Module):\n+            # Handle the case where the module directory contains a file with the same name as the module\n+            dir_name, base_name = os.path.split(node.file_path)\n+            if base_name == node.name + '.py':\n+                return\n+        self._generic_visit(node)\n+\n+    def _generic_visit(self, node):\n+        for child in node.get_children():\n+            self.visit(child)\n+\n+# Rest of the code...\n",
+    "model": "ollama_chat/mistral-small",
+    "temperature": 0,
+    "cost": 0.0,
+    "added_files": [
+        "astroid/manager.py",
+        "pylint/checkers/base.py",
+        "tests/checkers/unittest_imports.py"
+    ],
+    "gold_files": [
+        "pylint/lint/expand_modules.py"
+    ],
+    "edited_files": [
+        "astroid/manager.py",
+        "pylint/checkers/base.py"
+    ],
+    "edit_outcome": false,
+    "lint_outcome": true,
+    "test_outcome": false,
+    "try": 1,
+    "tries": 1,
+    "all_results": [
+        {
+            "instance_id": "pylint-dev__pylint-7114",
+            "model_name_or_path": "aider--ollama_chat-mistral-small",
+            "model_patch": "diff --git a/astroid/manager.py b/astroid/manager.py\nnew file mode 100644\nindex 000000000..2febdead1\n--- /dev/null\n+++ b/astroid/manager.py\n@@ -0,0 +1,32 @@\n+# astroid/manager.py\n+import os\n+from astroid import nodes, util\n+\n+class Module(nodes.Module):\n+    def __init__(self, name, file_path=None, parent=None):\n+        super().__init__()\n+        self.name = name\n+        self.file_path = file_path\n+        self.parent = parent\n+        self._load_module()\n+\n+    def _load_module(self):\n+        if not self.file_path:\n+            return\n+\n+        # Check if the module directory contains a file with the same name as the module\n+        dir_name, base_name = os.path.split(self.file_path)\n+        if base_name == self.name + '.py':\n+            self._parse_file(self.file_path)\n+        else:\n+            init_file = os.path.join(dir_name, '__init__.py')\n+            if os.path.exists(init_file):\n+                self._parse_file(init_file)\n+\n+    def _parse_file(self, file_path):\n+        with open(file_path, 'r') as f:\n+            source_code = f.read()\n+        tree = util.parse(source_code)\n+        self.body = tree.body\n+\n+# Rest of the code...\ndiff --git a/pylint/checkers/base.py b/pylint/checkers/base.py\nnew file mode 100644\nindex 000000000..40cdfdc27\n--- /dev/null\n+++ b/pylint/checkers/base.py\n@@ -0,0 +1,22 @@\n+# pylint/checkers/base.py\n+import os  # Import the os module\n+\n+from astroid import nodes\n+\n+class BaseChecker(object):\n+    def __init__(self, linter=None):\n+        self.linter = linter\n+\n+    def visit_module(self, node):\n+        if isinstance(node, nodes.Module):\n+            # Handle the case where the module directory contains a file with the same name as the module\n+            dir_name, base_name = os.path.split(node.file_path)\n+            if base_name == node.name + '.py':\n+                return\n+        self._generic_visit(node)\n+\n+    def _generic_visit(self, node):\n+        for child in node.get_children():\n+            self.visit(child)\n+\n+# Rest of the code...\n",
+            "model": "ollama_chat/mistral-small",
+            "temperature": 0,
+            "cost": 0.0,
+            "added_files": [
+                "astroid/manager.py",
+                "pylint/checkers/base.py",
+                "tests/checkers/unittest_imports.py"
+            ],
+            "gold_files": [
+                "pylint/lint/expand_modules.py"
+            ],
+            "edited_files": [
+                "astroid/manager.py",
+                "pylint/checkers/base.py"
+            ],
+            "edit_outcome": false,
+            "lint_outcome": true,
+            "test_outcome": false,
+            "try": 1
+        }
+    ]
+}

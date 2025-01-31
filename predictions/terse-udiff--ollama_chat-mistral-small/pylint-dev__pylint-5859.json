@@ -1,0 +1,47 @@
+{
+    "instance_id": "pylint-dev__pylint-5859",
+    "model_name_or_path": "aider--ollama_chat-mistral-small",
+    "model_patch": "diff --git a/pylint/checkers/fixme.py b/pylint/checkers/fixme.py\nnew file mode 100644\nindex 000000000..2b9509b64\n--- /dev/null\n+++ b/pylint/checkers/fixme.py\n@@ -0,0 +1,50 @@\n+# pylint/checkers/fixme.py\n+\"\"\"\n+This module contains the FixmeChecker class, which checks for fixme notes in the code.\n+\"\"\"\n+\n+import re\n+from pylint.checkers import BaseChecker\n+from pylint.interfaces import IAstroidChecker\n+from astroid import nodes\n+\n+class FixmeChecker(BaseChecker):\n+    __implements__ = IAstroidChecker\n+\n+    name = 'fixme'\n+    priority = -1\n+    msgs = {\n+        'W0511': (\n+            'Fixme',\n+            'Used when a warning note (FIXME) is detected.',\n+            'Used when a warning note (FIXME) is detected.'),\n+    }\n+\n+    options = (\n+        ('notes', {\n+            'default': '',\n+            'type': 'string',\n+            'metavar': '<comma separated list>',\n+            'help': 'List of notes tags to check for.'}),\n+    )\n+\n+    def __init__(self, linter=None):\n+        BaseChecker.__init__(self, linter)\n+        self._notes = set()\n+\n+    def open(self):\n+        if self.config.notes:\n+            self._notes.update(note.strip() for note in self.config.notes.split(','))\n+        # Update the regex pattern to include punctuation characters\n+        self._note_pattern = re.compile(r'^\\s*#\\s*(%s)\\s*:.*$' % '|'.join(re.escape(note) for note in self._notes))\n+\n+    def visit_module(self, node):\n+        if not self._notes:\n+            return\n+\n+        for stmt in node.body:\n+            if isinstance(stmt, nodes.stmt):\n+                match = self._note_pattern.match(stmt.raw_value)\n+                if match:\n+                    self.add_message('W0511', line=stmt.fromlineno)\n+\n",
+    "model": "ollama_chat/mistral-small",
+    "temperature": 0,
+    "cost": 0.0,
+    "added_files": [
+        "pylint/checkers/fixme.py",
+        "tests/functional/f/fixme.py"
+    ],
+    "gold_files": [
+        "pylint/checkers/misc.py"
+    ],
+    "edited_files": [
+        "pylint/checkers/fixme.py"
+    ],
+    "edit_outcome": true,
+    "lint_outcome": true,
+    "test_outcome": true,
+    "try": 1,
+    "tries": 1,
+    "all_results": [
+        {
+            "instance_id": "pylint-dev__pylint-5859",
+            "model_name_or_path": "aider--ollama_chat-mistral-small",
+            "model_patch": "diff --git a/pylint/checkers/fixme.py b/pylint/checkers/fixme.py\nnew file mode 100644\nindex 000000000..2b9509b64\n--- /dev/null\n+++ b/pylint/checkers/fixme.py\n@@ -0,0 +1,50 @@\n+# pylint/checkers/fixme.py\n+\"\"\"\n+This module contains the FixmeChecker class, which checks for fixme notes in the code.\n+\"\"\"\n+\n+import re\n+from pylint.checkers import BaseChecker\n+from pylint.interfaces import IAstroidChecker\n+from astroid import nodes\n+\n+class FixmeChecker(BaseChecker):\n+    __implements__ = IAstroidChecker\n+\n+    name = 'fixme'\n+    priority = -1\n+    msgs = {\n+        'W0511': (\n+            'Fixme',\n+            'Used when a warning note (FIXME) is detected.',\n+            'Used when a warning note (FIXME) is detected.'),\n+    }\n+\n+    options = (\n+        ('notes', {\n+            'default': '',\n+            'type': 'string',\n+            'metavar': '<comma separated list>',\n+            'help': 'List of notes tags to check for.'}),\n+    )\n+\n+    def __init__(self, linter=None):\n+        BaseChecker.__init__(self, linter)\n+        self._notes = set()\n+\n+    def open(self):\n+        if self.config.notes:\n+            self._notes.update(note.strip() for note in self.config.notes.split(','))\n+        # Update the regex pattern to include punctuation characters\n+        self._note_pattern = re.compile(r'^\\s*#\\s*(%s)\\s*:.*$' % '|'.join(re.escape(note) for note in self._notes))\n+\n+    def visit_module(self, node):\n+        if not self._notes:\n+            return\n+\n+        for stmt in node.body:\n+            if isinstance(stmt, nodes.stmt):\n+                match = self._note_pattern.match(stmt.raw_value)\n+                if match:\n+                    self.add_message('W0511', line=stmt.fromlineno)\n+\n",
+            "model": "ollama_chat/mistral-small",
+            "temperature": 0,
+            "cost": 0.0,
+            "added_files": [
+                "pylint/checkers/fixme.py",
+                "tests/functional/f/fixme.py"
+            ],
+            "gold_files": [
+                "pylint/checkers/misc.py"
+            ],
+            "edited_files": [
+                "pylint/checkers/fixme.py"
+            ],
+            "edit_outcome": true,
+            "lint_outcome": true,
+            "test_outcome": true,
+            "try": 1
+        }
+    ]
+}

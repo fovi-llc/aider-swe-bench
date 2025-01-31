@@ -1,0 +1,57 @@
+{
+    "instance_id": "django__django-12856",
+    "model_name_or_path": "aider--ollama_chat-mistral-small",
+    "model_patch": "diff --git a/### File: django/db/migrations/operations.py b/### File: django/db/migrations/operations.py\nnew file mode 100644\nindex 0000000000..4eb6cf8070\n--- /dev/null\n+++ b/### File: django/db/migrations/operations.py\t\n@@ -0,0 +1,28 @@\n+# entire file content ...\n+from django.db import models\n+\n+class UniqueConstraint(models.UniqueConstraint):\n+    def __init__(self, *args, **kwargs):\n+        super().__init__(*args, **kwargs)\n+        self.fields = kwargs.get('fields', [])\n+\n+    def deconstruct(self):\n+        name = self.name\n+        fields = self.fields\n+        return (\n+            'models.UniqueConstraint',\n+            [],\n+            {'name': name, 'fields': fields}\n+        )\n+\n+class CreateModel(models.CreateModel):\n+    # ... rest of the code ...\n+\n+    def state_forwards(self, app_label, state):\n+        # ... existing code ...\n+        for constraint in self.model._meta.constraints:\n+            if isinstance(constraint, models.UniqueConstraint):\n+                for field_name in constraint.fields:\n+                    if not hasattr(self.model, field_name):\n+                        raise ValueError(f\"Field '{field_name}' does not exist on model '{self.model.__name__}'\")\n+        # ... rest of the code ...\ndiff --git a/### File: django/db/migrations/recorder.py b/### File: django/db/migrations/recorder.py\nnew file mode 100644\nindex 0000000000..f4bcd097a3\n--- /dev/null\n+++ b/### File: django/db/migrations/recorder.py\t\n@@ -0,0 +1,14 @@\n+from django.db import models\n+\n+class MigrationRecorder(models.Model):\n+    # ... existing code ...\n+\n+    def record_migration(self, app_label, migration_name):\n+        from django.apps import apps\n+        model = apps.get_model(app_label, migration_name)\n+        for constraint in model._meta.constraints:\n+            if isinstance(constraint, models.UniqueConstraint):\n+                for field_name in constraint.fields:\n+                    if not hasattr(model, field_name):\n+                        raise ValueError(f\"Field '{field_name}' does not exist on model '{model.__name__}'\")\n+        # ... existing code ...\ndiff --git a/### File: django/db/migrations/state.py b/### File: django/db/migrations/state.py\nnew file mode 100644\nindex 0000000000..a2d17c3404\n--- /dev/null\n+++ b/### File: django/db/migrations/state.py\t\n@@ -0,0 +1,21 @@\n+from django.db import models\n+\n+class ModelState(models.ModelBase):\n+    def __init__(self, *args, **kwargs):\n+        super().__init__(*args, **kwargs)\n+        self._constraints = []\n+\n+    @property\n+    def constraints(self):\n+        return self._constraints\n+\n+    def add_constraint(self, constraint):\n+        if isinstance(constraint, models.UniqueConstraint):\n+            for field_name in constraint.fields:\n+                if not hasattr(self.model_class(), field_name):\n+                    raise ValueError(f\"Field '{field_name}' does not exist on model '{self.model_class().__name__}'\")\n+        self._constraints.append(constraint)\n+\n+    def model_class(self):\n+        from django.apps import apps\n+        return apps.get_model(self.app_label, self.model_name)\n",
+    "model": "ollama_chat/mistral-small",
+    "temperature": 0,
+    "cost": 0.0,
+    "added_files": [
+        "### File: django/db/migrations/operations.py",
+        "### File: django/db/migrations/recorder.py",
+        "### File: django/db/migrations/state.py",
+        "django/db/migrations/recorder.py",
+        "django/db/migrations/state.py"
+    ],
+    "gold_files": [
+        "django/db/models/base.py"
+    ],
+    "edited_files": [
+        "### File: django/db/migrations/operations.py\t",
+        "### File: django/db/migrations/recorder.py\t",
+        "### File: django/db/migrations/state.py\t"
+    ],
+    "edit_outcome": true,
+    "lint_outcome": true,
+    "test_outcome": true,
+    "try": 1,
+    "tries": 1,
+    "all_results": [
+        {
+            "instance_id": "django__django-12856",
+            "model_name_or_path": "aider--ollama_chat-mistral-small",
+            "model_patch": "diff --git a/### File: django/db/migrations/operations.py b/### File: django/db/migrations/operations.py\nnew file mode 100644\nindex 0000000000..4eb6cf8070\n--- /dev/null\n+++ b/### File: django/db/migrations/operations.py\t\n@@ -0,0 +1,28 @@\n+# entire file content ...\n+from django.db import models\n+\n+class UniqueConstraint(models.UniqueConstraint):\n+    def __init__(self, *args, **kwargs):\n+        super().__init__(*args, **kwargs)\n+        self.fields = kwargs.get('fields', [])\n+\n+    def deconstruct(self):\n+        name = self.name\n+        fields = self.fields\n+        return (\n+            'models.UniqueConstraint',\n+            [],\n+            {'name': name, 'fields': fields}\n+        )\n+\n+class CreateModel(models.CreateModel):\n+    # ... rest of the code ...\n+\n+    def state_forwards(self, app_label, state):\n+        # ... existing code ...\n+        for constraint in self.model._meta.constraints:\n+            if isinstance(constraint, models.UniqueConstraint):\n+                for field_name in constraint.fields:\n+                    if not hasattr(self.model, field_name):\n+                        raise ValueError(f\"Field '{field_name}' does not exist on model '{self.model.__name__}'\")\n+        # ... rest of the code ...\ndiff --git a/### File: django/db/migrations/recorder.py b/### File: django/db/migrations/recorder.py\nnew file mode 100644\nindex 0000000000..f4bcd097a3\n--- /dev/null\n+++ b/### File: django/db/migrations/recorder.py\t\n@@ -0,0 +1,14 @@\n+from django.db import models\n+\n+class MigrationRecorder(models.Model):\n+    # ... existing code ...\n+\n+    def record_migration(self, app_label, migration_name):\n+        from django.apps import apps\n+        model = apps.get_model(app_label, migration_name)\n+        for constraint in model._meta.constraints:\n+            if isinstance(constraint, models.UniqueConstraint):\n+                for field_name in constraint.fields:\n+                    if not hasattr(model, field_name):\n+                        raise ValueError(f\"Field '{field_name}' does not exist on model '{model.__name__}'\")\n+        # ... existing code ...\ndiff --git a/### File: django/db/migrations/state.py b/### File: django/db/migrations/state.py\nnew file mode 100644\nindex 0000000000..a2d17c3404\n--- /dev/null\n+++ b/### File: django/db/migrations/state.py\t\n@@ -0,0 +1,21 @@\n+from django.db import models\n+\n+class ModelState(models.ModelBase):\n+    def __init__(self, *args, **kwargs):\n+        super().__init__(*args, **kwargs)\n+        self._constraints = []\n+\n+    @property\n+    def constraints(self):\n+        return self._constraints\n+\n+    def add_constraint(self, constraint):\n+        if isinstance(constraint, models.UniqueConstraint):\n+            for field_name in constraint.fields:\n+                if not hasattr(self.model_class(), field_name):\n+                    raise ValueError(f\"Field '{field_name}' does not exist on model '{self.model_class().__name__}'\")\n+        self._constraints.append(constraint)\n+\n+    def model_class(self):\n+        from django.apps import apps\n+        return apps.get_model(self.app_label, self.model_name)\n",
+            "model": "ollama_chat/mistral-small",
+            "temperature": 0,
+            "cost": 0.0,
+            "added_files": [
+                "### File: django/db/migrations/operations.py",
+                "### File: django/db/migrations/recorder.py",
+                "### File: django/db/migrations/state.py",
+                "django/db/migrations/recorder.py",
+                "django/db/migrations/state.py"
+            ],
+            "gold_files": [
+                "django/db/models/base.py"
+            ],
+            "edited_files": [
+                "### File: django/db/migrations/operations.py\t",
+                "### File: django/db/migrations/recorder.py\t",
+                "### File: django/db/migrations/state.py\t"
+            ],
+            "edit_outcome": true,
+            "lint_outcome": true,
+            "test_outcome": true,
+            "try": 1
+        }
+    ]
+}

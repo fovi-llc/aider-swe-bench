@@ -1,0 +1,49 @@
+{
+    "instance_id": "psf__requests-863",
+    "model_name_or_path": "aider--ollama_chat-mistral-small",
+    "model_patch": "diff --git a/### requests/models.py b/### requests/models.py\nnew file mode 100644\nindex 00000000..4d712187\n--- /dev/null\n+++ b/### requests/models.py\t\n@@ -0,0 +1,24 @@\n+from .hooks import default_hooks\n+\n+class Request:\n+    def __init__(self, method=None, url=None, headers=None, **kwargs):\n+        self.method = method\n+        self.url = url\n+        self.headers = headers or {}\n+        self.hooks = kwargs.pop('hooks', {})\n+        # Ensure hooks are callable\n+        for event in self.hooks:\n+            if isinstance(self.hooks[event], list):\n+                self.hooks[event] = [hook for hook in self.hooks[event]]\n+            else:\n+                self.hooks[event] = [self.hooks[event]]\n+\n+    def register_hook(self, event, hook):\n+        if event not in self.hooks:\n+            self.hooks[event] = []\n+        if isinstance(hook, list):\n+            self.hooks[event].extend(hook)\n+        else:\n+            self.hooks[event].append(hook)\n+\n+# ... rest of the code ...\ndiff --git a/### requests/sessions.py b/### requests/sessions.py\nnew file mode 100644\nindex 00000000..6ae59dff\n--- /dev/null\n+++ b/### requests/sessions.py\t\n@@ -0,0 +1,22 @@\n+from .models import Request\n+\n+class Session:\n+    def __init__(self):\n+        self.headers = {}\n+        self.auth = None\n+        self.proxies = {}\n+        self.hooks = {}\n+\n+    def request(self, method, url, **kwargs):\n+        req = Request(method=method, url=url, **kwargs)\n+        # Merge session hooks with request hooks\n+        for event in self.hooks:\n+            if event not in req.hooks:\n+                req.hooks[event] = []\n+            if isinstance(req.hooks[event], list) and isinstance(self.hooks[event], list):\n+                req.hooks[event].extend(self.hooks[event])\n+            else:\n+                req.hooks[event] = [req.hooks[event]] + self.hooks[event]\n+        return req\n+\n+# ... rest of the code ...\n",
+    "model": "ollama_chat/mistral-small",
+    "temperature": 0,
+    "cost": 0.0,
+    "added_files": [
+        "### requests/models.py",
+        "### requests/sessions.py"
+    ],
+    "gold_files": [
+        "requests/models.py"
+    ],
+    "edited_files": [
+        "### requests/models.py\t",
+        "### requests/sessions.py\t"
+    ],
+    "edit_outcome": false,
+    "lint_outcome": true,
+    "test_outcome": false,
+    "try": 1,
+    "tries": 1,
+    "all_results": [
+        {
+            "instance_id": "psf__requests-863",
+            "model_name_or_path": "aider--ollama_chat-mistral-small",
+            "model_patch": "diff --git a/### requests/models.py b/### requests/models.py\nnew file mode 100644\nindex 00000000..4d712187\n--- /dev/null\n+++ b/### requests/models.py\t\n@@ -0,0 +1,24 @@\n+from .hooks import default_hooks\n+\n+class Request:\n+    def __init__(self, method=None, url=None, headers=None, **kwargs):\n+        self.method = method\n+        self.url = url\n+        self.headers = headers or {}\n+        self.hooks = kwargs.pop('hooks', {})\n+        # Ensure hooks are callable\n+        for event in self.hooks:\n+            if isinstance(self.hooks[event], list):\n+                self.hooks[event] = [hook for hook in self.hooks[event]]\n+            else:\n+                self.hooks[event] = [self.hooks[event]]\n+\n+    def register_hook(self, event, hook):\n+        if event not in self.hooks:\n+            self.hooks[event] = []\n+        if isinstance(hook, list):\n+            self.hooks[event].extend(hook)\n+        else:\n+            self.hooks[event].append(hook)\n+\n+# ... rest of the code ...\ndiff --git a/### requests/sessions.py b/### requests/sessions.py\nnew file mode 100644\nindex 00000000..6ae59dff\n--- /dev/null\n+++ b/### requests/sessions.py\t\n@@ -0,0 +1,22 @@\n+from .models import Request\n+\n+class Session:\n+    def __init__(self):\n+        self.headers = {}\n+        self.auth = None\n+        self.proxies = {}\n+        self.hooks = {}\n+\n+    def request(self, method, url, **kwargs):\n+        req = Request(method=method, url=url, **kwargs)\n+        # Merge session hooks with request hooks\n+        for event in self.hooks:\n+            if event not in req.hooks:\n+                req.hooks[event] = []\n+            if isinstance(req.hooks[event], list) and isinstance(self.hooks[event], list):\n+                req.hooks[event].extend(self.hooks[event])\n+            else:\n+                req.hooks[event] = [req.hooks[event]] + self.hooks[event]\n+        return req\n+\n+# ... rest of the code ...\n",
+            "model": "ollama_chat/mistral-small",
+            "temperature": 0,
+            "cost": 0.0,
+            "added_files": [
+                "### requests/models.py",
+                "### requests/sessions.py"
+            ],
+            "gold_files": [
+                "requests/models.py"
+            ],
+            "edited_files": [
+                "### requests/models.py\t",
+                "### requests/sessions.py\t"
+            ],
+            "edit_outcome": false,
+            "lint_outcome": true,
+            "test_outcome": false,
+            "try": 1
+        }
+    ]
+}

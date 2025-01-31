@@ -1,0 +1,45 @@
+{
+    "instance_id": "sympy__sympy-18835",
+    "model_name_or_path": "aider--ollama_chat-mistral-small",
+    "model_patch": "diff --git a/utils.py b/utils.py\nnew file mode 100644\nindex 0000000000..ef3c065b8b\n--- /dev/null\n+++ b/utils.py\n@@ -0,0 +1,12 @@\n+def uniq(seq):\n+    \"\"\"Return a new sequence with duplicate elements removed.\"\"\"\n+    seen = set()\n+    initial_size = len(seq)\n+    result = []\n+    for item in seq:\n+        if len(seq) != initial_size:\n+            raise RuntimeError(\"list modified during iteration\")\n+        if item not in seen:\n+            seen.add(item)\n+            result.append(item)\n+    return result\n",
+    "model": "ollama_chat/mistral-small",
+    "temperature": 0,
+    "cost": 0.0,
+    "added_files": [
+        "utils.py"
+    ],
+    "gold_files": [
+        "sympy/utilities/iterables.py"
+    ],
+    "edited_files": [
+        "utils.py"
+    ],
+    "edit_outcome": true,
+    "lint_outcome": true,
+    "test_outcome": true,
+    "try": 1,
+    "tries": 1,
+    "all_results": [
+        {
+            "instance_id": "sympy__sympy-18835",
+            "model_name_or_path": "aider--ollama_chat-mistral-small",
+            "model_patch": "diff --git a/utils.py b/utils.py\nnew file mode 100644\nindex 0000000000..ef3c065b8b\n--- /dev/null\n+++ b/utils.py\n@@ -0,0 +1,12 @@\n+def uniq(seq):\n+    \"\"\"Return a new sequence with duplicate elements removed.\"\"\"\n+    seen = set()\n+    initial_size = len(seq)\n+    result = []\n+    for item in seq:\n+        if len(seq) != initial_size:\n+            raise RuntimeError(\"list modified during iteration\")\n+        if item not in seen:\n+            seen.add(item)\n+            result.append(item)\n+    return result\n",
+            "model": "ollama_chat/mistral-small",
+            "temperature": 0,
+            "cost": 0.0,
+            "added_files": [
+                "utils.py"
+            ],
+            "gold_files": [
+                "sympy/utilities/iterables.py"
+            ],
+            "edited_files": [
+                "utils.py"
+            ],
+            "edit_outcome": true,
+            "lint_outcome": true,
+            "test_outcome": true,
+            "try": 1
+        }
+    ]
+}

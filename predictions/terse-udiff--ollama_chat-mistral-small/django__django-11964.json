@@ -1,0 +1,49 @@
+{
+    "instance_id": "django__django-11964",
+    "model_name_or_path": "aider--ollama_chat-mistral-small",
+    "model_patch": "diff --git a/testing/pkg/models.py b/testing/pkg/models.py\nnew file mode 100644\nindex 0000000000..1648caeb52\n--- /dev/null\n+++ b/testing/pkg/models.py\n@@ -0,0 +1,12 @@\n+from django.db import models\n+from django.utils.translation import gettext_lazy as _\n+\n+class MyChoice(models.TextChoices):\n+    FIRST_CHOICE = \"first\", _(\"The first choice, it is\")\n+    SECOND_CHOICE = \"second\", _(\"The second choice, it is\")\n+\n+class MyObject(models.Model):\n+    my_str_value = models.CharField(max_length=10, choices=MyChoice.choices)\n+\n+    def __str__(self):\n+        return str(self.my_str_value)\ndiff --git a/testing/tests.py b/testing/tests.py\nnew file mode 100644\nindex 0000000000..27b040c734\n--- /dev/null\n+++ b/testing/tests.py\n@@ -0,0 +1,16 @@\n+from django.test import TestCase\n+from testing.pkg.models import MyObject, MyChoice\n+\n+class EnumTest(TestCase):\n+    def setUp(self) -> None:\n+        self.my_object = MyObject.objects.create(my_str_value=MyChoice.FIRST_CHOICE)\n+\n+    def test_created_object_is_str(self):\n+        my_object = self.my_object\n+        self.assertIsInstance(str(my_object), str)\n+        self.assertEqual(str(my_object), \"first\")\n+\n+    def test_retrieved_object_is_str(self):\n+        my_object = MyObject.objects.last()\n+        self.assertIsInstance(str(my_object), str)\n+        self.assertEqual(str(my_object), \"first\")\n",
+    "model": "ollama_chat/mistral-small",
+    "temperature": 0,
+    "cost": 0.0,
+    "added_files": [
+        "testing/pkg/models.py",
+        "testing/tests.py"
+    ],
+    "gold_files": [
+        "django/db/models/enums.py"
+    ],
+    "edited_files": [
+        "testing/pkg/models.py",
+        "testing/tests.py"
+    ],
+    "edit_outcome": true,
+    "lint_outcome": true,
+    "test_outcome": true,
+    "try": 1,
+    "tries": 1,
+    "all_results": [
+        {
+            "instance_id": "django__django-11964",
+            "model_name_or_path": "aider--ollama_chat-mistral-small",
+            "model_patch": "diff --git a/testing/pkg/models.py b/testing/pkg/models.py\nnew file mode 100644\nindex 0000000000..1648caeb52\n--- /dev/null\n+++ b/testing/pkg/models.py\n@@ -0,0 +1,12 @@\n+from django.db import models\n+from django.utils.translation import gettext_lazy as _\n+\n+class MyChoice(models.TextChoices):\n+    FIRST_CHOICE = \"first\", _(\"The first choice, it is\")\n+    SECOND_CHOICE = \"second\", _(\"The second choice, it is\")\n+\n+class MyObject(models.Model):\n+    my_str_value = models.CharField(max_length=10, choices=MyChoice.choices)\n+\n+    def __str__(self):\n+        return str(self.my_str_value)\ndiff --git a/testing/tests.py b/testing/tests.py\nnew file mode 100644\nindex 0000000000..27b040c734\n--- /dev/null\n+++ b/testing/tests.py\n@@ -0,0 +1,16 @@\n+from django.test import TestCase\n+from testing.pkg.models import MyObject, MyChoice\n+\n+class EnumTest(TestCase):\n+    def setUp(self) -> None:\n+        self.my_object = MyObject.objects.create(my_str_value=MyChoice.FIRST_CHOICE)\n+\n+    def test_created_object_is_str(self):\n+        my_object = self.my_object\n+        self.assertIsInstance(str(my_object), str)\n+        self.assertEqual(str(my_object), \"first\")\n+\n+    def test_retrieved_object_is_str(self):\n+        my_object = MyObject.objects.last()\n+        self.assertIsInstance(str(my_object), str)\n+        self.assertEqual(str(my_object), \"first\")\n",
+            "model": "ollama_chat/mistral-small",
+            "temperature": 0,
+            "cost": 0.0,
+            "added_files": [
+                "testing/pkg/models.py",
+                "testing/tests.py"
+            ],
+            "gold_files": [
+                "django/db/models/enums.py"
+            ],
+            "edited_files": [
+                "testing/pkg/models.py",
+                "testing/tests.py"
+            ],
+            "edit_outcome": true,
+            "lint_outcome": true,
+            "test_outcome": true,
+            "try": 1
+        }
+    ]
+}

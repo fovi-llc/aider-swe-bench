@@ -1,0 +1,45 @@
+{
+    "instance_id": "sphinx-doc__sphinx-8273",
+    "model_name_or_path": "aider--ollama_chat-mistral-small",
+    "model_patch": "diff --git a/build_man_pages.sh b/build_man_pages.sh\nnew file mode 100644\nindex 000000000..e19454f92\n--- /dev/null\n+++ b/build_man_pages.sh\n@@ -0,0 +1,24 @@\n+#!/bin/bash\n+\n+# Define the build directory\n+BUILD_DIR=\"build/man\"\n+\n+# Create section directories if they do not exist\n+mkdir -p ${BUILD_DIR}/man1\n+mkdir -p ${BUILD_DIR}/man3\n+mkdir -p ${BUILD_DIR}/man5\n+mkdir -p ${BUILD_DIR}/man7\n+\n+# Generate man pages using Sphinx\n+sphinx-build -b man . ${BUILD_DIR}\n+\n+# Move man pages to the correct section directories\n+mv ${BUILD_DIR}/*.1 ${BUILD_DIR}/man1/\n+mv ${BUILD_DIR}/*.3 ${BUILD_DIR}/man3/\n+mv ${BUILD_DIR}/*.5 ${BUILD_DIR}/man5/\n+mv ${BUILD_DIR}/*.7 ${BUILD_DIR}/man7/\n+\n+# Clean up the original man directory\n+rm -rf ${BUILD_DIR}/man\n+\n+echo \"Man pages generated and moved to section directories.\"\n",
+    "model": "ollama_chat/mistral-small",
+    "temperature": 0,
+    "cost": 0.0,
+    "added_files": [
+        "build_man_pages.sh"
+    ],
+    "gold_files": [
+        "sphinx/builders/manpage.py"
+    ],
+    "edited_files": [
+        "build_man_pages.sh"
+    ],
+    "edit_outcome": true,
+    "lint_outcome": true,
+    "test_outcome": true,
+    "try": 1,
+    "tries": 1,
+    "all_results": [
+        {
+            "instance_id": "sphinx-doc__sphinx-8273",
+            "model_name_or_path": "aider--ollama_chat-mistral-small",
+            "model_patch": "diff --git a/build_man_pages.sh b/build_man_pages.sh\nnew file mode 100644\nindex 000000000..e19454f92\n--- /dev/null\n+++ b/build_man_pages.sh\n@@ -0,0 +1,24 @@\n+#!/bin/bash\n+\n+# Define the build directory\n+BUILD_DIR=\"build/man\"\n+\n+# Create section directories if they do not exist\n+mkdir -p ${BUILD_DIR}/man1\n+mkdir -p ${BUILD_DIR}/man3\n+mkdir -p ${BUILD_DIR}/man5\n+mkdir -p ${BUILD_DIR}/man7\n+\n+# Generate man pages using Sphinx\n+sphinx-build -b man . ${BUILD_DIR}\n+\n+# Move man pages to the correct section directories\n+mv ${BUILD_DIR}/*.1 ${BUILD_DIR}/man1/\n+mv ${BUILD_DIR}/*.3 ${BUILD_DIR}/man3/\n+mv ${BUILD_DIR}/*.5 ${BUILD_DIR}/man5/\n+mv ${BUILD_DIR}/*.7 ${BUILD_DIR}/man7/\n+\n+# Clean up the original man directory\n+rm -rf ${BUILD_DIR}/man\n+\n+echo \"Man pages generated and moved to section directories.\"\n",
+            "model": "ollama_chat/mistral-small",
+            "temperature": 0,
+            "cost": 0.0,
+            "added_files": [
+                "build_man_pages.sh"
+            ],
+            "gold_files": [
+                "sphinx/builders/manpage.py"
+            ],
+            "edited_files": [
+                "build_man_pages.sh"
+            ],
+            "edit_outcome": true,
+            "lint_outcome": true,
+            "test_outcome": true,
+            "try": 1
+        }
+    ]
+}

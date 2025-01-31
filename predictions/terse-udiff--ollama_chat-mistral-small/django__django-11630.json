@@ -1,0 +1,53 @@
+{
+    "instance_id": "django__django-11630",
+    "model_name_or_path": "aider--ollama_chat-mistral-small",
+    "model_patch": "diff --git a/base/database_routers.py b/base/database_routers.py\nnew file mode 100644\nindex 0000000000..07159539d5\n--- /dev/null\n+++ b/base/database_routers.py\n@@ -0,0 +1,28 @@\n+from django.conf import settings\n+\n+class BaseRouter:\n+    \"\"\"\n+    A router to control all database operations on models for the\n+    base app.\n+    \"\"\"\n+\n+    def db_for_read(self, model, **hints):\n+        if model._meta.app_label == 'base':\n+            return 'default'\n+        return None\n+\n+    def db_for_write(self, model, **hints):\n+        if model._meta.app_label == 'base':\n+            return 'default'\n+        return None\n+\n+    def allow_relation(self, obj1, obj2, **hints):\n+        if obj1._meta.app_label == 'base' or \\\n+           obj2._meta.app_label == 'base':\n+            return True\n+        return None\n+\n+    def allow_migrate(self, db, app_label, model_name=None, **hints):\n+        if app_label == 'base':\n+            return db == 'default'\n+        return None\ndiff --git a/models.py b/models.py\nnew file mode 100644\nindex 0000000000..58ded32bd9\n--- /dev/null\n+++ b/models.py\n@@ -0,0 +1,7 @@\n+from django.db import connection\n+\n+def custom_query():\n+    with connection.cursor() as cursor:\n+        cursor.execute(\"SELECT * FROM table_name\")\n+        rows = cursor.fetchall()\n+        return rows\ndiff --git a/settings.py b/settings.py\nnew file mode 100644\nindex 0000000000..8a9325e1fb\n--- /dev/null\n+++ b/settings.py\n@@ -0,0 +1,15 @@\n+# settings.py\n+\n+DATABASE_ROUTERS = ['base.database_routers.BaseRouter']\n+\n+DATABASES = {\n+    'default': {\n+        'ENGINE': 'django.db.backends.postgresql',\n+        'NAME': 'central_db',\n+        'USER': 'your_user',\n+        'PASSWORD': 'your_password',\n+        'HOST': 'localhost',\n+        'PORT': '',\n+    },\n+    # Add other databases here if needed\n+}\n",
+    "model": "ollama_chat/mistral-small",
+    "temperature": 0,
+    "cost": 0.0,
+    "added_files": [
+        "base/database_routers.py",
+        "models.py",
+        "settings.py"
+    ],
+    "gold_files": [
+        "django/core/checks/model_checks.py"
+    ],
+    "edited_files": [
+        "base/database_routers.py",
+        "models.py",
+        "settings.py"
+    ],
+    "edit_outcome": true,
+    "lint_outcome": true,
+    "test_outcome": true,
+    "try": 1,
+    "tries": 1,
+    "all_results": [
+        {
+            "instance_id": "django__django-11630",
+            "model_name_or_path": "aider--ollama_chat-mistral-small",
+            "model_patch": "diff --git a/base/database_routers.py b/base/database_routers.py\nnew file mode 100644\nindex 0000000000..07159539d5\n--- /dev/null\n+++ b/base/database_routers.py\n@@ -0,0 +1,28 @@\n+from django.conf import settings\n+\n+class BaseRouter:\n+    \"\"\"\n+    A router to control all database operations on models for the\n+    base app.\n+    \"\"\"\n+\n+    def db_for_read(self, model, **hints):\n+        if model._meta.app_label == 'base':\n+            return 'default'\n+        return None\n+\n+    def db_for_write(self, model, **hints):\n+        if model._meta.app_label == 'base':\n+            return 'default'\n+        return None\n+\n+    def allow_relation(self, obj1, obj2, **hints):\n+        if obj1._meta.app_label == 'base' or \\\n+           obj2._meta.app_label == 'base':\n+            return True\n+        return None\n+\n+    def allow_migrate(self, db, app_label, model_name=None, **hints):\n+        if app_label == 'base':\n+            return db == 'default'\n+        return None\ndiff --git a/models.py b/models.py\nnew file mode 100644\nindex 0000000000..58ded32bd9\n--- /dev/null\n+++ b/models.py\n@@ -0,0 +1,7 @@\n+from django.db import connection\n+\n+def custom_query():\n+    with connection.cursor() as cursor:\n+        cursor.execute(\"SELECT * FROM table_name\")\n+        rows = cursor.fetchall()\n+        return rows\ndiff --git a/settings.py b/settings.py\nnew file mode 100644\nindex 0000000000..8a9325e1fb\n--- /dev/null\n+++ b/settings.py\n@@ -0,0 +1,15 @@\n+# settings.py\n+\n+DATABASE_ROUTERS = ['base.database_routers.BaseRouter']\n+\n+DATABASES = {\n+    'default': {\n+        'ENGINE': 'django.db.backends.postgresql',\n+        'NAME': 'central_db',\n+        'USER': 'your_user',\n+        'PASSWORD': 'your_password',\n+        'HOST': 'localhost',\n+        'PORT': '',\n+    },\n+    # Add other databases here if needed\n+}\n",
+            "model": "ollama_chat/mistral-small",
+            "temperature": 0,
+            "cost": 0.0,
+            "added_files": [
+                "base/database_routers.py",
+                "models.py",
+                "settings.py"
+            ],
+            "gold_files": [
+                "django/core/checks/model_checks.py"
+            ],
+            "edited_files": [
+                "base/database_routers.py",
+                "models.py",
+                "settings.py"
+            ],
+            "edit_outcome": true,
+            "lint_outcome": true,
+            "test_outcome": true,
+            "try": 1
+        }
+    ]
+}

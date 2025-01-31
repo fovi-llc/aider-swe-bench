@@ -1,0 +1,73 @@
+{
+    "instance_id": "django__django-13925",
+    "model_name_or_path": "aider--ollama_chat-mistral-small",
+    "model_patch": "diff --git a/apps.py (in accounts directory) b/apps.py (in accounts directory)\nnew file mode 100644\nindex 0000000000..67c27c9b02\n--- /dev/null\n+++ b/apps.py (in accounts directory)\t\n@@ -0,0 +1,6 @@\n+from django.apps import AppConfig\n+\n+class SpeedyCoreAccountsConfig(AppConfig):\n+    name = 'accounts'\n+    default_auto_field = 'django.db.models.BigAutoField'\n+\ndiff --git a/apps.py (in blocks directory) b/apps.py (in blocks directory)\nnew file mode 100644\nindex 0000000000..b9b008f511\n--- /dev/null\n+++ b/apps.py (in blocks directory)\t\n@@ -0,0 +1,5 @@\n+from django.apps import AppConfig\n+\n+class BlocksConfig(AppConfig):\n+    name = 'blocks'\n+    default_auto_field = 'django.db.models.BigAutoField'\ndiff --git a/apps.py (in contact_by_form directory) b/apps.py (in contact_by_form directory)\nnew file mode 100644\nindex 0000000000..e3832bebe5\n--- /dev/null\n+++ b/apps.py (in contact_by_form directory)\t\n@@ -0,0 +1,5 @@\n+from django.apps import AppConfig\n+\n+class SpeedyCoreContactByFormConfig(AppConfig):\n+    name = 'contact_by_form'\n+    default_auto_field = 'django.db.models.BigAutoField'\ndiff --git a/apps.py (in core_messages directory) b/apps.py (in core_messages directory)\nnew file mode 100644\nindex 0000000000..9b5cdda74b\n--- /dev/null\n+++ b/apps.py (in core_messages directory)\t\n@@ -0,0 +1,5 @@\n+from django.apps import AppConfig\n+\n+class SpeedyCoreMessagesConfig(AppConfig):\n+    name = 'core_messages'\n+    default_auto_field = 'django.db.models.BigAutoField'\ndiff --git a/apps.py (in friendship directory) b/apps.py (in friendship directory)\nnew file mode 100644\nindex 0000000000..08e44fc616\n--- /dev/null\n+++ b/apps.py (in friendship directory)\t\n@@ -0,0 +1,5 @@\n+from django.apps import AppConfig\n+\n+class FriendshipConfig(AppConfig):\n+    name = 'friendship'\n+    default_auto_field = 'django.db.models.BigAutoField'\ndiff --git a/apps.py (in likes directory) b/apps.py (in likes directory)\nnew file mode 100644\nindex 0000000000..6b61d23426\n--- /dev/null\n+++ b/apps.py (in likes directory)\t\n@@ -0,0 +1,5 @@\n+from django.apps import AppConfig\n+\n+class LikesConfig(AppConfig):\n+    name = 'likes'\n+    default_auto_field = 'django.db.models.BigAutoField'\ndiff --git a/apps.py (in uploads directory) b/apps.py (in uploads directory)\nnew file mode 100644\nindex 0000000000..ea47ce5d4b\n--- /dev/null\n+++ b/apps.py (in uploads directory)\t\n@@ -0,0 +1,5 @@\n+from django.apps import AppConfig\n+\n+class UploadsConfig(AppConfig):\n+    name = 'uploads'\n+    default_auto_field = 'django.db.models.BigAutoField'\ndiff --git a/settings.py b/settings.py\nnew file mode 100644\nindex 0000000000..a0fc2b4c20\n--- /dev/null\n+++ b/settings.py\n@@ -0,0 +1,3 @@\n+# other settings ...\n+\n+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'\n",
+    "model": "ollama_chat/mistral-small",
+    "temperature": 0,
+    "cost": 0.0,
+    "added_files": [
+        "apps.py (in accounts directory)",
+        "apps.py (in blocks directory)",
+        "apps.py (in contact_by_form directory)",
+        "apps.py (in core_messages directory)",
+        "apps.py (in friendship directory)",
+        "apps.py (in likes directory)",
+        "apps.py (in uploads directory)",
+        "settings.py"
+    ],
+    "gold_files": [
+        "django/db/models/base.py"
+    ],
+    "edited_files": [
+        "apps.py (in accounts directory)\t",
+        "apps.py (in blocks directory)\t",
+        "apps.py (in contact_by_form directory)\t",
+        "apps.py (in core_messages directory)\t",
+        "apps.py (in friendship directory)\t",
+        "apps.py (in likes directory)\t",
+        "apps.py (in uploads directory)\t",
+        "settings.py"
+    ],
+    "edit_outcome": true,
+    "lint_outcome": true,
+    "test_outcome": true,
+    "try": 1,
+    "tries": 1,
+    "all_results": [
+        {
+            "instance_id": "django__django-13925",
+            "model_name_or_path": "aider--ollama_chat-mistral-small",
+            "model_patch": "diff --git a/apps.py (in accounts directory) b/apps.py (in accounts directory)\nnew file mode 100644\nindex 0000000000..67c27c9b02\n--- /dev/null\n+++ b/apps.py (in accounts directory)\t\n@@ -0,0 +1,6 @@\n+from django.apps import AppConfig\n+\n+class SpeedyCoreAccountsConfig(AppConfig):\n+    name = 'accounts'\n+    default_auto_field = 'django.db.models.BigAutoField'\n+\ndiff --git a/apps.py (in blocks directory) b/apps.py (in blocks directory)\nnew file mode 100644\nindex 0000000000..b9b008f511\n--- /dev/null\n+++ b/apps.py (in blocks directory)\t\n@@ -0,0 +1,5 @@\n+from django.apps import AppConfig\n+\n+class BlocksConfig(AppConfig):\n+    name = 'blocks'\n+    default_auto_field = 'django.db.models.BigAutoField'\ndiff --git a/apps.py (in contact_by_form directory) b/apps.py (in contact_by_form directory)\nnew file mode 100644\nindex 0000000000..e3832bebe5\n--- /dev/null\n+++ b/apps.py (in contact_by_form directory)\t\n@@ -0,0 +1,5 @@\n+from django.apps import AppConfig\n+\n+class SpeedyCoreContactByFormConfig(AppConfig):\n+    name = 'contact_by_form'\n+    default_auto_field = 'django.db.models.BigAutoField'\ndiff --git a/apps.py (in core_messages directory) b/apps.py (in core_messages directory)\nnew file mode 100644\nindex 0000000000..9b5cdda74b\n--- /dev/null\n+++ b/apps.py (in core_messages directory)\t\n@@ -0,0 +1,5 @@\n+from django.apps import AppConfig\n+\n+class SpeedyCoreMessagesConfig(AppConfig):\n+    name = 'core_messages'\n+    default_auto_field = 'django.db.models.BigAutoField'\ndiff --git a/apps.py (in friendship directory) b/apps.py (in friendship directory)\nnew file mode 100644\nindex 0000000000..08e44fc616\n--- /dev/null\n+++ b/apps.py (in friendship directory)\t\n@@ -0,0 +1,5 @@\n+from django.apps import AppConfig\n+\n+class FriendshipConfig(AppConfig):\n+    name = 'friendship'\n+    default_auto_field = 'django.db.models.BigAutoField'\ndiff --git a/apps.py (in likes directory) b/apps.py (in likes directory)\nnew file mode 100644\nindex 0000000000..6b61d23426\n--- /dev/null\n+++ b/apps.py (in likes directory)\t\n@@ -0,0 +1,5 @@\n+from django.apps import AppConfig\n+\n+class LikesConfig(AppConfig):\n+    name = 'likes'\n+    default_auto_field = 'django.db.models.BigAutoField'\ndiff --git a/apps.py (in uploads directory) b/apps.py (in uploads directory)\nnew file mode 100644\nindex 0000000000..ea47ce5d4b\n--- /dev/null\n+++ b/apps.py (in uploads directory)\t\n@@ -0,0 +1,5 @@\n+from django.apps import AppConfig\n+\n+class UploadsConfig(AppConfig):\n+    name = 'uploads'\n+    default_auto_field = 'django.db.models.BigAutoField'\ndiff --git a/settings.py b/settings.py\nnew file mode 100644\nindex 0000000000..a0fc2b4c20\n--- /dev/null\n+++ b/settings.py\n@@ -0,0 +1,3 @@\n+# other settings ...\n+\n+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'\n",
+            "model": "ollama_chat/mistral-small",
+            "temperature": 0,
+            "cost": 0.0,
+            "added_files": [
+                "apps.py (in accounts directory)",
+                "apps.py (in blocks directory)",
+                "apps.py (in contact_by_form directory)",
+                "apps.py (in core_messages directory)",
+                "apps.py (in friendship directory)",
+                "apps.py (in likes directory)",
+                "apps.py (in uploads directory)",
+                "settings.py"
+            ],
+            "gold_files": [
+                "django/db/models/base.py"
+            ],
+            "edited_files": [
+                "apps.py (in accounts directory)\t",
+                "apps.py (in blocks directory)\t",
+                "apps.py (in contact_by_form directory)\t",
+                "apps.py (in core_messages directory)\t",
+                "apps.py (in friendship directory)\t",
+                "apps.py (in likes directory)\t",
+                "apps.py (in uploads directory)\t",
+                "settings.py"
+            ],
+            "edit_outcome": true,
+            "lint_outcome": true,
+            "test_outcome": true,
+            "try": 1
+        }
+    ]
+}

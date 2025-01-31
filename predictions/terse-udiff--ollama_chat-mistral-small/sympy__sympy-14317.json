@@ -1,0 +1,45 @@
+{
+    "instance_id": "sympy__sympy-14317",
+    "model_name_or_path": "aider--ollama_chat-mistral-small",
+    "model_patch": "diff --git a/sage/symbolic/poly.py b/sage/symbolic/poly.py\nnew file mode 100644\nindex 0000000000..29f21fffb2\n--- /dev/null\n+++ b/sage/symbolic/poly.py\n@@ -0,0 +1,28 @@\n+# -*- coding: utf-8 -*-\n+\"\"\"\n+Polynomials\n+\n+This module provides classes and functions for working with polynomials.\n+\"\"\"\n+\n+from sage.all import var, ZZ\n+\n+class Poly:\n+    def __init__(self, coefficients, variable):\n+        self.coefficients = coefficients\n+        self.variable = variable\n+\n+    def _repr_(self):\n+        terms = [f\"{coeff}*{self.variable}^{deg}\" for deg, coeff in enumerate(self.coefficients) if coeff != 0]\n+        return f'Poly({{{\" + \".join(terms)}}}, {self.variable})'\n+\n+    def _latex_(self):\n+        terms = [f\"{coeff}*{self.variable}^{deg}\" for deg, coeff in enumerate(self.coefficients) if coeff != 0]\n+        sorted_terms = sorted(terms, key=lambda term: int(term.split('^')[1]), reverse=True)\n+        return f'\\\\operatorname{Poly}\\\\left({{{\" + \".join(sorted_terms)}}}, {self.variable}, domain=\\\\mathbb{Z}\\\\right)'\n+\n+# Example usage\n+if __name__ == \"__main__\":\n+    var('a b c x')\n+    p = Poly([1, 2, 3], 'x')\n+    print(p)\n",
+    "model": "ollama_chat/mistral-small",
+    "temperature": 0,
+    "cost": 0.0,
+    "added_files": [
+        "sage/symbolic/poly.py"
+    ],
+    "gold_files": [
+        "sympy/printing/latex.py"
+    ],
+    "edited_files": [
+        "sage/symbolic/poly.py"
+    ],
+    "edit_outcome": true,
+    "lint_outcome": false,
+    "test_outcome": null,
+    "try": 1,
+    "tries": 1,
+    "all_results": [
+        {
+            "instance_id": "sympy__sympy-14317",
+            "model_name_or_path": "aider--ollama_chat-mistral-small",
+            "model_patch": "diff --git a/sage/symbolic/poly.py b/sage/symbolic/poly.py\nnew file mode 100644\nindex 0000000000..29f21fffb2\n--- /dev/null\n+++ b/sage/symbolic/poly.py\n@@ -0,0 +1,28 @@\n+# -*- coding: utf-8 -*-\n+\"\"\"\n+Polynomials\n+\n+This module provides classes and functions for working with polynomials.\n+\"\"\"\n+\n+from sage.all import var, ZZ\n+\n+class Poly:\n+    def __init__(self, coefficients, variable):\n+        self.coefficients = coefficients\n+        self.variable = variable\n+\n+    def _repr_(self):\n+        terms = [f\"{coeff}*{self.variable}^{deg}\" for deg, coeff in enumerate(self.coefficients) if coeff != 0]\n+        return f'Poly({{{\" + \".join(terms)}}}, {self.variable})'\n+\n+    def _latex_(self):\n+        terms = [f\"{coeff}*{self.variable}^{deg}\" for deg, coeff in enumerate(self.coefficients) if coeff != 0]\n+        sorted_terms = sorted(terms, key=lambda term: int(term.split('^')[1]), reverse=True)\n+        return f'\\\\operatorname{Poly}\\\\left({{{\" + \".join(sorted_terms)}}}, {self.variable}, domain=\\\\mathbb{Z}\\\\right)'\n+\n+# Example usage\n+if __name__ == \"__main__\":\n+    var('a b c x')\n+    p = Poly([1, 2, 3], 'x')\n+    print(p)\n",
+            "model": "ollama_chat/mistral-small",
+            "temperature": 0,
+            "cost": 0.0,
+            "added_files": [
+                "sage/symbolic/poly.py"
+            ],
+            "gold_files": [
+                "sympy/printing/latex.py"
+            ],
+            "edited_files": [
+                "sage/symbolic/poly.py"
+            ],
+            "edit_outcome": true,
+            "lint_outcome": false,
+            "test_outcome": null,
+            "try": 1
+        }
+    ]
+}

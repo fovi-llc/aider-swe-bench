@@ -1,0 +1,51 @@
+{
+    "instance_id": "django__django-12286",
+    "model_name_or_path": "aider--ollama_chat-mistral-small",
+    "model_patch": "diff --git a/#### File: django/core/validators.py b/#### File: django/core/validators.py\nnew file mode 100644\nindex 0000000000..164ec15b49\n--- /dev/null\n+++ b/#### File: django/core/validators.py\t\n@@ -0,0 +1,19 @@\n+# Add this import at the top of the file if it's not already there.\n+from django.utils.translation import get_language_info\n+\n+from django.core.exceptions import ValidationError  # Import ValidationError\n+\n+def validate_language_code(value):\n+    \"\"\"\n+    Validate that the language code is in the LANGUAGES setting.\n+    \"\"\"\n+    from django.conf import settings\n+    languages = dict(settings.LANGUAGES)\n+    base_lang, _ = value.split('-') if '-' in value else (value, None)\n+\n+    # Check if the exact language code or its base language is available\n+    if value not in languages and base_lang not in languages:\n+        raise ValidationError(\n+            'You have provided a value for the LANGUAGE_CODE setting that is not in the LANGUAGES setting.',\n+            code='translation.E004',\n+        )\ndiff --git a/#### File: docs/ref/settings.rst b/#### File: docs/ref/settings.rst\nnew file mode 100644\nindex 0000000000..785b9ebf57\n--- /dev/null\n+++ b/#### File: docs/ref/settings.rst\t\n@@ -0,0 +1,9 @@\n+# Add or update the relevant section in the documentation.\n+LANGUAGE_CODE\n+-------------\n+\n+Default: ``'en-us'``\n+\n+A string representing the language code for this installation. This should be a valid language code, such as 'de', 'es-ar', etc.\n+\n+If a sublanguage is specified but not available (e.g., 'de-at'), Django will use the base language (e.g., 'de') if it is available.\n",
+    "model": "ollama_chat/mistral-small",
+    "temperature": 0,
+    "cost": 0.0,
+    "added_files": [
+        "#### File: django/core/validators.py",
+        "#### File: docs/ref/settings.rst",
+        "django/core/validators.py"
+    ],
+    "gold_files": [
+        "django/core/checks/translation.py"
+    ],
+    "edited_files": [
+        "#### File: django/core/validators.py\t",
+        "#### File: docs/ref/settings.rst\t"
+    ],
+    "edit_outcome": true,
+    "lint_outcome": true,
+    "test_outcome": true,
+    "try": 1,
+    "tries": 1,
+    "all_results": [
+        {
+            "instance_id": "django__django-12286",
+            "model_name_or_path": "aider--ollama_chat-mistral-small",
+            "model_patch": "diff --git a/#### File: django/core/validators.py b/#### File: django/core/validators.py\nnew file mode 100644\nindex 0000000000..164ec15b49\n--- /dev/null\n+++ b/#### File: django/core/validators.py\t\n@@ -0,0 +1,19 @@\n+# Add this import at the top of the file if it's not already there.\n+from django.utils.translation import get_language_info\n+\n+from django.core.exceptions import ValidationError  # Import ValidationError\n+\n+def validate_language_code(value):\n+    \"\"\"\n+    Validate that the language code is in the LANGUAGES setting.\n+    \"\"\"\n+    from django.conf import settings\n+    languages = dict(settings.LANGUAGES)\n+    base_lang, _ = value.split('-') if '-' in value else (value, None)\n+\n+    # Check if the exact language code or its base language is available\n+    if value not in languages and base_lang not in languages:\n+        raise ValidationError(\n+            'You have provided a value for the LANGUAGE_CODE setting that is not in the LANGUAGES setting.',\n+            code='translation.E004',\n+        )\ndiff --git a/#### File: docs/ref/settings.rst b/#### File: docs/ref/settings.rst\nnew file mode 100644\nindex 0000000000..785b9ebf57\n--- /dev/null\n+++ b/#### File: docs/ref/settings.rst\t\n@@ -0,0 +1,9 @@\n+# Add or update the relevant section in the documentation.\n+LANGUAGE_CODE\n+-------------\n+\n+Default: ``'en-us'``\n+\n+A string representing the language code for this installation. This should be a valid language code, such as 'de', 'es-ar', etc.\n+\n+If a sublanguage is specified but not available (e.g., 'de-at'), Django will use the base language (e.g., 'de') if it is available.\n",
+            "model": "ollama_chat/mistral-small",
+            "temperature": 0,
+            "cost": 0.0,
+            "added_files": [
+                "#### File: django/core/validators.py",
+                "#### File: docs/ref/settings.rst",
+                "django/core/validators.py"
+            ],
+            "gold_files": [
+                "django/core/checks/translation.py"
+            ],
+            "edited_files": [
+                "#### File: django/core/validators.py\t",
+                "#### File: docs/ref/settings.rst\t"
+            ],
+            "edit_outcome": true,
+            "lint_outcome": true,
+            "test_outcome": true,
+            "try": 1
+        }
+    ]
+}

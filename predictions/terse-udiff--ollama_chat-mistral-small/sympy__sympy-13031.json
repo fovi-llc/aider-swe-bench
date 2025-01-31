@@ -1,0 +1,49 @@
+{
+    "instance_id": "sympy__sympy-13031",
+    "model_name_or_path": "aider--ollama_chat-mistral-small",
+    "model_patch": "diff --git a/sympy/custom_matrix.py b/sympy/custom_matrix.py\nnew file mode 100644\nindex 0000000000..8c4ba0ff7f\n--- /dev/null\n+++ b/sympy/custom_matrix.py\n@@ -0,0 +1,8 @@\n+from sympy import Matrix\n+\n+def custom_hstack(*matrices):\n+    # Check if all matrices have zero rows\n+    if all(matrix.rows == 0 for matrix in matrices):\n+        return Matrix.zeros(0, sum(matrix.cols for matrix in matrices))\n+    else:\n+        return Matrix.hstack(*matrices)\ndiff --git a/sympy/tests/test_matrix.py b/sympy/tests/test_matrix.py\nnew file mode 100644\nindex 0000000000..873420a4fa\n--- /dev/null\n+++ b/sympy/tests/test_matrix.py\n@@ -0,0 +1,14 @@\n+from sympy import Matrix\n+from sympy.custom_matrix import custom_hstack\n+\n+def test_custom_hstack():\n+    M1 = Matrix.zeros(0, 0)\n+    M2 = Matrix.zeros(0, 1)\n+    M3 = Matrix.zeros(0, 2)\n+    M4 = Matrix.zeros(0, 3)\n+\n+    result = custom_hstack(M1, M2, M3, M4).shape\n+    assert result == (0, 6), f\"Expected (0, 6) but got {result}\"\n+\n+if __name__ == \"__main__\":\n+    test_custom_hstack()\n",
+    "model": "ollama_chat/mistral-small",
+    "temperature": 0,
+    "cost": 0.0,
+    "added_files": [
+        "sympy/custom_matrix.py",
+        "sympy/tests/test_matrix.py"
+    ],
+    "gold_files": [
+        "sympy/matrices/sparse.py"
+    ],
+    "edited_files": [
+        "sympy/custom_matrix.py",
+        "sympy/tests/test_matrix.py"
+    ],
+    "edit_outcome": true,
+    "lint_outcome": true,
+    "test_outcome": true,
+    "try": 1,
+    "tries": 1,
+    "all_results": [
+        {
+            "instance_id": "sympy__sympy-13031",
+            "model_name_or_path": "aider--ollama_chat-mistral-small",
+            "model_patch": "diff --git a/sympy/custom_matrix.py b/sympy/custom_matrix.py\nnew file mode 100644\nindex 0000000000..8c4ba0ff7f\n--- /dev/null\n+++ b/sympy/custom_matrix.py\n@@ -0,0 +1,8 @@\n+from sympy import Matrix\n+\n+def custom_hstack(*matrices):\n+    # Check if all matrices have zero rows\n+    if all(matrix.rows == 0 for matrix in matrices):\n+        return Matrix.zeros(0, sum(matrix.cols for matrix in matrices))\n+    else:\n+        return Matrix.hstack(*matrices)\ndiff --git a/sympy/tests/test_matrix.py b/sympy/tests/test_matrix.py\nnew file mode 100644\nindex 0000000000..873420a4fa\n--- /dev/null\n+++ b/sympy/tests/test_matrix.py\n@@ -0,0 +1,14 @@\n+from sympy import Matrix\n+from sympy.custom_matrix import custom_hstack\n+\n+def test_custom_hstack():\n+    M1 = Matrix.zeros(0, 0)\n+    M2 = Matrix.zeros(0, 1)\n+    M3 = Matrix.zeros(0, 2)\n+    M4 = Matrix.zeros(0, 3)\n+\n+    result = custom_hstack(M1, M2, M3, M4).shape\n+    assert result == (0, 6), f\"Expected (0, 6) but got {result}\"\n+\n+if __name__ == \"__main__\":\n+    test_custom_hstack()\n",
+            "model": "ollama_chat/mistral-small",
+            "temperature": 0,
+            "cost": 0.0,
+            "added_files": [
+                "sympy/custom_matrix.py",
+                "sympy/tests/test_matrix.py"
+            ],
+            "gold_files": [
+                "sympy/matrices/sparse.py"
+            ],
+            "edited_files": [
+                "sympy/custom_matrix.py",
+                "sympy/tests/test_matrix.py"
+            ],
+            "edit_outcome": true,
+            "lint_outcome": true,
+            "test_outcome": true,
+            "try": 1
+        }
+    ]
+}

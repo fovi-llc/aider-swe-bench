@@ -1,0 +1,65 @@
+{
+    "instance_id": "sphinx-doc__sphinx-7686",
+    "model_name_or_path": "aider--ollama_chat-mistral-small",
+    "model_patch": "diff --git a/### File: index.rst b/### File: index.rst\nnew file mode 100644\nindex 000000000..334b48fe0\n--- /dev/null\n+++ b/### File: index.rst\t\n@@ -0,0 +1,6 @@\n+# index.rst\n+\n+.. autosummary::\n+   :toctree: generated\n+\n+   example\ndiff --git a/### File: sphinx/ext/autosummary.py b/### File: sphinx/ext/autosummary.py\nnew file mode 100644\nindex 000000000..f7b5310bc\n--- /dev/null\n+++ b/### File: sphinx/ext/autosummary.py\t\n@@ -0,0 +1,33 @@\n+# sphinx/ext/autosummary.py\n+\n+from docutils import nodes\n+from sphinx.ext.autodoc import AutodocDirective, generate_autosummary\n+\n+def setup(app):\n+    app.add_config_value('autosummary_generate', False, 'env')\n+    app.add_config_value('autosummary_imported_members', True, 'env')\n+\n+    # Register the autosummary directive\n+    class AutosummaryDirective(AutodocDirective):\n+        def run(self):\n+            env = self.state.document.settings.env\n+            config = env.config\n+            members = self.options.get('members', [])\n+\n+            if not config['autosummary_imported_members']:\n+                # Filter out imported members\n+                members = [m for m in members if not m.startswith('_') and m != 'os']\n+\n+            return [nodes.section(text='Autosummary', ids=['autosummary'])]\n+\n+    app.add_directive('autosummary', AutosummaryDirective)\n+\n+    # Register the autosummary generator\n+    def generate_autosummary(app, env):\n+        config = env.config\n+        if not config['autosummary_generate']:\n+            return\n+        for module in config.autosummary_modules:\n+            generate_autosummary(app, env, module)\n+\n+    app.connect('builder-inited', generate_autosummary)\ndiff --git a/#### File: _templates/autosummary/module.rst b/#### File: _templates/autosummary/module.rst\nnew file mode 100644\nindex 000000000..23481e470\n--- /dev/null\n+++ b/#### File: _templates/autosummary/module.rst\t\n@@ -0,0 +1,9 @@\n+# _templates/autosummary/module.rst\n+{{ fullname | escape | underline }}\n+\n+.. automodule:: {{ fullname }}\n+\n+   .. autosummary::\n+   {% for item in members %}\n+      {{ item }}\n+   {%- endfor %}\ndiff --git a/#### File: conf.py b/#### File: conf.py\nnew file mode 100644\nindex 000000000..870a929a9\n--- /dev/null\n+++ b/#### File: conf.py\t\n@@ -0,0 +1,8 @@\n+# conf.py\n+extensions = [\n+    'sphinx.ext.autodoc',\n+    'sphinx.ext.autosummary',\n+]\n+\n+autosummary_generate = True\n+autosummary_imported_members = False\ndiff --git a/#### File: index.rst b/#### File: index.rst\nnew file mode 100644\nindex 000000000..ed4aedc42\n--- /dev/null\n+++ b/#### File: index.rst\t\n@@ -0,0 +1,5 @@\n+# index.rst\n+.. autosummary::\n+   :toctree: generated\n+\n+   example\ndiff --git a/#### File: sphinx/ext/autosummary.py b/#### File: sphinx/ext/autosummary.py\nnew file mode 100644\nindex 000000000..7be0f2179\n--- /dev/null\n+++ b/#### File: sphinx/ext/autosummary.py\t\n@@ -0,0 +1,35 @@\n+# sphinx/ext/autosummary.py\n+import os\n+from docutils import nodes\n+\n+def setup(app):\n+    app.add_config_value('autosummary_generate', False, 'env')\n+    app.add_config_value('autosummary_imported_members', True, 'env')\n+\n+    # Register the autosummary directive\n+    from sphinx.ext.autodoc import AutodocDirective\n+\n+    class AutosummaryDirective(AutodocDirective):\n+        def run(self):\n+            env = self.state.document.settings.env\n+            config = env.config\n+            members = self.options.get('members', [])\n+\n+            if not config['autosummary_imported_members']:\n+                # Filter out imported members\n+                members = [m for m in members if not m.startswith('_') and m != 'os']\n+\n+            return [nodes.section(text='Autosummary', ids=['autosummary'])]\n+\n+    app.add_directive('autosummary', AutosummaryDirective)\n+\n+    # Register the autosummary generator\n+    from sphinx.ext.autodoc import generate_autosummary\n+\n+    def generate_autosummary(app, env):\n+        if not config['autosummary_generate']:\n+            return\n+        for module in env.config.autosummary_modules:\n+            generate_autosummary(app, env, module)\n+\n+    app.connect('builder-inited', generate_autosummary)\n",
+    "model": "ollama_chat/mistral-small",
+    "temperature": 0,
+    "cost": 0.0,
+    "added_files": [
+        "### File: index.rst",
+        "### File: sphinx/ext/autosummary.py",
+        "#### File: _templates/autosummary/module.rst",
+        "#### File: conf.py",
+        "#### File: index.rst",
+        "#### File: sphinx/ext/autosummary.py"
+    ],
+    "gold_files": [
+        "sphinx/ext/autosummary/generate.py"
+    ],
+    "edited_files": [
+        "### File: index.rst\t",
+        "### File: sphinx/ext/autosummary.py\t",
+        "#### File: _templates/autosummary/module.rst\t",
+        "#### File: conf.py\t",
+        "#### File: index.rst\t",
+        "#### File: sphinx/ext/autosummary.py\t"
+    ],
+    "edit_outcome": false,
+    "lint_outcome": true,
+    "test_outcome": false,
+    "try": 1,
+    "tries": 1,
+    "all_results": [
+        {
+            "instance_id": "sphinx-doc__sphinx-7686",
+            "model_name_or_path": "aider--ollama_chat-mistral-small",
+            "model_patch": "diff --git a/### File: index.rst b/### File: index.rst\nnew file mode 100644\nindex 000000000..334b48fe0\n--- /dev/null\n+++ b/### File: index.rst\t\n@@ -0,0 +1,6 @@\n+# index.rst\n+\n+.. autosummary::\n+   :toctree: generated\n+\n+   example\ndiff --git a/### File: sphinx/ext/autosummary.py b/### File: sphinx/ext/autosummary.py\nnew file mode 100644\nindex 000000000..f7b5310bc\n--- /dev/null\n+++ b/### File: sphinx/ext/autosummary.py\t\n@@ -0,0 +1,33 @@\n+# sphinx/ext/autosummary.py\n+\n+from docutils import nodes\n+from sphinx.ext.autodoc import AutodocDirective, generate_autosummary\n+\n+def setup(app):\n+    app.add_config_value('autosummary_generate', False, 'env')\n+    app.add_config_value('autosummary_imported_members', True, 'env')\n+\n+    # Register the autosummary directive\n+    class AutosummaryDirective(AutodocDirective):\n+        def run(self):\n+            env = self.state.document.settings.env\n+            config = env.config\n+            members = self.options.get('members', [])\n+\n+            if not config['autosummary_imported_members']:\n+                # Filter out imported members\n+                members = [m for m in members if not m.startswith('_') and m != 'os']\n+\n+            return [nodes.section(text='Autosummary', ids=['autosummary'])]\n+\n+    app.add_directive('autosummary', AutosummaryDirective)\n+\n+    # Register the autosummary generator\n+    def generate_autosummary(app, env):\n+        config = env.config\n+        if not config['autosummary_generate']:\n+            return\n+        for module in config.autosummary_modules:\n+            generate_autosummary(app, env, module)\n+\n+    app.connect('builder-inited', generate_autosummary)\ndiff --git a/#### File: _templates/autosummary/module.rst b/#### File: _templates/autosummary/module.rst\nnew file mode 100644\nindex 000000000..23481e470\n--- /dev/null\n+++ b/#### File: _templates/autosummary/module.rst\t\n@@ -0,0 +1,9 @@\n+# _templates/autosummary/module.rst\n+{{ fullname | escape | underline }}\n+\n+.. automodule:: {{ fullname }}\n+\n+   .. autosummary::\n+   {% for item in members %}\n+      {{ item }}\n+   {%- endfor %}\ndiff --git a/#### File: conf.py b/#### File: conf.py\nnew file mode 100644\nindex 000000000..870a929a9\n--- /dev/null\n+++ b/#### File: conf.py\t\n@@ -0,0 +1,8 @@\n+# conf.py\n+extensions = [\n+    'sphinx.ext.autodoc',\n+    'sphinx.ext.autosummary',\n+]\n+\n+autosummary_generate = True\n+autosummary_imported_members = False\ndiff --git a/#### File: index.rst b/#### File: index.rst\nnew file mode 100644\nindex 000000000..ed4aedc42\n--- /dev/null\n+++ b/#### File: index.rst\t\n@@ -0,0 +1,5 @@\n+# index.rst\n+.. autosummary::\n+   :toctree: generated\n+\n+   example\ndiff --git a/#### File: sphinx/ext/autosummary.py b/#### File: sphinx/ext/autosummary.py\nnew file mode 100644\nindex 000000000..7be0f2179\n--- /dev/null\n+++ b/#### File: sphinx/ext/autosummary.py\t\n@@ -0,0 +1,35 @@\n+# sphinx/ext/autosummary.py\n+import os\n+from docutils import nodes\n+\n+def setup(app):\n+    app.add_config_value('autosummary_generate', False, 'env')\n+    app.add_config_value('autosummary_imported_members', True, 'env')\n+\n+    # Register the autosummary directive\n+    from sphinx.ext.autodoc import AutodocDirective\n+\n+    class AutosummaryDirective(AutodocDirective):\n+        def run(self):\n+            env = self.state.document.settings.env\n+            config = env.config\n+            members = self.options.get('members', [])\n+\n+            if not config['autosummary_imported_members']:\n+                # Filter out imported members\n+                members = [m for m in members if not m.startswith('_') and m != 'os']\n+\n+            return [nodes.section(text='Autosummary', ids=['autosummary'])]\n+\n+    app.add_directive('autosummary', AutosummaryDirective)\n+\n+    # Register the autosummary generator\n+    from sphinx.ext.autodoc import generate_autosummary\n+\n+    def generate_autosummary(app, env):\n+        if not config['autosummary_generate']:\n+            return\n+        for module in env.config.autosummary_modules:\n+            generate_autosummary(app, env, module)\n+\n+    app.connect('builder-inited', generate_autosummary)\n",
+            "model": "ollama_chat/mistral-small",
+            "temperature": 0,
+            "cost": 0.0,
+            "added_files": [
+                "### File: index.rst",
+                "### File: sphinx/ext/autosummary.py",
+                "#### File: _templates/autosummary/module.rst",
+                "#### File: conf.py",
+                "#### File: index.rst",
+                "#### File: sphinx/ext/autosummary.py"
+            ],
+            "gold_files": [
+                "sphinx/ext/autosummary/generate.py"
+            ],
+            "edited_files": [
+                "### File: index.rst\t",
+                "### File: sphinx/ext/autosummary.py\t",
+                "#### File: _templates/autosummary/module.rst\t",
+                "#### File: conf.py\t",
+                "#### File: index.rst\t",
+                "#### File: sphinx/ext/autosummary.py\t"
+            ],
+            "edit_outcome": false,
+            "lint_outcome": true,
+            "test_outcome": false,
+            "try": 1
+        }
+    ]
+}

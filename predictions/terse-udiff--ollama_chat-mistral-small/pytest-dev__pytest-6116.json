@@ -1,0 +1,61 @@
+{
+    "instance_id": "pytest-dev__pytest-6116",
+    "model_name_or_path": "aider--ollama_chat-mistral-small",
+    "model_patch": "diff --git a/### New File: pytest/shortcuts.py b/### New File: pytest/shortcuts.py\nnew file mode 100644\nindex 000000000..b64634c64\n--- /dev/null\n+++ b/### New File: pytest/shortcuts.py\t\n@@ -0,0 +1,3 @@\n+def add_shortcut_option(parser):\n+    parser.add_argument('-c', '--collect-only', action='store_true',\n+                        help='only collect tests without executing them')\ndiff --git a/### Updated File: pytest/__init__.py b/### Updated File: pytest/__init__.py\nnew file mode 100644\nindex 000000000..52f631f50\n--- /dev/null\n+++ b/### Updated File: pytest/__init__.py\t\n@@ -0,0 +1,7 @@\n+from .cli import cli\n+\n+def main():\n+    cli()\n+\n+if __name__ == '__main__':\n+    main()\ndiff --git a/### Updated File: pytest/cli.py b/### Updated File: pytest/cli.py\nnew file mode 100644\nindex 000000000..dda40adc9\n--- /dev/null\n+++ b/### Updated File: pytest/cli.py\t\n@@ -0,0 +1,19 @@\n+import argparse\n+\n+from .main import main as pytest_main\n+from .shortcuts import add_shortcut_option\n+\n+def cli():\n+    parser = argparse.ArgumentParser(description='PyTest CLI')\n+    add_shortcut_option(parser)\n+\n+    args = parser.parse_args()\n+\n+    if args.collect_only:\n+        # Logic to handle --collect-only\n+        print(\"Collecting tests only...\")\n+    else:\n+        pytest_main()\n+\n+if __name__ == '__main__':\n+    cli()\ndiff --git a/### Updated File: pytest/help.py b/### Updated File: pytest/help.py\nnew file mode 100644\nindex 000000000..655ded594\n--- /dev/null\n+++ b/### Updated File: pytest/help.py\t\n@@ -0,0 +1,13 @@\n+def show_help():\n+    help_text = \"\"\"\n+Usage: pytest [options] [file_or_dir] [file_or_dir] ...\n+\n+Options:\n+  -c, --collect-only   only collect tests without executing them\n+\n+For more details, see the documentation at https://docs.pytest.org/en/latest/\n+\"\"\"\n+    print(help_text)\n+\n+if __name__ == '__main__':\n+    show_help()\ndiff --git a/### Updated File: pytest/main.py b/### Updated File: pytest/main.py\nnew file mode 100644\nindex 000000000..039ca1ab3\n--- /dev/null\n+++ b/### Updated File: pytest/main.py\t\n@@ -0,0 +1,18 @@\n+import argparse\n+\n+def main():\n+    parser = argparse.ArgumentParser(description='PyTest')\n+    parser.add_argument('-c', '--collect-only', action='store_true',\n+                        help='only collect tests without executing them')\n+\n+    args = parser.parse_args()\n+\n+    if args.collect_only:\n+        # Logic to handle --collect-only\n+        print(\"Collecting tests only...\")\n+    else:\n+        # Regular pytest logic\n+        print(\"Running tests...\")\n+\n+if __name__ == '__main__':\n+    main()\n",
+    "model": "ollama_chat/mistral-small",
+    "temperature": 0,
+    "cost": 0.0,
+    "added_files": [
+        "### New File: pytest/shortcuts.py",
+        "### Updated File: pytest/__init__.py",
+        "### Updated File: pytest/cli.py",
+        "### Updated File: pytest/help.py",
+        "### Updated File: pytest/main.py"
+    ],
+    "gold_files": [
+        "src/_pytest/main.py"
+    ],
+    "edited_files": [
+        "### New File: pytest/shortcuts.py\t",
+        "### Updated File: pytest/__init__.py\t",
+        "### Updated File: pytest/cli.py\t",
+        "### Updated File: pytest/help.py\t",
+        "### Updated File: pytest/main.py\t"
+    ],
+    "edit_outcome": true,
+    "lint_outcome": true,
+    "test_outcome": true,
+    "try": 1,
+    "tries": 1,
+    "all_results": [
+        {
+            "instance_id": "pytest-dev__pytest-6116",
+            "model_name_or_path": "aider--ollama_chat-mistral-small",
+            "model_patch": "diff --git a/### New File: pytest/shortcuts.py b/### New File: pytest/shortcuts.py\nnew file mode 100644\nindex 000000000..b64634c64\n--- /dev/null\n+++ b/### New File: pytest/shortcuts.py\t\n@@ -0,0 +1,3 @@\n+def add_shortcut_option(parser):\n+    parser.add_argument('-c', '--collect-only', action='store_true',\n+                        help='only collect tests without executing them')\ndiff --git a/### Updated File: pytest/__init__.py b/### Updated File: pytest/__init__.py\nnew file mode 100644\nindex 000000000..52f631f50\n--- /dev/null\n+++ b/### Updated File: pytest/__init__.py\t\n@@ -0,0 +1,7 @@\n+from .cli import cli\n+\n+def main():\n+    cli()\n+\n+if __name__ == '__main__':\n+    main()\ndiff --git a/### Updated File: pytest/cli.py b/### Updated File: pytest/cli.py\nnew file mode 100644\nindex 000000000..dda40adc9\n--- /dev/null\n+++ b/### Updated File: pytest/cli.py\t\n@@ -0,0 +1,19 @@\n+import argparse\n+\n+from .main import main as pytest_main\n+from .shortcuts import add_shortcut_option\n+\n+def cli():\n+    parser = argparse.ArgumentParser(description='PyTest CLI')\n+    add_shortcut_option(parser)\n+\n+    args = parser.parse_args()\n+\n+    if args.collect_only:\n+        # Logic to handle --collect-only\n+        print(\"Collecting tests only...\")\n+    else:\n+        pytest_main()\n+\n+if __name__ == '__main__':\n+    cli()\ndiff --git a/### Updated File: pytest/help.py b/### Updated File: pytest/help.py\nnew file mode 100644\nindex 000000000..655ded594\n--- /dev/null\n+++ b/### Updated File: pytest/help.py\t\n@@ -0,0 +1,13 @@\n+def show_help():\n+    help_text = \"\"\"\n+Usage: pytest [options] [file_or_dir] [file_or_dir] ...\n+\n+Options:\n+  -c, --collect-only   only collect tests without executing them\n+\n+For more details, see the documentation at https://docs.pytest.org/en/latest/\n+\"\"\"\n+    print(help_text)\n+\n+if __name__ == '__main__':\n+    show_help()\ndiff --git a/### Updated File: pytest/main.py b/### Updated File: pytest/main.py\nnew file mode 100644\nindex 000000000..039ca1ab3\n--- /dev/null\n+++ b/### Updated File: pytest/main.py\t\n@@ -0,0 +1,18 @@\n+import argparse\n+\n+def main():\n+    parser = argparse.ArgumentParser(description='PyTest')\n+    parser.add_argument('-c', '--collect-only', action='store_true',\n+                        help='only collect tests without executing them')\n+\n+    args = parser.parse_args()\n+\n+    if args.collect_only:\n+        # Logic to handle --collect-only\n+        print(\"Collecting tests only...\")\n+    else:\n+        # Regular pytest logic\n+        print(\"Running tests...\")\n+\n+if __name__ == '__main__':\n+    main()\n",
+            "model": "ollama_chat/mistral-small",
+            "temperature": 0,
+            "cost": 0.0,
+            "added_files": [
+                "### New File: pytest/shortcuts.py",
+                "### Updated File: pytest/__init__.py",
+                "### Updated File: pytest/cli.py",
+                "### Updated File: pytest/help.py",
+                "### Updated File: pytest/main.py"
+            ],
+            "gold_files": [
+                "src/_pytest/main.py"
+            ],
+            "edited_files": [
+                "### New File: pytest/shortcuts.py\t",
+                "### Updated File: pytest/__init__.py\t",
+                "### Updated File: pytest/cli.py\t",
+                "### Updated File: pytest/help.py\t",
+                "### Updated File: pytest/main.py\t"
+            ],
+            "edit_outcome": true,
+            "lint_outcome": true,
+            "test_outcome": true,
+            "try": 1
+        }
+    ]
+}

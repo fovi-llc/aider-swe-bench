@@ -1,0 +1,49 @@
+{
+    "instance_id": "django__django-14787",
+    "model_name_or_path": "aider--ollama_chat-mistral-small",
+    "model_patch": "diff --git a/decorators.py b/decorators.py\nnew file mode 100644\nindex 0000000000..abad96207a\n--- /dev/null\n+++ b/decorators.py\n@@ -0,0 +1,9 @@\n+from functools import wraps, partial\n+\n+def method_decorator(decorator):\n+    def wrapper(func):\n+        @wraps(func)\n+        def inner(*args, **kwargs):\n+            return func(*args, **kwargs)\n+        return decorator(inner)\n+    return wrapper\ndiff --git a/test_decorator.py b/test_decorator.py\nnew file mode 100644\nindex 0000000000..0789d41881\n--- /dev/null\n+++ b/test_decorator.py\n@@ -0,0 +1,10 @@\n+from decorators import method_decorator, logger\n+\n+class Test:\n+    @method_decorator(logger)\n+    def hello_world(self):\n+        return \"hello\"\n+\n+if __name__ == '__main__':\n+    test = Test()\n+    print(test.hello_world())\n",
+    "model": "ollama_chat/mistral-small",
+    "temperature": 0,
+    "cost": 0.0,
+    "added_files": [
+        "decorators.py",
+        "test_decorator.py"
+    ],
+    "gold_files": [
+        "django/utils/decorators.py"
+    ],
+    "edited_files": [
+        "decorators.py",
+        "test_decorator.py"
+    ],
+    "edit_outcome": true,
+    "lint_outcome": true,
+    "test_outcome": true,
+    "try": 1,
+    "tries": 1,
+    "all_results": [
+        {
+            "instance_id": "django__django-14787",
+            "model_name_or_path": "aider--ollama_chat-mistral-small",
+            "model_patch": "diff --git a/decorators.py b/decorators.py\nnew file mode 100644\nindex 0000000000..abad96207a\n--- /dev/null\n+++ b/decorators.py\n@@ -0,0 +1,9 @@\n+from functools import wraps, partial\n+\n+def method_decorator(decorator):\n+    def wrapper(func):\n+        @wraps(func)\n+        def inner(*args, **kwargs):\n+            return func(*args, **kwargs)\n+        return decorator(inner)\n+    return wrapper\ndiff --git a/test_decorator.py b/test_decorator.py\nnew file mode 100644\nindex 0000000000..0789d41881\n--- /dev/null\n+++ b/test_decorator.py\n@@ -0,0 +1,10 @@\n+from decorators import method_decorator, logger\n+\n+class Test:\n+    @method_decorator(logger)\n+    def hello_world(self):\n+        return \"hello\"\n+\n+if __name__ == '__main__':\n+    test = Test()\n+    print(test.hello_world())\n",
+            "model": "ollama_chat/mistral-small",
+            "temperature": 0,
+            "cost": 0.0,
+            "added_files": [
+                "decorators.py",
+                "test_decorator.py"
+            ],
+            "gold_files": [
+                "django/utils/decorators.py"
+            ],
+            "edited_files": [
+                "decorators.py",
+                "test_decorator.py"
+            ],
+            "edit_outcome": true,
+            "lint_outcome": true,
+            "test_outcome": true,
+            "try": 1
+        }
+    ]
+}

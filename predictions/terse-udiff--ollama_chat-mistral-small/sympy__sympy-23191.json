@@ -1,0 +1,49 @@
+{
+    "instance_id": "sympy__sympy-23191",
+    "model_name_or_path": "aider--ollama_chat-mistral-small",
+    "model_patch": "diff --git a/custom_pretty_print.py b/custom_pretty_print.py\nnew file mode 100644\nindex 0000000000..06e7fe93da\n--- /dev/null\n+++ b/custom_pretty_print.py\n@@ -0,0 +1,9 @@\n+from sympy import pretty\n+from sympy.vector import Vector\n+\n+def custom_pretty_print(expr):\n+    if isinstance(expr, Vector):\n+        return pretty(expr)\n+    else:\n+        return expr._pretty()\n+\ndiff --git a/show_greeting.py b/show_greeting.py\nnew file mode 100644\nindex 0000000000..f1b84f1b5a\n--- /dev/null\n+++ b/show_greeting.py\n@@ -0,0 +1,27 @@\n+from sympy import *\n+from sympy.vector import CoordSys3D, Del\n+\n+# Import the custom pretty print function\n+from custom_pretty_print import custom_pretty_print\n+\n+init_printing()\n+\n+delop = Del()\n+CC_ = CoordSys3D(\"C\")\n+x,    y,    z    = CC_.x, CC_.y, CC_.z\n+xhat, yhat, zhat = CC_.i, CC_.j, CC_.k\n+\n+t = symbols(\"t\")\n+ten = symbols(\"10\", positive=True)\n+eps, mu = 4*pi*ten**(-11), ten**(-5)\n+\n+Bx = 2 * ten**(-4) * cos(ten**5 * t) * sin(ten**(-3) * y)\n+vecB = Bx * xhat\n+vecE = (1/eps) * Integral(delop.cross(vecB/mu).doit(), t)\n+\n+# Use the custom pretty print function\n+custom_pretty_print(vecB)\n+print()\n+custom_pretty_print(vecE)\n+print()\n+custom_pretty_print(vecE.doit())\n",
+    "model": "ollama_chat/mistral-small",
+    "temperature": 0,
+    "cost": 0.0,
+    "added_files": [
+        "custom_pretty_print.py",
+        "show_greeting.py"
+    ],
+    "gold_files": [
+        "sympy/printing/pretty/pretty.py"
+    ],
+    "edited_files": [
+        "custom_pretty_print.py",
+        "show_greeting.py"
+    ],
+    "edit_outcome": true,
+    "lint_outcome": true,
+    "test_outcome": true,
+    "try": 1,
+    "tries": 1,
+    "all_results": [
+        {
+            "instance_id": "sympy__sympy-23191",
+            "model_name_or_path": "aider--ollama_chat-mistral-small",
+            "model_patch": "diff --git a/custom_pretty_print.py b/custom_pretty_print.py\nnew file mode 100644\nindex 0000000000..06e7fe93da\n--- /dev/null\n+++ b/custom_pretty_print.py\n@@ -0,0 +1,9 @@\n+from sympy import pretty\n+from sympy.vector import Vector\n+\n+def custom_pretty_print(expr):\n+    if isinstance(expr, Vector):\n+        return pretty(expr)\n+    else:\n+        return expr._pretty()\n+\ndiff --git a/show_greeting.py b/show_greeting.py\nnew file mode 100644\nindex 0000000000..f1b84f1b5a\n--- /dev/null\n+++ b/show_greeting.py\n@@ -0,0 +1,27 @@\n+from sympy import *\n+from sympy.vector import CoordSys3D, Del\n+\n+# Import the custom pretty print function\n+from custom_pretty_print import custom_pretty_print\n+\n+init_printing()\n+\n+delop = Del()\n+CC_ = CoordSys3D(\"C\")\n+x,    y,    z    = CC_.x, CC_.y, CC_.z\n+xhat, yhat, zhat = CC_.i, CC_.j, CC_.k\n+\n+t = symbols(\"t\")\n+ten = symbols(\"10\", positive=True)\n+eps, mu = 4*pi*ten**(-11), ten**(-5)\n+\n+Bx = 2 * ten**(-4) * cos(ten**5 * t) * sin(ten**(-3) * y)\n+vecB = Bx * xhat\n+vecE = (1/eps) * Integral(delop.cross(vecB/mu).doit(), t)\n+\n+# Use the custom pretty print function\n+custom_pretty_print(vecB)\n+print()\n+custom_pretty_print(vecE)\n+print()\n+custom_pretty_print(vecE.doit())\n",
+            "model": "ollama_chat/mistral-small",
+            "temperature": 0,
+            "cost": 0.0,
+            "added_files": [
+                "custom_pretty_print.py",
+                "show_greeting.py"
+            ],
+            "gold_files": [
+                "sympy/printing/pretty/pretty.py"
+            ],
+            "edited_files": [
+                "custom_pretty_print.py",
+                "show_greeting.py"
+            ],
+            "edit_outcome": true,
+            "lint_outcome": true,
+            "test_outcome": true,
+            "try": 1
+        }
+    ]
+}

@@ -1,0 +1,49 @@
+{
+    "instance_id": "django__django-12184",
+    "model_name_or_path": "aider--ollama_chat-mistral-small",
+    "model_patch": "diff --git a/urls.py b/urls.py\nnew file mode 100644\nindex 0000000000..0a3a334cc0\n--- /dev/null\n+++ b/urls.py\n@@ -0,0 +1,6 @@\n+from django.urls import re_path\n+import views\n+\n+urlpatterns = [\n+    re_path(r'^module/(?P<format>(html|json|xml))?/?$', views.modules, name='modules'),\n+]\ndiff --git a/views.py b/views.py\nnew file mode 100644\nindex 0000000000..50372160ce\n--- /dev/null\n+++ b/views.py\n@@ -0,0 +1,4 @@\n+from django.shortcuts import render\n+\n+def modules(request, format='html', **kwargs):\n+\treturn render(request, 'template_name.html')\n",
+    "model": "ollama_chat/mistral-small",
+    "temperature": 0,
+    "cost": 0.0,
+    "added_files": [
+        "urls.py",
+        "views.py"
+    ],
+    "gold_files": [
+        "django/urls/resolvers.py"
+    ],
+    "edited_files": [
+        "urls.py",
+        "views.py"
+    ],
+    "edit_outcome": true,
+    "lint_outcome": true,
+    "test_outcome": true,
+    "try": 1,
+    "tries": 1,
+    "all_results": [
+        {
+            "instance_id": "django__django-12184",
+            "model_name_or_path": "aider--ollama_chat-mistral-small",
+            "model_patch": "diff --git a/urls.py b/urls.py\nnew file mode 100644\nindex 0000000000..0a3a334cc0\n--- /dev/null\n+++ b/urls.py\n@@ -0,0 +1,6 @@\n+from django.urls import re_path\n+import views\n+\n+urlpatterns = [\n+    re_path(r'^module/(?P<format>(html|json|xml))?/?$', views.modules, name='modules'),\n+]\ndiff --git a/views.py b/views.py\nnew file mode 100644\nindex 0000000000..50372160ce\n--- /dev/null\n+++ b/views.py\n@@ -0,0 +1,4 @@\n+from django.shortcuts import render\n+\n+def modules(request, format='html', **kwargs):\n+\treturn render(request, 'template_name.html')\n",
+            "model": "ollama_chat/mistral-small",
+            "temperature": 0,
+            "cost": 0.0,
+            "added_files": [
+                "urls.py",
+                "views.py"
+            ],
+            "gold_files": [
+                "django/urls/resolvers.py"
+            ],
+            "edited_files": [
+                "urls.py",
+                "views.py"
+            ],
+            "edit_outcome": true,
+            "lint_outcome": true,
+            "test_outcome": true,
+            "try": 1
+        }
+    ]
+}

@@ -1,0 +1,47 @@
+{
+    "instance_id": "scikit-learn__scikit-learn-14983",
+    "model_name_or_path": "aider--ollama_chat-mistral-small",
+    "model_patch": "diff --git a/#### sklearn/model_selection/_split.py b/#### sklearn/model_selection/_split.py\nnew file mode 100644\nindex 000000000..077309b4b\n--- /dev/null\n+++ b/#### sklearn/model_selection/_split.py\t\n@@ -0,0 +1,76 @@\n+from sklearn.utils import check_random_state\n+from sklearn.model_selection._split import BaseCrossValidator, _BaseKFold, indexable, _num_samples\n+from sklearn.base import clone\n+import numpy as np\n+\n+class RepeatedKFold(BaseCrossValidator):\n+    \"\"\"Repeated K-Fold cross validator.\n+\n+    This class computes the k-fold cross-validation score for an estimator,\n+    but repeats the process n_repeats times. It is used to get a better estimate of model performance.\n+    Parameters\n+    ----------\n+    n_splits : int, default=5\n+        Number of folds. Must be at least 2.\n+    n_repeats : int, default=10\n+        Number of times cross-validation is repeated.\n+    random_state : int or RandomState instance, default=None\n+        Pseudo-random number generator state used for shuffling the data for each repetition.\n+\n+    Attributes\n+    ----------\n+    n_splits_ : int\n+        The effective number of splits. This can be less than `n_splits` if\n+        `n_samples` is too small.\n+    \"\"\"\n+\n+    def __init__(self, n_splits=5, n_repeats=10, random_state=None):\n+        super().__init__()\n+        self.n_splits = n_splits\n+        self.n_repeats = n_repeats\n+        self.random_state = random_state\n+\n+    def _iter_test_indices(self, X, y=None, groups=None):\n+        for train_index in self._iter_train_indices(X, y, groups):\n+            test_index = np.setdiff1d(np.arange(len(X)), train_index)\n+            yield test_index\n+\n+    def __repr__(self):\n+        return (f\"RepeatedKFold(n_splits={self.n_splits}, n_repeats={self.n_repeats}, \"\n+                f\"random_state={self.random_state})\")\n+\n+class RepeatedStratifiedKFold(BaseCrossValidator):\n+    \"\"\"Repeated Stratified K-Fold cross validator.\n+\n+    This class computes the k-fold cross-validation score for an estimator,\n+    but repeats the process n_repeats times. It is used to get a better estimate of model performance.\n+    Parameters\n+    ----------\n+    n_splits : int, default=5\n+        Number of folds. Must be at least 2.\n+    n_repeats : int, default=10\n+        Number of times cross-validation is repeated.\n+    random_state : int or RandomState instance, default=None\n+        Pseudo-random number generator state used for shuffling the data for each repetition.\n+\n+    Attributes\n+    ----------\n+    n_splits_ : int\n+        The effective number of splits. This can be less than `n_splits` if\n+        `n_samples` is too small.\n+    \"\"\"\n+\n+    def __init__(self, n_splits=5, n_repeats=10, random_state=None):\n+        super().__init__()\n+        self.n_splits = n_splits\n+        self.n_repeats = n_repeats\n+        self.random_state = random_state\n+\n+    def _iter_test_indices(self, X, y=None, groups=None):\n+        for train_index in self._iter_train_indices(X, y, groups):\n+            test_index = np.setdiff1d(np.arange(len(X)), train_index)\n+            yield test_index\n+\n+    def __repr__(self):\n+        return (f\"RepeatedStratifiedKFold(n_splits={self.n_splits}, n_repeats={self.n_repeats}, \"\n+                f\"random_state={self.random_state})\")\n",
+    "model": "ollama_chat/mistral-small",
+    "temperature": 0,
+    "cost": 0.0,
+    "added_files": [
+        "#### sklearn/model_selection/_split.py",
+        "sklearn/model_selection/_split.py"
+    ],
+    "gold_files": [
+        "sklearn/model_selection/_split.py"
+    ],
+    "edited_files": [
+        "#### sklearn/model_selection/_split.py\t"
+    ],
+    "edit_outcome": true,
+    "lint_outcome": true,
+    "test_outcome": true,
+    "try": 1,
+    "tries": 1,
+    "all_results": [
+        {
+            "instance_id": "scikit-learn__scikit-learn-14983",
+            "model_name_or_path": "aider--ollama_chat-mistral-small",
+            "model_patch": "diff --git a/#### sklearn/model_selection/_split.py b/#### sklearn/model_selection/_split.py\nnew file mode 100644\nindex 000000000..077309b4b\n--- /dev/null\n+++ b/#### sklearn/model_selection/_split.py\t\n@@ -0,0 +1,76 @@\n+from sklearn.utils import check_random_state\n+from sklearn.model_selection._split import BaseCrossValidator, _BaseKFold, indexable, _num_samples\n+from sklearn.base import clone\n+import numpy as np\n+\n+class RepeatedKFold(BaseCrossValidator):\n+    \"\"\"Repeated K-Fold cross validator.\n+\n+    This class computes the k-fold cross-validation score for an estimator,\n+    but repeats the process n_repeats times. It is used to get a better estimate of model performance.\n+    Parameters\n+    ----------\n+    n_splits : int, default=5\n+        Number of folds. Must be at least 2.\n+    n_repeats : int, default=10\n+        Number of times cross-validation is repeated.\n+    random_state : int or RandomState instance, default=None\n+        Pseudo-random number generator state used for shuffling the data for each repetition.\n+\n+    Attributes\n+    ----------\n+    n_splits_ : int\n+        The effective number of splits. This can be less than `n_splits` if\n+        `n_samples` is too small.\n+    \"\"\"\n+\n+    def __init__(self, n_splits=5, n_repeats=10, random_state=None):\n+        super().__init__()\n+        self.n_splits = n_splits\n+        self.n_repeats = n_repeats\n+        self.random_state = random_state\n+\n+    def _iter_test_indices(self, X, y=None, groups=None):\n+        for train_index in self._iter_train_indices(X, y, groups):\n+            test_index = np.setdiff1d(np.arange(len(X)), train_index)\n+            yield test_index\n+\n+    def __repr__(self):\n+        return (f\"RepeatedKFold(n_splits={self.n_splits}, n_repeats={self.n_repeats}, \"\n+                f\"random_state={self.random_state})\")\n+\n+class RepeatedStratifiedKFold(BaseCrossValidator):\n+    \"\"\"Repeated Stratified K-Fold cross validator.\n+\n+    This class computes the k-fold cross-validation score for an estimator,\n+    but repeats the process n_repeats times. It is used to get a better estimate of model performance.\n+    Parameters\n+    ----------\n+    n_splits : int, default=5\n+        Number of folds. Must be at least 2.\n+    n_repeats : int, default=10\n+        Number of times cross-validation is repeated.\n+    random_state : int or RandomState instance, default=None\n+        Pseudo-random number generator state used for shuffling the data for each repetition.\n+\n+    Attributes\n+    ----------\n+    n_splits_ : int\n+        The effective number of splits. This can be less than `n_splits` if\n+        `n_samples` is too small.\n+    \"\"\"\n+\n+    def __init__(self, n_splits=5, n_repeats=10, random_state=None):\n+        super().__init__()\n+        self.n_splits = n_splits\n+        self.n_repeats = n_repeats\n+        self.random_state = random_state\n+\n+    def _iter_test_indices(self, X, y=None, groups=None):\n+        for train_index in self._iter_train_indices(X, y, groups):\n+            test_index = np.setdiff1d(np.arange(len(X)), train_index)\n+            yield test_index\n+\n+    def __repr__(self):\n+        return (f\"RepeatedStratifiedKFold(n_splits={self.n_splits}, n_repeats={self.n_repeats}, \"\n+                f\"random_state={self.random_state})\")\n",
+            "model": "ollama_chat/mistral-small",
+            "temperature": 0,
+            "cost": 0.0,
+            "added_files": [
+                "#### sklearn/model_selection/_split.py",
+                "sklearn/model_selection/_split.py"
+            ],
+            "gold_files": [
+                "sklearn/model_selection/_split.py"
+            ],
+            "edited_files": [
+                "#### sklearn/model_selection/_split.py\t"
+            ],
+            "edit_outcome": true,
+            "lint_outcome": true,
+            "test_outcome": true,
+            "try": 1
+        }
+    ]
+}

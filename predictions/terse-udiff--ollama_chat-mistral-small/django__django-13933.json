@@ -1,0 +1,45 @@
+{
+    "instance_id": "django__django-13933",
+    "model_name_or_path": "aider--ollama_chat-mistral-small",
+    "model_patch": "diff --git a/forms/models.py b/forms/models.py\nnew file mode 100644\nindex 0000000000..345be83cc9\n--- /dev/null\n+++ b/forms/models.py\n@@ -0,0 +1,23 @@\n+from django.forms import ChoiceField, ModelChoiceField, SelectMultiple, MultipleHiddenInput\n+from django.utils.translation import gettext_lazy as _\n+\n+class ModelMultipleChoiceField(ModelChoiceField):\n+    \"\"\"A MultipleChoiceField whose choices are a model QuerySet.\"\"\"\n+    widget = SelectMultiple\n+    hidden_widget = MultipleHiddenInput\n+    default_error_messages = {\n+        'invalid_list': _('Enter a list of values.'),\n+        'invalid_choice': _('Select a valid choice. %(value)s is not one of the'\n+                            ' available choices.'),\n+        'invalid_pk_value': _('\u201c%(pk)s\u201d is not a valid value.')\n+    }\n+    ...\n+\n+class ModelChoiceField(ChoiceField):\n+    \"\"\"A ChoiceField whose choices are a model QuerySet.\"\"\"\n+    # This class is a subclass of ChoiceField for purity, but it doesn't\n+    # actually use any of ChoiceField's implementation.\n+    default_error_messages = {\n+        'invalid_choice': _('Select a valid choice. That choice is not one of'\n+                            ' the available choices. %(value)s'),\n+    }\n",
+    "model": "ollama_chat/mistral-small",
+    "temperature": 0,
+    "cost": 0.0,
+    "added_files": [
+        "forms/models.py"
+    ],
+    "gold_files": [
+        "django/forms/models.py"
+    ],
+    "edited_files": [
+        "forms/models.py"
+    ],
+    "edit_outcome": true,
+    "lint_outcome": true,
+    "test_outcome": true,
+    "try": 1,
+    "tries": 1,
+    "all_results": [
+        {
+            "instance_id": "django__django-13933",
+            "model_name_or_path": "aider--ollama_chat-mistral-small",
+            "model_patch": "diff --git a/forms/models.py b/forms/models.py\nnew file mode 100644\nindex 0000000000..345be83cc9\n--- /dev/null\n+++ b/forms/models.py\n@@ -0,0 +1,23 @@\n+from django.forms import ChoiceField, ModelChoiceField, SelectMultiple, MultipleHiddenInput\n+from django.utils.translation import gettext_lazy as _\n+\n+class ModelMultipleChoiceField(ModelChoiceField):\n+    \"\"\"A MultipleChoiceField whose choices are a model QuerySet.\"\"\"\n+    widget = SelectMultiple\n+    hidden_widget = MultipleHiddenInput\n+    default_error_messages = {\n+        'invalid_list': _('Enter a list of values.'),\n+        'invalid_choice': _('Select a valid choice. %(value)s is not one of the'\n+                            ' available choices.'),\n+        'invalid_pk_value': _('\u201c%(pk)s\u201d is not a valid value.')\n+    }\n+    ...\n+\n+class ModelChoiceField(ChoiceField):\n+    \"\"\"A ChoiceField whose choices are a model QuerySet.\"\"\"\n+    # This class is a subclass of ChoiceField for purity, but it doesn't\n+    # actually use any of ChoiceField's implementation.\n+    default_error_messages = {\n+        'invalid_choice': _('Select a valid choice. That choice is not one of'\n+                            ' the available choices. %(value)s'),\n+    }\n",
+            "model": "ollama_chat/mistral-small",
+            "temperature": 0,
+            "cost": 0.0,
+            "added_files": [
+                "forms/models.py"
+            ],
+            "gold_files": [
+                "django/forms/models.py"
+            ],
+            "edited_files": [
+                "forms/models.py"
+            ],
+            "edit_outcome": true,
+            "lint_outcome": true,
+            "test_outcome": true,
+            "try": 1
+        }
+    ]
+}

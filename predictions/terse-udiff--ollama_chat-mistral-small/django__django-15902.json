@@ -1,0 +1,45 @@
+{
+    "instance_id": "django__django-15902",
+    "model_name_or_path": "aider--ollama_chat-mistral-small",
+    "model_patch": "diff --git a/custom_tags.py b/custom_tags.py\nnew file mode 100644\nindex 0000000000..9adc8c34c5\n--- /dev/null\n+++ b/custom_tags.py\n@@ -0,0 +1,11 @@\n+from django import template\n+\n+register = template.Library()\n+\n+@register.simple_tag(takes_context=True)\n+def render_form(context, form):\n+    if hasattr(form, 'management_form') and form.management_form:\n+        # Skip rendering the management form to avoid deprecation warning\n+        return ''\n+    else:\n+        return form.as_p()\n",
+    "model": "ollama_chat/mistral-small",
+    "temperature": 0,
+    "cost": 0.0,
+    "added_files": [
+        "custom_tags.py"
+    ],
+    "gold_files": [
+        "django/forms/formsets.py"
+    ],
+    "edited_files": [
+        "custom_tags.py"
+    ],
+    "edit_outcome": true,
+    "lint_outcome": true,
+    "test_outcome": true,
+    "try": 1,
+    "tries": 1,
+    "all_results": [
+        {
+            "instance_id": "django__django-15902",
+            "model_name_or_path": "aider--ollama_chat-mistral-small",
+            "model_patch": "diff --git a/custom_tags.py b/custom_tags.py\nnew file mode 100644\nindex 0000000000..9adc8c34c5\n--- /dev/null\n+++ b/custom_tags.py\n@@ -0,0 +1,11 @@\n+from django import template\n+\n+register = template.Library()\n+\n+@register.simple_tag(takes_context=True)\n+def render_form(context, form):\n+    if hasattr(form, 'management_form') and form.management_form:\n+        # Skip rendering the management form to avoid deprecation warning\n+        return ''\n+    else:\n+        return form.as_p()\n",
+            "model": "ollama_chat/mistral-small",
+            "temperature": 0,
+            "cost": 0.0,
+            "added_files": [
+                "custom_tags.py"
+            ],
+            "gold_files": [
+                "django/forms/formsets.py"
+            ],
+            "edited_files": [
+                "custom_tags.py"
+            ],
+            "edit_outcome": true,
+            "lint_outcome": true,
+            "test_outcome": true,
+            "try": 1
+        }
+    ]
+}

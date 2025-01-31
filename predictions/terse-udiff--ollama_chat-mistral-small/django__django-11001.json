@@ -1,0 +1,45 @@
+{
+    "instance_id": "django__django-11001",
+    "model_name_or_path": "aider--ollama_chat-mistral-small",
+    "model_patch": "diff --git a/sqlcompiler.py b/sqlcompiler.py\nnew file mode 100644\nindex 0000000000..7912be59f0\n--- /dev/null\n+++ b/sqlcompiler.py\n@@ -0,0 +1,10 @@\n+from django.db.models.sql.compiler import SQLCompiler\n+\n+class CustomSQLCompiler(SQLCompiler):\n+    def get_order_by(self, sql):\n+        # Clean the SQL string of newline characters\n+        sql_oneline = ' '.join(sql.split('\\n'))\n+        without_ordering = self.ordering_parts.search(sql_oneline).group(1)\n+        return super().get_order_by(sql)\n+\n+# Assuming the original SQLCompiler class is being extended or modified\n",
+    "model": "ollama_chat/mistral-small",
+    "temperature": 0,
+    "cost": 0.0,
+    "added_files": [
+        "sqlcompiler.py"
+    ],
+    "gold_files": [
+        "django/db/models/sql/compiler.py"
+    ],
+    "edited_files": [
+        "sqlcompiler.py"
+    ],
+    "edit_outcome": true,
+    "lint_outcome": true,
+    "test_outcome": true,
+    "try": 1,
+    "tries": 1,
+    "all_results": [
+        {
+            "instance_id": "django__django-11001",
+            "model_name_or_path": "aider--ollama_chat-mistral-small",
+            "model_patch": "diff --git a/sqlcompiler.py b/sqlcompiler.py\nnew file mode 100644\nindex 0000000000..7912be59f0\n--- /dev/null\n+++ b/sqlcompiler.py\n@@ -0,0 +1,10 @@\n+from django.db.models.sql.compiler import SQLCompiler\n+\n+class CustomSQLCompiler(SQLCompiler):\n+    def get_order_by(self, sql):\n+        # Clean the SQL string of newline characters\n+        sql_oneline = ' '.join(sql.split('\\n'))\n+        without_ordering = self.ordering_parts.search(sql_oneline).group(1)\n+        return super().get_order_by(sql)\n+\n+# Assuming the original SQLCompiler class is being extended or modified\n",
+            "model": "ollama_chat/mistral-small",
+            "temperature": 0,
+            "cost": 0.0,
+            "added_files": [
+                "sqlcompiler.py"
+            ],
+            "gold_files": [
+                "django/db/models/sql/compiler.py"
+            ],
+            "edited_files": [
+                "sqlcompiler.py"
+            ],
+            "edit_outcome": true,
+            "lint_outcome": true,
+            "test_outcome": true,
+            "try": 1
+        }
+    ]
+}

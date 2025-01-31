@@ -1,0 +1,45 @@
+{
+    "instance_id": "sympy__sympy-20212",
+    "model_name_or_path": "aider--ollama_chat-mistral-small",
+    "model_patch": "diff --git a/sympy/core/pow.py b/sympy/core/pow.py\nnew file mode 100644\nindex 0000000000..cdc82e93fc\n--- /dev/null\n+++ b/sympy/core/pow.py\n@@ -0,0 +1,32 @@\n+from sympy.core.basic import Basic\n+from sympy.core.mul import Mul\n+from sympy.core.add import Add\n+from sympy.core.numbers import Float, I, oo, nan, Infinity, NegativeInfinity, ComplexInfinity, Zero\n+from sympy.core.sympify import _sympify\n+from sympy.utilities.iterables import flatten\n+\n+class Pow(Basic):\n+    \"\"\"\n+    Represents the power operation.\n+    \"\"\"\n+\n+    def __new__(cls, base, exp, **kwargs):\n+        if not isinstance(base, Basic) or not isinstance(exp, Basic):\n+            raise TypeError(\"Arguments must be SymPy expressions\")\n+\n+        # Handle the case where the base is 0 and the exponent is negative infinity\n+        if base == Zero and exp == NegativeInfinity:\n+            return ComplexInfinity\n+\n+        # Rest of the existing code...\n+        return super().__new__(cls, base, exp)\n+\n+    def _eval_power(self):\n+        base = self.base\n+        exp = self.exp\n+\n+        # Handle the case where the base is 0 and the exponent is negative infinity\n+        if base == Zero and exp == NegativeInfinity:\n+            return ComplexInfinity\n+\n+        # Rest of the existing code...\n",
+    "model": "ollama_chat/mistral-small",
+    "temperature": 0,
+    "cost": 0.0,
+    "added_files": [
+        "sympy/core/pow.py"
+    ],
+    "gold_files": [
+        "sympy/core/power.py"
+    ],
+    "edited_files": [
+        "sympy/core/pow.py"
+    ],
+    "edit_outcome": true,
+    "lint_outcome": true,
+    "test_outcome": true,
+    "try": 1,
+    "tries": 1,
+    "all_results": [
+        {
+            "instance_id": "sympy__sympy-20212",
+            "model_name_or_path": "aider--ollama_chat-mistral-small",
+            "model_patch": "diff --git a/sympy/core/pow.py b/sympy/core/pow.py\nnew file mode 100644\nindex 0000000000..cdc82e93fc\n--- /dev/null\n+++ b/sympy/core/pow.py\n@@ -0,0 +1,32 @@\n+from sympy.core.basic import Basic\n+from sympy.core.mul import Mul\n+from sympy.core.add import Add\n+from sympy.core.numbers import Float, I, oo, nan, Infinity, NegativeInfinity, ComplexInfinity, Zero\n+from sympy.core.sympify import _sympify\n+from sympy.utilities.iterables import flatten\n+\n+class Pow(Basic):\n+    \"\"\"\n+    Represents the power operation.\n+    \"\"\"\n+\n+    def __new__(cls, base, exp, **kwargs):\n+        if not isinstance(base, Basic) or not isinstance(exp, Basic):\n+            raise TypeError(\"Arguments must be SymPy expressions\")\n+\n+        # Handle the case where the base is 0 and the exponent is negative infinity\n+        if base == Zero and exp == NegativeInfinity:\n+            return ComplexInfinity\n+\n+        # Rest of the existing code...\n+        return super().__new__(cls, base, exp)\n+\n+    def _eval_power(self):\n+        base = self.base\n+        exp = self.exp\n+\n+        # Handle the case where the base is 0 and the exponent is negative infinity\n+        if base == Zero and exp == NegativeInfinity:\n+            return ComplexInfinity\n+\n+        # Rest of the existing code...\n",
+            "model": "ollama_chat/mistral-small",
+            "temperature": 0,
+            "cost": 0.0,
+            "added_files": [
+                "sympy/core/pow.py"
+            ],
+            "gold_files": [
+                "sympy/core/power.py"
+            ],
+            "edited_files": [
+                "sympy/core/pow.py"
+            ],
+            "edit_outcome": true,
+            "lint_outcome": true,
+            "test_outcome": true,
+            "try": 1
+        }
+    ]
+}

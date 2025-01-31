@@ -1,0 +1,45 @@
+{
+    "instance_id": "django__django-13028",
+    "model_name_or_path": "aider--ollama_chat-mistral-small",
+    "model_patch": "diff --git a/adminpricing/models.py b/adminpricing/models.py\nnew file mode 100644\nindex 0000000000..ea87487a28\n--- /dev/null\n+++ b/adminpricing/models.py\n@@ -0,0 +1,57 @@\n+from django.db import models, NotSupportedError\n+from django.utils.translation import gettext_lazy as _\n+import time\n+from django.utils import timezone  # Import timezone\n+\n+# Assuming Produit and Plateforme are defined in another module within the same app, import them here\n+from .models import Produit, Plateforme  # Adjust the import path as necessary\n+\n+class ProductMetaDataType(models.Model):\n+    label = models.CharField(max_length=255, unique=True, blank=False, null=False)\n+    filterable = models.BooleanField(default=False, verbose_name=_(\"filterable\"))\n+\n+    class Meta:\n+        app_label = \"adminpricing\"\n+        verbose_name = _(\"product meta data type\")\n+        verbose_name_plural = _(\"product meta data types\")\n+\n+    def __str__(self):\n+        return self.label\n+\n+class ProductMetaDataManager(models.Manager):\n+\n+    def filter_with_filterable(self, **kwargs):\n+        try:\n+            queryset = super().get_queryset()\n+            for key, value in kwargs.items():\n+                if hasattr(queryset.model, key) and isinstance(getattr(queryset.model, key).field, models.ForeignKey):\n+                    queryset = queryset.filter(**{key: value})\n+            return queryset\n+        except Exception as e:\n+            print(f\"An error occurred: {e}\")\n+            return super().get_queryset()\n+\n+    def get_queryset(self):\n+        return super().get_queryset().filter(metadata_type__filterable=True)\n+\n+class ProductMetaData(models.Model):\n+    id = models.BigAutoField(primary_key=True)\n+    product = models.ForeignKey(\n+        Produit, null=False, blank=False, on_delete=models.CASCADE\n+    )\n+    value = models.TextField(null=False, blank=False)\n+    marketplace = models.ForeignKey(\n+        Plateforme, null=False, blank=False, on_delete=models.CASCADE\n+    )\n+    date_created = models.DateTimeField(null=True, default=timezone.now)\n+    metadata_type = models.ForeignKey(\n+        ProductMetaDataType, null=False, blank=False, on_delete=models.CASCADE\n+    )\n+\n+    objects = ProductMetaDataManager()\n+\n+    class Meta:\n+        app_label = \"adminpricing\"\n+        verbose_name = _(\"product meta data\")\n+        verbose_name_plural = _(\"product meta datas\")\n+\n",
+    "model": "ollama_chat/mistral-small",
+    "temperature": 0,
+    "cost": 0.0,
+    "added_files": [
+        "adminpricing/models.py"
+    ],
+    "gold_files": [
+        "django/db/models/sql/query.py"
+    ],
+    "edited_files": [
+        "adminpricing/models.py"
+    ],
+    "edit_outcome": true,
+    "lint_outcome": true,
+    "test_outcome": true,
+    "try": 1,
+    "tries": 1,
+    "all_results": [
+        {
+            "instance_id": "django__django-13028",
+            "model_name_or_path": "aider--ollama_chat-mistral-small",
+            "model_patch": "diff --git a/adminpricing/models.py b/adminpricing/models.py\nnew file mode 100644\nindex 0000000000..ea87487a28\n--- /dev/null\n+++ b/adminpricing/models.py\n@@ -0,0 +1,57 @@\n+from django.db import models, NotSupportedError\n+from django.utils.translation import gettext_lazy as _\n+import time\n+from django.utils import timezone  # Import timezone\n+\n+# Assuming Produit and Plateforme are defined in another module within the same app, import them here\n+from .models import Produit, Plateforme  # Adjust the import path as necessary\n+\n+class ProductMetaDataType(models.Model):\n+    label = models.CharField(max_length=255, unique=True, blank=False, null=False)\n+    filterable = models.BooleanField(default=False, verbose_name=_(\"filterable\"))\n+\n+    class Meta:\n+        app_label = \"adminpricing\"\n+        verbose_name = _(\"product meta data type\")\n+        verbose_name_plural = _(\"product meta data types\")\n+\n+    def __str__(self):\n+        return self.label\n+\n+class ProductMetaDataManager(models.Manager):\n+\n+    def filter_with_filterable(self, **kwargs):\n+        try:\n+            queryset = super().get_queryset()\n+            for key, value in kwargs.items():\n+                if hasattr(queryset.model, key) and isinstance(getattr(queryset.model, key).field, models.ForeignKey):\n+                    queryset = queryset.filter(**{key: value})\n+            return queryset\n+        except Exception as e:\n+            print(f\"An error occurred: {e}\")\n+            return super().get_queryset()\n+\n+    def get_queryset(self):\n+        return super().get_queryset().filter(metadata_type__filterable=True)\n+\n+class ProductMetaData(models.Model):\n+    id = models.BigAutoField(primary_key=True)\n+    product = models.ForeignKey(\n+        Produit, null=False, blank=False, on_delete=models.CASCADE\n+    )\n+    value = models.TextField(null=False, blank=False)\n+    marketplace = models.ForeignKey(\n+        Plateforme, null=False, blank=False, on_delete=models.CASCADE\n+    )\n+    date_created = models.DateTimeField(null=True, default=timezone.now)\n+    metadata_type = models.ForeignKey(\n+        ProductMetaDataType, null=False, blank=False, on_delete=models.CASCADE\n+    )\n+\n+    objects = ProductMetaDataManager()\n+\n+    class Meta:\n+        app_label = \"adminpricing\"\n+        verbose_name = _(\"product meta data\")\n+        verbose_name_plural = _(\"product meta datas\")\n+\n",
+            "model": "ollama_chat/mistral-small",
+            "temperature": 0,
+            "cost": 0.0,
+            "added_files": [
+                "adminpricing/models.py"
+            ],
+            "gold_files": [
+                "django/db/models/sql/query.py"
+            ],
+            "edited_files": [
+                "adminpricing/models.py"
+            ],
+            "edit_outcome": true,
+            "lint_outcome": true,
+            "test_outcome": true,
+            "try": 1
+        }
+    ]
+}

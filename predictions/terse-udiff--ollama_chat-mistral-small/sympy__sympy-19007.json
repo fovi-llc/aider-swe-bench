@@ -1,0 +1,47 @@
+{
+    "instance_id": "sympy__sympy-19007",
+    "model_name_or_path": "aider--ollama_chat-mistral-small",
+    "model_patch": "diff --git a/test_blockmatrix.py b/test_blockmatrix.py\nnew file mode 100644\nindex 0000000000..7e28bb8dc9\n--- /dev/null\n+++ b/test_blockmatrix.py\n@@ -0,0 +1,10 @@\n+from sympy import *\n+\n+n, i = symbols('n, i', integer=True)\n+A = MatrixSymbol('A', 1, 1)\n+B = MatrixSymbol('B', n, 1)\n+C = BlockMatrix([[A], [B]])\n+print('C is')\n+pprint(C)\n+print('C[i, 0] is')\n+pprint(C[i, 0].as_expr())\n",
+    "model": "ollama_chat/mistral-small",
+    "temperature": 0,
+    "cost": 0.0,
+    "added_files": [
+        "sympy/matrices/expressions/tests/test_blockmatrix.py",
+        "test_blockmatrix.py"
+    ],
+    "gold_files": [
+        "sympy/matrices/expressions/blockmatrix.py"
+    ],
+    "edited_files": [
+        "test_blockmatrix.py"
+    ],
+    "edit_outcome": true,
+    "lint_outcome": true,
+    "test_outcome": true,
+    "try": 1,
+    "tries": 1,
+    "all_results": [
+        {
+            "instance_id": "sympy__sympy-19007",
+            "model_name_or_path": "aider--ollama_chat-mistral-small",
+            "model_patch": "diff --git a/test_blockmatrix.py b/test_blockmatrix.py\nnew file mode 100644\nindex 0000000000..7e28bb8dc9\n--- /dev/null\n+++ b/test_blockmatrix.py\n@@ -0,0 +1,10 @@\n+from sympy import *\n+\n+n, i = symbols('n, i', integer=True)\n+A = MatrixSymbol('A', 1, 1)\n+B = MatrixSymbol('B', n, 1)\n+C = BlockMatrix([[A], [B]])\n+print('C is')\n+pprint(C)\n+print('C[i, 0] is')\n+pprint(C[i, 0].as_expr())\n",
+            "model": "ollama_chat/mistral-small",
+            "temperature": 0,
+            "cost": 0.0,
+            "added_files": [
+                "sympy/matrices/expressions/tests/test_blockmatrix.py",
+                "test_blockmatrix.py"
+            ],
+            "gold_files": [
+                "sympy/matrices/expressions/blockmatrix.py"
+            ],
+            "edited_files": [
+                "test_blockmatrix.py"
+            ],
+            "edit_outcome": true,
+            "lint_outcome": true,
+            "test_outcome": true,
+            "try": 1
+        }
+    ]
+}

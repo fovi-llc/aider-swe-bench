@@ -1,0 +1,43 @@
+{
+    "instance_id": "sympy__sympy-18532",
+    "model_name_or_path": "aider--ollama_chat-mistral-small",
+    "model_patch": "diff --git a/### sympy/core/expr.py b/### sympy/core/expr.py\nnew file mode 100644\nindex 0000000000..03fa8d3b25\n--- /dev/null\n+++ b/### sympy/core/expr.py\t\n@@ -0,0 +1,67 @@\n+from __future__ import print_function\n+\n+from sympy.core.compatibility import iterable, range\n+from sympy.core.basic import Basic\n+from sympy.core.sympify import _sympify\n+from sympy.utilities.iterables import flatten\n+\n+class Expr(Basic):\n+    \"\"\"\n+    The base class for all SymPy expressions.\n+    \"\"\"\n+\n+    def atoms(self, *types):\n+        \"\"\"Return the set of atoms in self.\n+\n+        An atom is a leaf node in an expression tree.  It has no children\n+        (i.e., it does not have any arguments).\n+\n+        Examples\n+        ========\n+\n+        >>> from sympy import symbols, sin\n+        >>> x = symbols('x')\n+        >>> sin(x).atoms()\n+        {sin(x)}\n+        \"\"\"\n+        if types:\n+            return self._atoms(types)\n+        else:\n+            # Original implementation returned subclasses of Atom\n+            # We need to modify this to return objects with no args\n+            atoms = set()\n+            for obj in self.args:\n+                if not hasattr(obj, 'args'):\n+                    atoms.add(obj)\n+                else:\n+                    atoms.update(obj.atoms())\n+            return atoms\n+\n+    def _atoms(self, types):\n+        \"\"\"Return the set of atoms in self that are instances of any type\n+        in ``types``.\n+\n+        Examples\n+        ========\n+\n+        >>> from sympy import symbols, sin\n+        >>> x = symbols('x')\n+        >>> sin(x)._atoms((sin,))\n+        {sin(x)}\n+        \"\"\"\n+        return {a for a in self.atoms() if isinstance(a, types)}\n+\n+    def __iter__(self):\n+        \"\"\"Iterate over the arguments of this expression.\n+\n+        Examples\n+        ========\n+\n+        >>> from sympy import symbols\n+        >>> x = symbols('x')\n+        >>> list(x)\n+        [x]\n+        \"\"\"\n+        return iter(self.args)\n+\n+# ... rest of code ...\ndiff --git a/### sympy/core/tests/test_expr.py b/### sympy/core/tests/test_expr.py\nnew file mode 100644\nindex 0000000000..d5d2cfec97\n--- /dev/null\n+++ b/### sympy/core/tests/test_expr.py\t\n@@ -0,0 +1,16 @@\n+from sympy.core.expr import Expr\n+from sympy.core.sympify import _sympify\n+from sympy.core.basic import Basic\n+\n+def test_atoms():\n+    from sympy import symbols, sin\n+    x = symbols('x')\n+    assert set(sin(x).atoms()) == {sin(x)}\n+    assert set((x + 1).atoms()) == {x, 1}\n+\n+def test_atoms_with_types():\n+    from sympy import symbols, sin\n+    x = symbols('x')\n+    assert set(sin(x)._atoms((sin,))) == {sin(x)}\n+\n+# ... rest of code ...\n",
+    "model": "ollama_chat/mistral-small",
+    "temperature": 0,
+    "cost": 0.0,
+    "added_files": [],
+    "gold_files": [
+        "sympy/core/basic.py"
+    ],
+    "edited_files": [
+        "### sympy/core/expr.py\t",
+        "### sympy/core/tests/test_expr.py\t"
+    ],
+    "edit_outcome": true,
+    "lint_outcome": true,
+    "test_outcome": true,
+    "try": 1,
+    "tries": 1,
+    "all_results": [
+        {
+            "instance_id": "sympy__sympy-18532",
+            "model_name_or_path": "aider--ollama_chat-mistral-small",
+            "model_patch": "diff --git a/### sympy/core/expr.py b/### sympy/core/expr.py\nnew file mode 100644\nindex 0000000000..03fa8d3b25\n--- /dev/null\n+++ b/### sympy/core/expr.py\t\n@@ -0,0 +1,67 @@\n+from __future__ import print_function\n+\n+from sympy.core.compatibility import iterable, range\n+from sympy.core.basic import Basic\n+from sympy.core.sympify import _sympify\n+from sympy.utilities.iterables import flatten\n+\n+class Expr(Basic):\n+    \"\"\"\n+    The base class for all SymPy expressions.\n+    \"\"\"\n+\n+    def atoms(self, *types):\n+        \"\"\"Return the set of atoms in self.\n+\n+        An atom is a leaf node in an expression tree.  It has no children\n+        (i.e., it does not have any arguments).\n+\n+        Examples\n+        ========\n+\n+        >>> from sympy import symbols, sin\n+        >>> x = symbols('x')\n+        >>> sin(x).atoms()\n+        {sin(x)}\n+        \"\"\"\n+        if types:\n+            return self._atoms(types)\n+        else:\n+            # Original implementation returned subclasses of Atom\n+            # We need to modify this to return objects with no args\n+            atoms = set()\n+            for obj in self.args:\n+                if not hasattr(obj, 'args'):\n+                    atoms.add(obj)\n+                else:\n+                    atoms.update(obj.atoms())\n+            return atoms\n+\n+    def _atoms(self, types):\n+        \"\"\"Return the set of atoms in self that are instances of any type\n+        in ``types``.\n+\n+        Examples\n+        ========\n+\n+        >>> from sympy import symbols, sin\n+        >>> x = symbols('x')\n+        >>> sin(x)._atoms((sin,))\n+        {sin(x)}\n+        \"\"\"\n+        return {a for a in self.atoms() if isinstance(a, types)}\n+\n+    def __iter__(self):\n+        \"\"\"Iterate over the arguments of this expression.\n+\n+        Examples\n+        ========\n+\n+        >>> from sympy import symbols\n+        >>> x = symbols('x')\n+        >>> list(x)\n+        [x]\n+        \"\"\"\n+        return iter(self.args)\n+\n+# ... rest of code ...\ndiff --git a/### sympy/core/tests/test_expr.py b/### sympy/core/tests/test_expr.py\nnew file mode 100644\nindex 0000000000..d5d2cfec97\n--- /dev/null\n+++ b/### sympy/core/tests/test_expr.py\t\n@@ -0,0 +1,16 @@\n+from sympy.core.expr import Expr\n+from sympy.core.sympify import _sympify\n+from sympy.core.basic import Basic\n+\n+def test_atoms():\n+    from sympy import symbols, sin\n+    x = symbols('x')\n+    assert set(sin(x).atoms()) == {sin(x)}\n+    assert set((x + 1).atoms()) == {x, 1}\n+\n+def test_atoms_with_types():\n+    from sympy import symbols, sin\n+    x = symbols('x')\n+    assert set(sin(x)._atoms((sin,))) == {sin(x)}\n+\n+# ... rest of code ...\n",
+            "model": "ollama_chat/mistral-small",
+            "temperature": 0,
+            "cost": 0.0,
+            "added_files": [],
+            "gold_files": [
+                "sympy/core/basic.py"
+            ],
+            "edited_files": [
+                "### sympy/core/expr.py\t",
+                "### sympy/core/tests/test_expr.py\t"
+            ],
+            "edit_outcome": true,
+            "lint_outcome": true,
+            "test_outcome": true,
+            "try": 1
+        }
+    ]
+}
