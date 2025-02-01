@@ -1,0 +1,53 @@
+{
+    "instance_id": "django__django-13757",
+    "model_name_or_path": "aider--ollama_chat-mistral-small",
+    "model_patch": "diff --git a/#### File: django/db/models/lookups.py b/#### File: django/db/models/lookups.py\nnew file mode 100644\nindex 0000000000..b1663864ca\n--- /dev/null\n+++ b/#### File: django/db/models/lookups.py\t\n@@ -0,0 +1,17 @@\n+from django.db.models import Lookup\n+\n+class KeyTransformIsNull(Lookup):\n+    lookup_name = 'isnull'\n+\n+    def as_sql(self, compiler, connection):\n+        lhs, lhs_params = self.process_lhs(compiler, connection)\n+        rhs, rhs_params = self.process_rhs(compiler, connection)\n+\n+        if connection.vendor == 'sqlite' or connection.vendor == 'oracle':\n+            # Adjust the query for SQLite and Oracle\n+            sql = f\"{lhs} IS NULL\"\n+        else:\n+            sql = f\"JSON_EXTRACT({lhs}, '$[*]') IS NOT NULL\"\n+\n+        return sql, lhs_params + rhs_params\n+\ndiff --git a/#### File: tests/model_fields/test_jsonfield.py b/#### File: tests/model_fields/test_jsonfield.py\nnew file mode 100644\nindex 0000000000..dc794af13b\n--- /dev/null\n+++ b/#### File: tests/model_fields/test_jsonfield.py\t\n@@ -0,0 +1,28 @@\n+from django.test import TestCase\n+from .models import NullableJSONModel\n+\n+class TestQuerying(TestCase):\n+    def setUp(self):\n+        self.objs = [\n+            NullableJSONModel(value={'a': None}),\n+            NullableJSONModel(value={'a': 1}),\n+            NullableJSONModel(value={'b': 2}),\n+            NullableJSONModel(value={'c': 3}),\n+            NullableJSONModel(value=None),\n+            NullableJSONModel(value={})\n+        ]\n+        for obj in self.objs:\n+            obj.save()\n+\n+    def test_isnull_key(self):\n+        # Test with value__a\n+        self.assertSequenceEqual(\n+            NullableJSONModel.objects.filter(value__a__isnull=True),\n+            self.objs[:3] + self.objs[5:],\n+        )\n+\n+        # Test with value__j\n+        self.assertSequenceEqual(\n+            NullableJSONModel.objects.filter(value__j__isnull=True),\n+            self.objs[:4] + self.objs[5:],\n+        )\n",
+    "model": "ollama_chat/mistral-small",
+    "temperature": 0,
+    "cost": 0.0,
+    "added_files": [
+        "#### File: django/db/models/lookups.py",
+        "#### File: tests/model_fields/test_jsonfield.py",
+        "django/db/models/lookups.py",
+        "tests/model_fields/test_jsonfield.py"
+    ],
+    "gold_files": [
+        "django/db/models/fields/json.py"
+    ],
+    "edited_files": [
+        "#### File: django/db/models/lookups.py\t",
+        "#### File: tests/model_fields/test_jsonfield.py\t"
+    ],
+    "edit_outcome": true,
+    "lint_outcome": true,
+    "test_outcome": true,
+    "try": 1,
+    "tries": 1,
+    "all_results": [
+        {
+            "instance_id": "django__django-13757",
+            "model_name_or_path": "aider--ollama_chat-mistral-small",
+            "model_patch": "diff --git a/#### File: django/db/models/lookups.py b/#### File: django/db/models/lookups.py\nnew file mode 100644\nindex 0000000000..b1663864ca\n--- /dev/null\n+++ b/#### File: django/db/models/lookups.py\t\n@@ -0,0 +1,17 @@\n+from django.db.models import Lookup\n+\n+class KeyTransformIsNull(Lookup):\n+    lookup_name = 'isnull'\n+\n+    def as_sql(self, compiler, connection):\n+        lhs, lhs_params = self.process_lhs(compiler, connection)\n+        rhs, rhs_params = self.process_rhs(compiler, connection)\n+\n+        if connection.vendor == 'sqlite' or connection.vendor == 'oracle':\n+            # Adjust the query for SQLite and Oracle\n+            sql = f\"{lhs} IS NULL\"\n+        else:\n+            sql = f\"JSON_EXTRACT({lhs}, '$[*]') IS NOT NULL\"\n+\n+        return sql, lhs_params + rhs_params\n+\ndiff --git a/#### File: tests/model_fields/test_jsonfield.py b/#### File: tests/model_fields/test_jsonfield.py\nnew file mode 100644\nindex 0000000000..dc794af13b\n--- /dev/null\n+++ b/#### File: tests/model_fields/test_jsonfield.py\t\n@@ -0,0 +1,28 @@\n+from django.test import TestCase\n+from .models import NullableJSONModel\n+\n+class TestQuerying(TestCase):\n+    def setUp(self):\n+        self.objs = [\n+            NullableJSONModel(value={'a': None}),\n+            NullableJSONModel(value={'a': 1}),\n+            NullableJSONModel(value={'b': 2}),\n+            NullableJSONModel(value={'c': 3}),\n+            NullableJSONModel(value=None),\n+            NullableJSONModel(value={})\n+        ]\n+        for obj in self.objs:\n+            obj.save()\n+\n+    def test_isnull_key(self):\n+        # Test with value__a\n+        self.assertSequenceEqual(\n+            NullableJSONModel.objects.filter(value__a__isnull=True),\n+            self.objs[:3] + self.objs[5:],\n+        )\n+\n+        # Test with value__j\n+        self.assertSequenceEqual(\n+            NullableJSONModel.objects.filter(value__j__isnull=True),\n+            self.objs[:4] + self.objs[5:],\n+        )\n",
+            "model": "ollama_chat/mistral-small",
+            "temperature": 0,
+            "cost": 0.0,
+            "added_files": [
+                "#### File: django/db/models/lookups.py",
+                "#### File: tests/model_fields/test_jsonfield.py",
+                "django/db/models/lookups.py",
+                "tests/model_fields/test_jsonfield.py"
+            ],
+            "gold_files": [
+                "django/db/models/fields/json.py"
+            ],
+            "edited_files": [
+                "#### File: django/db/models/lookups.py\t",
+                "#### File: tests/model_fields/test_jsonfield.py\t"
+            ],
+            "edit_outcome": true,
+            "lint_outcome": true,
+            "test_outcome": true,
+            "try": 1
+        }
+    ]
+}

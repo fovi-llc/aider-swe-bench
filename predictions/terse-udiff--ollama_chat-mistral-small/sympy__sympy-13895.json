@@ -1,0 +1,49 @@
+{
+    "instance_id": "sympy__sympy-13895",
+    "model_name_or_path": "aider--ollama_chat-mistral-small",
+    "model_patch": "diff --git a/sympy/custom_simplify.py b/sympy/custom_simplify.py\nnew file mode 100644\nindex 0000000000..e008faa0ff\n--- /dev/null\n+++ b/sympy/custom_simplify.py\n@@ -0,0 +1,30 @@\n+from sympy import *\n+from sympy.core.sympify import SympifyError\n+\n+def custom_simplify(expr):\n+    if expr.is_Pow and expr.base.is_Add:\n+        base = expr.base\n+        exponent = expr.exp\n+        if base.args[0].is_Mul and base.args[1].is_Rational:\n+            coeff, const = base.args\n+            if coeff.is_Number and const.is_Number:\n+                try:\n+                    new_expr = (coeff * (-1) ** exponent + const ** exponent)\n+                    return new_expr - 1\n+                except SympifyError:\n+                    pass\n+    return expr\n+\n+def simplify_custom(expr):\n+    return custom_simplify(expr)\n+\n+# Register the custom simplification rule with SymPy\n+from sympy.core.sympify import SympifyError\n+from sympy.core.mul import Mul\n+from sympy.core.power import Pow\n+from sympy.core.add import Add\n+from sympy.core.numbers import Rational\n+\n+@simplify.register((Pow,))\n+def _(expr):\n+    return simplify_custom(expr)\ndiff --git a/sympy/simplify.py b/sympy/simplify.py\nnew file mode 100644\nindex 0000000000..25a8e4ade1\n--- /dev/null\n+++ b/sympy/simplify.py\n@@ -0,0 +1,13 @@\n+from sympy.core.sympify import SympifyError\n+from sympy.core.mul import Mul\n+from sympy.core.power import Pow\n+from sympy.core.add import Add\n+from sympy.core.numbers import Rational\n+from sympy.core.function import simplify\n+\n+# Import the custom simplification rule\n+from sympy.custom_simplify import simplify_custom\n+\n+@simplify.register((Pow,))\n+def _(expr):\n+    return simplify_custom(expr)\n",
+    "model": "ollama_chat/mistral-small",
+    "temperature": 0,
+    "cost": 0.0,
+    "added_files": [
+        "sympy/custom_simplify.py",
+        "sympy/simplify.py"
+    ],
+    "gold_files": [
+        "sympy/core/numbers.py"
+    ],
+    "edited_files": [
+        "sympy/custom_simplify.py",
+        "sympy/simplify.py"
+    ],
+    "edit_outcome": true,
+    "lint_outcome": true,
+    "test_outcome": true,
+    "try": 1,
+    "tries": 1,
+    "all_results": [
+        {
+            "instance_id": "sympy__sympy-13895",
+            "model_name_or_path": "aider--ollama_chat-mistral-small",
+            "model_patch": "diff --git a/sympy/custom_simplify.py b/sympy/custom_simplify.py\nnew file mode 100644\nindex 0000000000..e008faa0ff\n--- /dev/null\n+++ b/sympy/custom_simplify.py\n@@ -0,0 +1,30 @@\n+from sympy import *\n+from sympy.core.sympify import SympifyError\n+\n+def custom_simplify(expr):\n+    if expr.is_Pow and expr.base.is_Add:\n+        base = expr.base\n+        exponent = expr.exp\n+        if base.args[0].is_Mul and base.args[1].is_Rational:\n+            coeff, const = base.args\n+            if coeff.is_Number and const.is_Number:\n+                try:\n+                    new_expr = (coeff * (-1) ** exponent + const ** exponent)\n+                    return new_expr - 1\n+                except SympifyError:\n+                    pass\n+    return expr\n+\n+def simplify_custom(expr):\n+    return custom_simplify(expr)\n+\n+# Register the custom simplification rule with SymPy\n+from sympy.core.sympify import SympifyError\n+from sympy.core.mul import Mul\n+from sympy.core.power import Pow\n+from sympy.core.add import Add\n+from sympy.core.numbers import Rational\n+\n+@simplify.register((Pow,))\n+def _(expr):\n+    return simplify_custom(expr)\ndiff --git a/sympy/simplify.py b/sympy/simplify.py\nnew file mode 100644\nindex 0000000000..25a8e4ade1\n--- /dev/null\n+++ b/sympy/simplify.py\n@@ -0,0 +1,13 @@\n+from sympy.core.sympify import SympifyError\n+from sympy.core.mul import Mul\n+from sympy.core.power import Pow\n+from sympy.core.add import Add\n+from sympy.core.numbers import Rational\n+from sympy.core.function import simplify\n+\n+# Import the custom simplification rule\n+from sympy.custom_simplify import simplify_custom\n+\n+@simplify.register((Pow,))\n+def _(expr):\n+    return simplify_custom(expr)\n",
+            "model": "ollama_chat/mistral-small",
+            "temperature": 0,
+            "cost": 0.0,
+            "added_files": [
+                "sympy/custom_simplify.py",
+                "sympy/simplify.py"
+            ],
+            "gold_files": [
+                "sympy/core/numbers.py"
+            ],
+            "edited_files": [
+                "sympy/custom_simplify.py",
+                "sympy/simplify.py"
+            ],
+            "edit_outcome": true,
+            "lint_outcome": true,
+            "test_outcome": true,
+            "try": 1
+        }
+    ]
+}

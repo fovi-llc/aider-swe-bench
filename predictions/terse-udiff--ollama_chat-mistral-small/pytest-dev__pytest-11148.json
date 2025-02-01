@@ -1,0 +1,49 @@
+{
+    "instance_id": "pytest-dev__pytest-11148",
+    "model_name_or_path": "aider--ollama_chat-mistral-small",
+    "model_patch": "diff --git a/### tests/unit/conftest.py b/### tests/unit/conftest.py\nnew file mode 100644\nindex 000000000..bf068f7f0\n--- /dev/null\n+++ b/### tests/unit/conftest.py\t\n@@ -0,0 +1,19 @@\n+import os\n+import pytest\n+from pmxbot import core, logging\n+\n+@pytest.fixture(scope=\"class\")\n+def setup_class():\n+    from pmxbot import dictlib\n+    path = os.path.dirname(os.path.abspath(__file__))\n+    configfile = os.path.join(path, 'testconf.yaml')\n+    config = dictlib.ConfigDict.from_yaml(configfile)\n+    bot = core.initialize(config)\n+\n+    # Ensure the correct version of logging is used\n+    import sys\n+    if 'pmxbot.logging' in sys.modules:\n+        del sys.modules['pmxbot.logging']\n+    import pmxbot.logging\n+\n+    return bot\ndiff --git a/### tests/unit/test_commands.py b/### tests/unit/test_commands.py\nnew file mode 100644\nindex 000000000..ba0829f17\n--- /dev/null\n+++ b/### tests/unit/test_commands.py\t\n@@ -0,0 +1,16 @@\n+import os\n+import pytest\n+from pmxbot import core, logging\n+\n+@pytest.mark.usefixtures(\"setup_class\")\n+class TestCommands:\n+    @classmethod\n+    def setup_class(cls):\n+        path = os.path.dirname(os.path.abspath(__file__))\n+        configfile = os.path.join(path, 'testconf.yaml')\n+        from pmxbot import dictlib\n+        config = dictlib.ConfigDict.from_yaml(configfile)\n+        cls.bot = core.initialize(config)\n+\n+    def test_logging(self):\n+        logging.Logger.store.message(\"logged\", \"testrunner\", \"some text\")\n",
+    "model": "ollama_chat/mistral-small",
+    "temperature": 0,
+    "cost": 0.0,
+    "added_files": [
+        "### tests/unit/conftest.py",
+        "### tests/unit/test_commands.py"
+    ],
+    "gold_files": [
+        "src/_pytest/pathlib.py"
+    ],
+    "edited_files": [
+        "### tests/unit/conftest.py\t",
+        "### tests/unit/test_commands.py\t"
+    ],
+    "edit_outcome": true,
+    "lint_outcome": true,
+    "test_outcome": true,
+    "try": 1,
+    "tries": 1,
+    "all_results": [
+        {
+            "instance_id": "pytest-dev__pytest-11148",
+            "model_name_or_path": "aider--ollama_chat-mistral-small",
+            "model_patch": "diff --git a/### tests/unit/conftest.py b/### tests/unit/conftest.py\nnew file mode 100644\nindex 000000000..bf068f7f0\n--- /dev/null\n+++ b/### tests/unit/conftest.py\t\n@@ -0,0 +1,19 @@\n+import os\n+import pytest\n+from pmxbot import core, logging\n+\n+@pytest.fixture(scope=\"class\")\n+def setup_class():\n+    from pmxbot import dictlib\n+    path = os.path.dirname(os.path.abspath(__file__))\n+    configfile = os.path.join(path, 'testconf.yaml')\n+    config = dictlib.ConfigDict.from_yaml(configfile)\n+    bot = core.initialize(config)\n+\n+    # Ensure the correct version of logging is used\n+    import sys\n+    if 'pmxbot.logging' in sys.modules:\n+        del sys.modules['pmxbot.logging']\n+    import pmxbot.logging\n+\n+    return bot\ndiff --git a/### tests/unit/test_commands.py b/### tests/unit/test_commands.py\nnew file mode 100644\nindex 000000000..ba0829f17\n--- /dev/null\n+++ b/### tests/unit/test_commands.py\t\n@@ -0,0 +1,16 @@\n+import os\n+import pytest\n+from pmxbot import core, logging\n+\n+@pytest.mark.usefixtures(\"setup_class\")\n+class TestCommands:\n+    @classmethod\n+    def setup_class(cls):\n+        path = os.path.dirname(os.path.abspath(__file__))\n+        configfile = os.path.join(path, 'testconf.yaml')\n+        from pmxbot import dictlib\n+        config = dictlib.ConfigDict.from_yaml(configfile)\n+        cls.bot = core.initialize(config)\n+\n+    def test_logging(self):\n+        logging.Logger.store.message(\"logged\", \"testrunner\", \"some text\")\n",
+            "model": "ollama_chat/mistral-small",
+            "temperature": 0,
+            "cost": 0.0,
+            "added_files": [
+                "### tests/unit/conftest.py",
+                "### tests/unit/test_commands.py"
+            ],
+            "gold_files": [
+                "src/_pytest/pathlib.py"
+            ],
+            "edited_files": [
+                "### tests/unit/conftest.py\t",
+                "### tests/unit/test_commands.py\t"
+            ],
+            "edit_outcome": true,
+            "lint_outcome": true,
+            "test_outcome": true,
+            "try": 1
+        }
+    ]
+}

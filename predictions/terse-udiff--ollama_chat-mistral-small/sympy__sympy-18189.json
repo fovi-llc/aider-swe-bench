@@ -1,0 +1,47 @@
+{
+    "instance_id": "sympy__sympy-18189",
+    "model_name_or_path": "aider--ollama_chat-mistral-small",
+    "model_patch": "diff --git a/diophantine.py b/diophantine.py\nnew file mode 100644\nindex 0000000000..3f6307fe4f\n--- /dev/null\n+++ b/diophantine.py\n@@ -0,0 +1,26 @@\n+from itertools import permutations\n+\n+def diophantine(expression, syms, permute=False):\n+    # Generate all permutations of symbols if permute is True\n+    if permute:\n+        sym_permutations = list(permutations(syms))\n+    else:\n+        sym_permutations = [syms]\n+\n+    results = set()\n+\n+    for sym_tuple in sym_permutations:\n+        # Substitute the symbols in the expression and solve\n+        substituted_expr = expression.subs(dict(zip(syms, sym_tuple)))\n+        solutions = solve(substituted_expr)\n+        results.update(solutions)\n+\n+    return results\n+\n+# Example usage\n+from sympy import symbols, Eq, solve\n+\n+n, m = symbols('n m')\n+expression = n**4 + m**4 - 2**4 - 3**4\n+print(diophantine(expression, (m,n), permute=True))\n+print(diophantine(expression, (n,m), permute=True))\n",
+    "model": "ollama_chat/mistral-small",
+    "temperature": 0,
+    "cost": 0.0,
+    "added_files": [
+        "diophantine.py",
+        "sympy/solvers/diophantine.py"
+    ],
+    "gold_files": [
+        "sympy/solvers/diophantine.py"
+    ],
+    "edited_files": [
+        "diophantine.py"
+    ],
+    "edit_outcome": true,
+    "lint_outcome": true,
+    "test_outcome": true,
+    "try": 1,
+    "tries": 1,
+    "all_results": [
+        {
+            "instance_id": "sympy__sympy-18189",
+            "model_name_or_path": "aider--ollama_chat-mistral-small",
+            "model_patch": "diff --git a/diophantine.py b/diophantine.py\nnew file mode 100644\nindex 0000000000..3f6307fe4f\n--- /dev/null\n+++ b/diophantine.py\n@@ -0,0 +1,26 @@\n+from itertools import permutations\n+\n+def diophantine(expression, syms, permute=False):\n+    # Generate all permutations of symbols if permute is True\n+    if permute:\n+        sym_permutations = list(permutations(syms))\n+    else:\n+        sym_permutations = [syms]\n+\n+    results = set()\n+\n+    for sym_tuple in sym_permutations:\n+        # Substitute the symbols in the expression and solve\n+        substituted_expr = expression.subs(dict(zip(syms, sym_tuple)))\n+        solutions = solve(substituted_expr)\n+        results.update(solutions)\n+\n+    return results\n+\n+# Example usage\n+from sympy import symbols, Eq, solve\n+\n+n, m = symbols('n m')\n+expression = n**4 + m**4 - 2**4 - 3**4\n+print(diophantine(expression, (m,n), permute=True))\n+print(diophantine(expression, (n,m), permute=True))\n",
+            "model": "ollama_chat/mistral-small",
+            "temperature": 0,
+            "cost": 0.0,
+            "added_files": [
+                "diophantine.py",
+                "sympy/solvers/diophantine.py"
+            ],
+            "gold_files": [
+                "sympy/solvers/diophantine.py"
+            ],
+            "edited_files": [
+                "diophantine.py"
+            ],
+            "edit_outcome": true,
+            "lint_outcome": true,
+            "test_outcome": true,
+            "try": 1
+        }
+    ]
+}

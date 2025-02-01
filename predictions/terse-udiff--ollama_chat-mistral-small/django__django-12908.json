@@ -1,0 +1,45 @@
+{
+    "instance_id": "django__django-12908",
+    "model_name_or_path": "aider--ollama_chat-mistral-small",
+    "model_patch": "diff --git a/models/tests.py b/models/tests.py\nnew file mode 100644\nindex 0000000000..6ad2bc8c83\n--- /dev/null\n+++ b/models/tests.py\n@@ -0,0 +1,33 @@\n+from django.test import TestCase\n+from django.db.models import Value, IntegerField\n+from .models import Sample\n+\n+class UnionQuerySetTest(TestCase):\n+\n+    def setUp(self) -> None:\n+        user = self.get_or_create_admin_user()\n+        Sample.h.create(user, name=\"Sam1\")\n+        Sample.h.create(user, name=\"Sam2 acid\")\n+        Sample.h.create(user, name=\"Sam3\")\n+        Sample.h.create(user, name=\"Sam4 acid\")\n+        Sample.h.create(user, name=\"Dub\")\n+        Sample.h.create(user, name=\"Dub\")\n+        Sample.h.create(user, name=\"Dub\")\n+        self.user = user\n+\n+    def test_union_annotated_diff_distinct(self):\n+        qs1 = Sample.objects.filter(user=self.user, name='Dub').annotate(rank=Value(0, IntegerField()))\n+        qs2 = Sample.objects.filter(user=self.user, name='Sam1').annotate(rank=Value(1, IntegerField()))\n+\n+        # Use raw SQL to get the distinct results\n+        query = \"\"\"\n+            SELECT DISTINCT ON (siebox_sample.name) *\n+            FROM (\n+                SELECT * FROM siebox_sample WHERE user_id=%s AND name='Dub' UNION ALL\n+                SELECT * FROM siebox_sample WHERE user_id=%s AND name='Sam1'\n+            ) AS siebox_sample\n+        \"\"\"\n+\n+        with self.assertNumQueries(1):\n+            qs = Sample.objects.raw(query, [self.user.id, self.user.id])\n+            self.assertEqual(len(list(qs)), 2)\n",
+    "model": "ollama_chat/mistral-small",
+    "temperature": 0,
+    "cost": 0.0,
+    "added_files": [
+        "models/tests.py"
+    ],
+    "gold_files": [
+        "django/db/models/query.py"
+    ],
+    "edited_files": [
+        "models/tests.py"
+    ],
+    "edit_outcome": true,
+    "lint_outcome": true,
+    "test_outcome": true,
+    "try": 1,
+    "tries": 1,
+    "all_results": [
+        {
+            "instance_id": "django__django-12908",
+            "model_name_or_path": "aider--ollama_chat-mistral-small",
+            "model_patch": "diff --git a/models/tests.py b/models/tests.py\nnew file mode 100644\nindex 0000000000..6ad2bc8c83\n--- /dev/null\n+++ b/models/tests.py\n@@ -0,0 +1,33 @@\n+from django.test import TestCase\n+from django.db.models import Value, IntegerField\n+from .models import Sample\n+\n+class UnionQuerySetTest(TestCase):\n+\n+    def setUp(self) -> None:\n+        user = self.get_or_create_admin_user()\n+        Sample.h.create(user, name=\"Sam1\")\n+        Sample.h.create(user, name=\"Sam2 acid\")\n+        Sample.h.create(user, name=\"Sam3\")\n+        Sample.h.create(user, name=\"Sam4 acid\")\n+        Sample.h.create(user, name=\"Dub\")\n+        Sample.h.create(user, name=\"Dub\")\n+        Sample.h.create(user, name=\"Dub\")\n+        self.user = user\n+\n+    def test_union_annotated_diff_distinct(self):\n+        qs1 = Sample.objects.filter(user=self.user, name='Dub').annotate(rank=Value(0, IntegerField()))\n+        qs2 = Sample.objects.filter(user=self.user, name='Sam1').annotate(rank=Value(1, IntegerField()))\n+\n+        # Use raw SQL to get the distinct results\n+        query = \"\"\"\n+            SELECT DISTINCT ON (siebox_sample.name) *\n+            FROM (\n+                SELECT * FROM siebox_sample WHERE user_id=%s AND name='Dub' UNION ALL\n+                SELECT * FROM siebox_sample WHERE user_id=%s AND name='Sam1'\n+            ) AS siebox_sample\n+        \"\"\"\n+\n+        with self.assertNumQueries(1):\n+            qs = Sample.objects.raw(query, [self.user.id, self.user.id])\n+            self.assertEqual(len(list(qs)), 2)\n",
+            "model": "ollama_chat/mistral-small",
+            "temperature": 0,
+            "cost": 0.0,
+            "added_files": [
+                "models/tests.py"
+            ],
+            "gold_files": [
+                "django/db/models/query.py"
+            ],
+            "edited_files": [
+                "models/tests.py"
+            ],
+            "edit_outcome": true,
+            "lint_outcome": true,
+            "test_outcome": true,
+            "try": 1
+        }
+    ]
+}

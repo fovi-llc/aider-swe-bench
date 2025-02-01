@@ -1,0 +1,49 @@
+{
+    "instance_id": "django__django-11910",
+    "model_name_or_path": "aider--ollama_chat-mistral-small",
+    "model_patch": "diff --git a/app1/migrations/0002_auto_rename_field.py b/app1/migrations/0002_auto_rename_field.py\nnew file mode 100644\nindex 0000000000..e17489abf7\n--- /dev/null\n+++ b/app1/migrations/0002_auto_rename_field.py\n@@ -0,0 +1,21 @@\n+from django.db import migrations, models\n+import django.db.models.deletion\n+\n+class Migration(migrations.Migration):\n+\n+    dependencies = [\n+        ('app1', '0001_initial'),\n+    ]\n+\n+    operations = [\n+        migrations.RenameField(\n+            model_name='modela',\n+            old_name='field_wrong',\n+            new_name='field_fixed',\n+        ),\n+        migrations.AlterField(\n+            model_name='modelb',\n+            name='field_fk',\n+            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='app1.ModelA', to_field='field_fixed'),\n+        ),\n+    ]\ndiff --git a/app1/models.py b/app1/models.py\nnew file mode 100644\nindex 0000000000..2709245119\n--- /dev/null\n+++ b/app1/models.py\n@@ -0,0 +1,7 @@\n+from django.db import models\n+\n+class ModelA(models.Model):\n+    field_fixed = models.CharField('field1', max_length=50, primary_key=True)  # I'm a Primary key.\n+\n+class ModelB(models.Model):\n+    field_fk = models.ForeignKey(ModelA, blank=True, null=True, on_delete=models.CASCADE)\n",
+    "model": "ollama_chat/mistral-small",
+    "temperature": 0,
+    "cost": 0.0,
+    "added_files": [
+        "app1/migrations/0002_auto_rename_field.py",
+        "app1/models.py"
+    ],
+    "gold_files": [
+        "django/db/migrations/autodetector.py"
+    ],
+    "edited_files": [
+        "app1/migrations/0002_auto_rename_field.py",
+        "app1/models.py"
+    ],
+    "edit_outcome": true,
+    "lint_outcome": true,
+    "test_outcome": true,
+    "try": 1,
+    "tries": 1,
+    "all_results": [
+        {
+            "instance_id": "django__django-11910",
+            "model_name_or_path": "aider--ollama_chat-mistral-small",
+            "model_patch": "diff --git a/app1/migrations/0002_auto_rename_field.py b/app1/migrations/0002_auto_rename_field.py\nnew file mode 100644\nindex 0000000000..e17489abf7\n--- /dev/null\n+++ b/app1/migrations/0002_auto_rename_field.py\n@@ -0,0 +1,21 @@\n+from django.db import migrations, models\n+import django.db.models.deletion\n+\n+class Migration(migrations.Migration):\n+\n+    dependencies = [\n+        ('app1', '0001_initial'),\n+    ]\n+\n+    operations = [\n+        migrations.RenameField(\n+            model_name='modela',\n+            old_name='field_wrong',\n+            new_name='field_fixed',\n+        ),\n+        migrations.AlterField(\n+            model_name='modelb',\n+            name='field_fk',\n+            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='app1.ModelA', to_field='field_fixed'),\n+        ),\n+    ]\ndiff --git a/app1/models.py b/app1/models.py\nnew file mode 100644\nindex 0000000000..2709245119\n--- /dev/null\n+++ b/app1/models.py\n@@ -0,0 +1,7 @@\n+from django.db import models\n+\n+class ModelA(models.Model):\n+    field_fixed = models.CharField('field1', max_length=50, primary_key=True)  # I'm a Primary key.\n+\n+class ModelB(models.Model):\n+    field_fk = models.ForeignKey(ModelA, blank=True, null=True, on_delete=models.CASCADE)\n",
+            "model": "ollama_chat/mistral-small",
+            "temperature": 0,
+            "cost": 0.0,
+            "added_files": [
+                "app1/migrations/0002_auto_rename_field.py",
+                "app1/models.py"
+            ],
+            "gold_files": [
+                "django/db/migrations/autodetector.py"
+            ],
+            "edited_files": [
+                "app1/migrations/0002_auto_rename_field.py",
+                "app1/models.py"
+            ],
+            "edit_outcome": true,
+            "lint_outcome": true,
+            "test_outcome": true,
+            "try": 1
+        }
+    ]
+}

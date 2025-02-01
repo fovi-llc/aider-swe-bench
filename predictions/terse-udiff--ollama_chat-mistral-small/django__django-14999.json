@@ -1,0 +1,45 @@
+{
+    "instance_id": "django__django-14999",
+    "model_name_or_path": "aider--ollama_chat-mistral-small",
+    "model_patch": "diff --git a/migrations/operations.py b/migrations/operations.py\nnew file mode 100644\nindex 0000000000..609def9025\n--- /dev/null\n+++ b/migrations/operations.py\n@@ -0,0 +1,21 @@\n+from django.db import migrations, models\n+\n+class RenameModel(migrations.Migration):\n+\n+    def __init__(self, name=None):\n+        super().__init__()\n+        self.name = name\n+\n+    def state_forwards(self, app_label, state):\n+        pass  # Implementation details\n+\n+    def database_forwards(self, app_label, schema_editor, from_state, to_state):\n+        if hasattr(to_state.models[app_label], 'db_table'):\n+            return\n+        super().database_forwards(app_label, schema_editor, from_state, to_state)\n+\n+    def database_backwards(self, app_label, schema_editor, from_state, to_state):\n+        pass  # Implementation details\n+\n+    def describe(self):\n+        pass  # Implementation details\n",
+    "model": "ollama_chat/mistral-small",
+    "temperature": 0,
+    "cost": 0.0,
+    "added_files": [
+        "migrations/operations.py"
+    ],
+    "gold_files": [
+        "django/db/migrations/operations/models.py"
+    ],
+    "edited_files": [
+        "migrations/operations.py"
+    ],
+    "edit_outcome": true,
+    "lint_outcome": true,
+    "test_outcome": true,
+    "try": 1,
+    "tries": 1,
+    "all_results": [
+        {
+            "instance_id": "django__django-14999",
+            "model_name_or_path": "aider--ollama_chat-mistral-small",
+            "model_patch": "diff --git a/migrations/operations.py b/migrations/operations.py\nnew file mode 100644\nindex 0000000000..609def9025\n--- /dev/null\n+++ b/migrations/operations.py\n@@ -0,0 +1,21 @@\n+from django.db import migrations, models\n+\n+class RenameModel(migrations.Migration):\n+\n+    def __init__(self, name=None):\n+        super().__init__()\n+        self.name = name\n+\n+    def state_forwards(self, app_label, state):\n+        pass  # Implementation details\n+\n+    def database_forwards(self, app_label, schema_editor, from_state, to_state):\n+        if hasattr(to_state.models[app_label], 'db_table'):\n+            return\n+        super().database_forwards(app_label, schema_editor, from_state, to_state)\n+\n+    def database_backwards(self, app_label, schema_editor, from_state, to_state):\n+        pass  # Implementation details\n+\n+    def describe(self):\n+        pass  # Implementation details\n",
+            "model": "ollama_chat/mistral-small",
+            "temperature": 0,
+            "cost": 0.0,
+            "added_files": [
+                "migrations/operations.py"
+            ],
+            "gold_files": [
+                "django/db/migrations/operations/models.py"
+            ],
+            "edited_files": [
+                "migrations/operations.py"
+            ],
+            "edit_outcome": true,
+            "lint_outcome": true,
+            "test_outcome": true,
+            "try": 1
+        }
+    ]
+}

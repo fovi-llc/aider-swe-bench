@@ -1,0 +1,37 @@
+{
+    "instance_id": "sympy__sympy-18532",
+    "model_name_or_path": "aider--ollama_chat-deepseek-r1:14b",
+    "model_patch": "",
+    "model": "ollama_chat/deepseek-r1:14b",
+    "temperature": 0,
+    "cost": 0.0,
+    "added_files": [],
+    "gold_files": [
+        "sympy/core/basic.py"
+    ],
+    "edited_files": [],
+    "edit_outcome": null,
+    "lint_outcome": null,
+    "test_outcome": null,
+    "try": 1,
+    "tries": 1,
+    "all_results": [
+        {
+            "instance_id": "sympy__sympy-18532",
+            "model_name_or_path": "aider--ollama_chat-deepseek-r1:14b",
+            "model_patch": "",
+            "model": "ollama_chat/deepseek-r1:14b",
+            "temperature": 0,
+            "cost": 0.0,
+            "added_files": [],
+            "gold_files": [
+                "sympy/core/basic.py"
+            ],
+            "edited_files": [],
+            "edit_outcome": null,
+            "lint_outcome": null,
+            "test_outcome": null,
+            "try": 1
+        }
+    ]
+}

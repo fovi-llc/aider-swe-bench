@@ -1,0 +1,57 @@
+{
+    "instance_id": "sympy__sympy-15308",
+    "model_name_or_path": "aider--ollama_chat-mistral-small",
+    "model_patch": "diff --git a/### New File: sympy/matrices/expressions/trace.py b/### New File: sympy/matrices/expressions/trace.py\nnew file mode 100644\nindex 0000000000..f31280b4b4\n--- /dev/null\n+++ b/### New File: sympy/matrices/expressions/trace.py\t\n@@ -0,0 +1,12 @@\n+from sympy.core.expr import Expr\n+\n+class Trace(Expr):\n+    def __init__(self, arg):\n+        self.arg = arg\n+\n+    def _latex(self, printer):\n+        return r'\\text{Trace}(%s)' % printer._print(self.arg)\n+\n+# Register the new printer for Trace\n+from sympy.printing.latex import LatexPrinter\n+LatexPrinter._dispatch[Trace] = LatexPrinter._print_Trace\ndiff --git a/### sympy/core/sympify.py b/### sympy/core/sympify.py\nnew file mode 100644\nindex 0000000000..b72708b121\n--- /dev/null\n+++ b/### sympy/core/sympify.py\t\n@@ -0,0 +1,23 @@\n+from sympy.core.sympify import SympifyError, _sympify\n+\n+def trace(expr):\n+    \"\"\"\n+    Compute the trace of a matrix expression.\n+    \"\"\"\n+    if not expr.is_Matrix:\n+        raise TypeError(\"Argument must be a Matrix\")\n+    return sum(expr[i, i] for i in range(expr.rows))\n+\n+# Add this to ensure that trace is recognized\n+from sympy.core.sympify import SympifyError\n+\n+def _sympify_trace(expr):\n+    if isinstance(expr, Trace):\n+        return expr\n+    raise ValueError(\"Expression must be a Trace instance\")\n+\n+_sympify.register(trace)\n+\n+# Import the Trace class\n+from sympy.matrices.expressions.trace import Trace\n+\ndiff --git a/### sympy/matrices/expressions/matrix_symbol.py b/### sympy/matrices/expressions/matrix_symbol.py\nnew file mode 100644\nindex 0000000000..551e851f25\n--- /dev/null\n+++ b/### sympy/matrices/expressions/matrix_symbol.py\t\n@@ -0,0 +1,15 @@\n+from sympy.core.expr import Expr\n+\n+class MatrixSymbol(Expr):\n+    def __init__(self, name, rows, cols):\n+        self.name = name\n+        self.rows = rows\n+        self.cols = cols\n+\n+    def _latex(self, printer):\n+        return r'%s' % self.name\n+\n+# Register the new printer for MatrixSymbol\n+from sympy.printing.latex import LatexPrinter\n+LatexPrinter._dispatch[MatrixSymbol] = LatexPrinter._print_MatrixSymbol\n+\ndiff --git a/### sympy/printing/latex.py b/### sympy/printing/latex.py\nnew file mode 100644\nindex 0000000000..d39e077da6\n--- /dev/null\n+++ b/### sympy/printing/latex.py\t\n@@ -0,0 +1,10 @@\n+from sympy.printing.latex import LatexPrinter\n+\n+def _print_Trace(self, expr):\n+    return r'\\text{Trace}(%s)' % self._print(expr.arg)\n+\n+# Import the Trace class\n+from sympy.matrices.expressions.trace import Trace\n+\n+# Register the new printer for Trace\n+LatexPrinter._dispatch[Trace] = _print_Trace\n",
+    "model": "ollama_chat/mistral-small",
+    "temperature": 0,
+    "cost": 0.0,
+    "added_files": [
+        "### New File: sympy/matrices/expressions/trace.py",
+        "### sympy/core/sympify.py",
+        "### sympy/matrices/expressions/matrix_symbol.py",
+        "### sympy/printing/latex.py"
+    ],
+    "gold_files": [
+        "sympy/printing/latex.py"
+    ],
+    "edited_files": [
+        "### New File: sympy/matrices/expressions/trace.py\t",
+        "### sympy/core/sympify.py\t",
+        "### sympy/matrices/expressions/matrix_symbol.py\t",
+        "### sympy/printing/latex.py\t"
+    ],
+    "edit_outcome": true,
+    "lint_outcome": true,
+    "test_outcome": false,
+    "try": 1,
+    "tries": 1,
+    "all_results": [
+        {
+            "instance_id": "sympy__sympy-15308",
+            "model_name_or_path": "aider--ollama_chat-mistral-small",
+            "model_patch": "diff --git a/### New File: sympy/matrices/expressions/trace.py b/### New File: sympy/matrices/expressions/trace.py\nnew file mode 100644\nindex 0000000000..f31280b4b4\n--- /dev/null\n+++ b/### New File: sympy/matrices/expressions/trace.py\t\n@@ -0,0 +1,12 @@\n+from sympy.core.expr import Expr\n+\n+class Trace(Expr):\n+    def __init__(self, arg):\n+        self.arg = arg\n+\n+    def _latex(self, printer):\n+        return r'\\text{Trace}(%s)' % printer._print(self.arg)\n+\n+# Register the new printer for Trace\n+from sympy.printing.latex import LatexPrinter\n+LatexPrinter._dispatch[Trace] = LatexPrinter._print_Trace\ndiff --git a/### sympy/core/sympify.py b/### sympy/core/sympify.py\nnew file mode 100644\nindex 0000000000..b72708b121\n--- /dev/null\n+++ b/### sympy/core/sympify.py\t\n@@ -0,0 +1,23 @@\n+from sympy.core.sympify import SympifyError, _sympify\n+\n+def trace(expr):\n+    \"\"\"\n+    Compute the trace of a matrix expression.\n+    \"\"\"\n+    if not expr.is_Matrix:\n+        raise TypeError(\"Argument must be a Matrix\")\n+    return sum(expr[i, i] for i in range(expr.rows))\n+\n+# Add this to ensure that trace is recognized\n+from sympy.core.sympify import SympifyError\n+\n+def _sympify_trace(expr):\n+    if isinstance(expr, Trace):\n+        return expr\n+    raise ValueError(\"Expression must be a Trace instance\")\n+\n+_sympify.register(trace)\n+\n+# Import the Trace class\n+from sympy.matrices.expressions.trace import Trace\n+\ndiff --git a/### sympy/matrices/expressions/matrix_symbol.py b/### sympy/matrices/expressions/matrix_symbol.py\nnew file mode 100644\nindex 0000000000..551e851f25\n--- /dev/null\n+++ b/### sympy/matrices/expressions/matrix_symbol.py\t\n@@ -0,0 +1,15 @@\n+from sympy.core.expr import Expr\n+\n+class MatrixSymbol(Expr):\n+    def __init__(self, name, rows, cols):\n+        self.name = name\n+        self.rows = rows\n+        self.cols = cols\n+\n+    def _latex(self, printer):\n+        return r'%s' % self.name\n+\n+# Register the new printer for MatrixSymbol\n+from sympy.printing.latex import LatexPrinter\n+LatexPrinter._dispatch[MatrixSymbol] = LatexPrinter._print_MatrixSymbol\n+\ndiff --git a/### sympy/printing/latex.py b/### sympy/printing/latex.py\nnew file mode 100644\nindex 0000000000..d39e077da6\n--- /dev/null\n+++ b/### sympy/printing/latex.py\t\n@@ -0,0 +1,10 @@\n+from sympy.printing.latex import LatexPrinter\n+\n+def _print_Trace(self, expr):\n+    return r'\\text{Trace}(%s)' % self._print(expr.arg)\n+\n+# Import the Trace class\n+from sympy.matrices.expressions.trace import Trace\n+\n+# Register the new printer for Trace\n+LatexPrinter._dispatch[Trace] = _print_Trace\n",
+            "model": "ollama_chat/mistral-small",
+            "temperature": 0,
+            "cost": 0.0,
+            "added_files": [
+                "### New File: sympy/matrices/expressions/trace.py",
+                "### sympy/core/sympify.py",
+                "### sympy/matrices/expressions/matrix_symbol.py",
+                "### sympy/printing/latex.py"
+            ],
+            "gold_files": [
+                "sympy/printing/latex.py"
+            ],
+            "edited_files": [
+                "### New File: sympy/matrices/expressions/trace.py\t",
+                "### sympy/core/sympify.py\t",
+                "### sympy/matrices/expressions/matrix_symbol.py\t",
+                "### sympy/printing/latex.py\t"
+            ],
+            "edit_outcome": true,
+            "lint_outcome": true,
+            "test_outcome": false,
+            "try": 1
+        }
+    ]
+}

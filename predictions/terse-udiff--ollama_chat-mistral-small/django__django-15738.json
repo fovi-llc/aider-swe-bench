@@ -1,0 +1,53 @@
+{
+    "instance_id": "django__django-15738",
+    "model_name_or_path": "aider--ollama_chat-mistral-small",
+    "model_patch": "diff --git a/migrations/0002_remove_unique_together.py b/migrations/0002_remove_unique_together.py\nnew file mode 100644\nindex 0000000000..66d8b67dd9\n--- /dev/null\n+++ b/migrations/0002_remove_unique_together.py\n@@ -0,0 +1,14 @@\n+from django.db import migrations\n+\n+class Migration(migrations.Migration):\n+\n+    dependencies = [\n+        ('app_authors', '0001_initial'),\n+    ]\n+\n+    operations = [\n+        migrations.AlterUniqueTogether(\n+            name='authors',\n+            unique_together=set(),\n+        ),\n+    ]\ndiff --git a/migrations/0003_change_field_type.py b/migrations/0003_change_field_type.py\nnew file mode 100644\nindex 0000000000..3e04b870d5\n--- /dev/null\n+++ b/migrations/0003_change_field_type.py\n@@ -0,0 +1,19 @@\n+from django.db import migrations, models\n+\n+class Migration(migrations.Migration):\n+\n+    dependencies = [\n+        ('app_authors', '0002_remove_unique_together'),\n+    ]\n+\n+    operations = [\n+        migrations.RemoveField(\n+            model_name='authors',\n+            name='project_data_set',\n+        ),\n+        migrations.AddField(\n+            model_name='authors',\n+            name='project_data_set',\n+            field=models.ManyToManyField(to='app_authors.ProjectDataSet'),\n+        ),\n+    ]\ndiff --git a/models.py b/models.py\nnew file mode 100644\nindex 0000000000..1ec8c04681\n--- /dev/null\n+++ b/models.py\n@@ -0,0 +1,29 @@\n+from django.db import models\n+\n+class DataSet(models.Model):\n+    name = models.TextField(max_length=50)\n+\n+class Project(models.Model):\n+    data_sets = models.ManyToManyField(\n+        DataSet,\n+        through='ProjectDataSet',\n+    )\n+    name = models.TextField(max_length=50)\n+\n+class ProjectDataSet(models.Model):\n+    \"\"\"\n+    Cross table of data set and project\n+    \"\"\"\n+    data_set = models.ForeignKey(DataSet, on_delete=models.PROTECT)\n+    project = models.ForeignKey(Project, on_delete=models.PROTECT)\n+\n+    class Meta:\n+        unique_together = (('data_set', 'project'),)\n+\n+class Authors(models.Model):\n+    project_data_set = models.ManyToManyField(\n+        ProjectDataSet,\n+    )\n+    state = models.IntegerField()\n+    start_date = models.DateField()\n+\n",
+    "model": "ollama_chat/mistral-small",
+    "temperature": 0,
+    "cost": 0.0,
+    "added_files": [
+        "migrations/0002_remove_unique_together.py",
+        "migrations/0003_change_field_type.py",
+        "models.py"
+    ],
+    "gold_files": [
+        "django/db/migrations/autodetector.py"
+    ],
+    "edited_files": [
+        "migrations/0002_remove_unique_together.py",
+        "migrations/0003_change_field_type.py",
+        "models.py"
+    ],
+    "edit_outcome": true,
+    "lint_outcome": true,
+    "test_outcome": true,
+    "try": 1,
+    "tries": 1,
+    "all_results": [
+        {
+            "instance_id": "django__django-15738",
+            "model_name_or_path": "aider--ollama_chat-mistral-small",
+            "model_patch": "diff --git a/migrations/0002_remove_unique_together.py b/migrations/0002_remove_unique_together.py\nnew file mode 100644\nindex 0000000000..66d8b67dd9\n--- /dev/null\n+++ b/migrations/0002_remove_unique_together.py\n@@ -0,0 +1,14 @@\n+from django.db import migrations\n+\n+class Migration(migrations.Migration):\n+\n+    dependencies = [\n+        ('app_authors', '0001_initial'),\n+    ]\n+\n+    operations = [\n+        migrations.AlterUniqueTogether(\n+            name='authors',\n+            unique_together=set(),\n+        ),\n+    ]\ndiff --git a/migrations/0003_change_field_type.py b/migrations/0003_change_field_type.py\nnew file mode 100644\nindex 0000000000..3e04b870d5\n--- /dev/null\n+++ b/migrations/0003_change_field_type.py\n@@ -0,0 +1,19 @@\n+from django.db import migrations, models\n+\n+class Migration(migrations.Migration):\n+\n+    dependencies = [\n+        ('app_authors', '0002_remove_unique_together'),\n+    ]\n+\n+    operations = [\n+        migrations.RemoveField(\n+            model_name='authors',\n+            name='project_data_set',\n+        ),\n+        migrations.AddField(\n+            model_name='authors',\n+            name='project_data_set',\n+            field=models.ManyToManyField(to='app_authors.ProjectDataSet'),\n+        ),\n+    ]\ndiff --git a/models.py b/models.py\nnew file mode 100644\nindex 0000000000..1ec8c04681\n--- /dev/null\n+++ b/models.py\n@@ -0,0 +1,29 @@\n+from django.db import models\n+\n+class DataSet(models.Model):\n+    name = models.TextField(max_length=50)\n+\n+class Project(models.Model):\n+    data_sets = models.ManyToManyField(\n+        DataSet,\n+        through='ProjectDataSet',\n+    )\n+    name = models.TextField(max_length=50)\n+\n+class ProjectDataSet(models.Model):\n+    \"\"\"\n+    Cross table of data set and project\n+    \"\"\"\n+    data_set = models.ForeignKey(DataSet, on_delete=models.PROTECT)\n+    project = models.ForeignKey(Project, on_delete=models.PROTECT)\n+\n+    class Meta:\n+        unique_together = (('data_set', 'project'),)\n+\n+class Authors(models.Model):\n+    project_data_set = models.ManyToManyField(\n+        ProjectDataSet,\n+    )\n+    state = models.IntegerField()\n+    start_date = models.DateField()\n+\n",
+            "model": "ollama_chat/mistral-small",
+            "temperature": 0,
+            "cost": 0.0,
+            "added_files": [
+                "migrations/0002_remove_unique_together.py",
+                "migrations/0003_change_field_type.py",
+                "models.py"
+            ],
+            "gold_files": [
+                "django/db/migrations/autodetector.py"
+            ],
+            "edited_files": [
+                "migrations/0002_remove_unique_together.py",
+                "migrations/0003_change_field_type.py",
+                "models.py"
+            ],
+            "edit_outcome": true,
+            "lint_outcome": true,
+            "test_outcome": true,
+            "try": 1
+        }
+    ]
+}

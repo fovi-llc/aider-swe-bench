@@ -1,0 +1,45 @@
+{
+    "instance_id": "django__django-15400",
+    "model_name_or_path": "aider--ollama_chat-mistral-small",
+    "model_patch": "diff --git a/django/utils/lazy.py b/django/utils/lazy.py\nnew file mode 100644\nindex 0000000000..167b666fca\n--- /dev/null\n+++ b/django/utils/lazy.py\n@@ -0,0 +1 @@\n+python manage.py makemigrations utils_tests\n",
+    "model": "ollama_chat/mistral-small",
+    "temperature": 0,
+    "cost": 0.0,
+    "added_files": [
+        "django/utils/lazy.py"
+    ],
+    "gold_files": [
+        "django/utils/functional.py"
+    ],
+    "edited_files": [
+        "django/utils/lazy.py"
+    ],
+    "edit_outcome": true,
+    "lint_outcome": false,
+    "test_outcome": false,
+    "try": 1,
+    "tries": 1,
+    "all_results": [
+        {
+            "instance_id": "django__django-15400",
+            "model_name_or_path": "aider--ollama_chat-mistral-small",
+            "model_patch": "diff --git a/django/utils/lazy.py b/django/utils/lazy.py\nnew file mode 100644\nindex 0000000000..167b666fca\n--- /dev/null\n+++ b/django/utils/lazy.py\n@@ -0,0 +1 @@\n+python manage.py makemigrations utils_tests\n",
+            "model": "ollama_chat/mistral-small",
+            "temperature": 0,
+            "cost": 0.0,
+            "added_files": [
+                "django/utils/lazy.py"
+            ],
+            "gold_files": [
+                "django/utils/functional.py"
+            ],
+            "edited_files": [
+                "django/utils/lazy.py"
+            ],
+            "edit_outcome": true,
+            "lint_outcome": false,
+            "test_outcome": false,
+            "try": 1
+        }
+    ]
+}
