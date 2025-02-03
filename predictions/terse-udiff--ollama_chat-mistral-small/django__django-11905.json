@@ -1,0 +1,45 @@
+{
+    "instance_id": "django__django-11905",
+    "model_name_or_path": "aider--ollama_chat-mistral-small",
+    "model_patch": "diff --git a/### django/db/models/fields/__init__.py b/### django/db/models/fields/__init__.py\nnew file mode 100644\nindex 0000000000..310574b967\n--- /dev/null\n+++ b/### django/db/models/fields/__init__.py\t\n@@ -0,0 +1,7 @@\n+# django/db/models/fields/__init__.py\n+\n+from django.db.models import Field\n+from django.db.models.lookups import IsNull\n+\n+# Register the custom lookup\n+Field.register_lookup(IsNull)\ndiff --git a/### django/db/models/lookups.py b/### django/db/models/lookups.py\nnew file mode 100644\nindex 0000000000..75d591cfaa\n--- /dev/null\n+++ b/### django/db/models/lookups.py\t\n@@ -0,0 +1,18 @@\n+# django/db/models/lookups.py\n+\n+from django.db.models import Lookup\n+\n+class IsNull(Lookup):\n+    lookup_name = 'isnull'\n+\n+    def process_lhs(self, compiler, connection):\n+        lhs, params = super().process_lhs(compiler, connection)\n+        if not isinstance(params[0], bool):\n+            raise ValueError(f\"__isnull lookup must be used with a boolean value. Got {type(params[0])} instead.\")\n+        return lhs, params\n+\n+    def as_sql(self, compiler, connection):\n+        lhs, lhs_params = self.process_lhs(compiler, connection)\n+        rhs, rhs_params = self.process_rhs(compiler, connection)\n+        params = lhs_params + rhs_params\n+        return '%s IS %s' % (lhs, 'NULL' if params[0] else 'NOT NULL'), params\ndiff --git a/### django/db/models/sql/query.py b/### django/db/models/sql/query.py\nnew file mode 100644\nindex 0000000000..634d987dcf\n--- /dev/null\n+++ b/### django/db/models/sql/query.py\t\n@@ -0,0 +1,22 @@\n+# django/db/models/sql/query.py\n+\n+from django.db.models import Lookup, QuerySet as DjangoQuerySet\n+\n+class QuerySet(DjangoQuerySet):\n+    # ... rest of code ...\n+\n+    def filter(self, *args, **kwargs):\n+        if '__isnull' in kwargs:\n+            value = kwargs['__isnull']\n+            if not isinstance(value, bool):\n+                raise ValueError(f\"__isnull lookup must be used with a boolean value. Got {type(value)} instead.\")\n+        return super().filter(*args, **kwargs)\n+\n+    def exclude(self, *args, **kwargs):\n+        if '__isnull' in kwargs:\n+            value = kwargs['__isnull']\n+            if not isinstance(value, bool):\n+                raise ValueError(f\"__isnull lookup must be used with a boolean value. Got {type(value)} instead.\")\n+        return super().exclude(*args, **kwargs)\n+\n+    # ... rest of code ...\n",
+    "model": "ollama_chat/mistral-small",
+    "temperature": 0,
+    "cost": 0.0,
+    "added_files": [],
+    "gold_files": [
+        "django/db/models/lookups.py"
+    ],
+    "edited_files": [
+        "### django/db/models/fields/__init__.py\t",
+        "### django/db/models/lookups.py\t",
+        "### django/db/models/sql/query.py\t"
+    ],
+    "edit_outcome": true,
+    "lint_outcome": true,
+    "test_outcome": true,
+    "try": 1,
+    "tries": 1,
+    "all_results": [
+        {
+            "instance_id": "django__django-11905",
+            "model_name_or_path": "aider--ollama_chat-mistral-small",
+            "model_patch": "diff --git a/### django/db/models/fields/__init__.py b/### django/db/models/fields/__init__.py\nnew file mode 100644\nindex 0000000000..310574b967\n--- /dev/null\n+++ b/### django/db/models/fields/__init__.py\t\n@@ -0,0 +1,7 @@\n+# django/db/models/fields/__init__.py\n+\n+from django.db.models import Field\n+from django.db.models.lookups import IsNull\n+\n+# Register the custom lookup\n+Field.register_lookup(IsNull)\ndiff --git a/### django/db/models/lookups.py b/### django/db/models/lookups.py\nnew file mode 100644\nindex 0000000000..75d591cfaa\n--- /dev/null\n+++ b/### django/db/models/lookups.py\t\n@@ -0,0 +1,18 @@\n+# django/db/models/lookups.py\n+\n+from django.db.models import Lookup\n+\n+class IsNull(Lookup):\n+    lookup_name = 'isnull'\n+\n+    def process_lhs(self, compiler, connection):\n+        lhs, params = super().process_lhs(compiler, connection)\n+        if not isinstance(params[0], bool):\n+            raise ValueError(f\"__isnull lookup must be used with a boolean value. Got {type(params[0])} instead.\")\n+        return lhs, params\n+\n+    def as_sql(self, compiler, connection):\n+        lhs, lhs_params = self.process_lhs(compiler, connection)\n+        rhs, rhs_params = self.process_rhs(compiler, connection)\n+        params = lhs_params + rhs_params\n+        return '%s IS %s' % (lhs, 'NULL' if params[0] else 'NOT NULL'), params\ndiff --git a/### django/db/models/sql/query.py b/### django/db/models/sql/query.py\nnew file mode 100644\nindex 0000000000..634d987dcf\n--- /dev/null\n+++ b/### django/db/models/sql/query.py\t\n@@ -0,0 +1,22 @@\n+# django/db/models/sql/query.py\n+\n+from django.db.models import Lookup, QuerySet as DjangoQuerySet\n+\n+class QuerySet(DjangoQuerySet):\n+    # ... rest of code ...\n+\n+    def filter(self, *args, **kwargs):\n+        if '__isnull' in kwargs:\n+            value = kwargs['__isnull']\n+            if not isinstance(value, bool):\n+                raise ValueError(f\"__isnull lookup must be used with a boolean value. Got {type(value)} instead.\")\n+        return super().filter(*args, **kwargs)\n+\n+    def exclude(self, *args, **kwargs):\n+        if '__isnull' in kwargs:\n+            value = kwargs['__isnull']\n+            if not isinstance(value, bool):\n+                raise ValueError(f\"__isnull lookup must be used with a boolean value. Got {type(value)} instead.\")\n+        return super().exclude(*args, **kwargs)\n+\n+    # ... rest of code ...\n",
+            "model": "ollama_chat/mistral-small",
+            "temperature": 0,
+            "cost": 0.0,
+            "added_files": [],
+            "gold_files": [
+                "django/db/models/lookups.py"
+            ],
+            "edited_files": [
+                "### django/db/models/fields/__init__.py\t",
+                "### django/db/models/lookups.py\t",
+                "### django/db/models/sql/query.py\t"
+            ],
+            "edit_outcome": true,
+            "lint_outcome": true,
+            "test_outcome": true,
+            "try": 1
+        }
+    ]
+}

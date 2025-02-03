@@ -1,0 +1,45 @@
+{
+    "instance_id": "matplotlib__matplotlib-23562",
+    "model_name_or_path": "aider--ollama_chat-mistral-small",
+    "model_patch": "diff --git a/mpl_toolkits/mplot3d/art3d.py b/mpl_toolkits/mplot3d/art3d.py\nnew file mode 100644\nindex 0000000000..482ecfdea6\n--- /dev/null\n+++ b/mpl_toolkits/mplot3d/art3d.py\n@@ -0,0 +1,48 @@\n+# This file is part of matplotlib.\n+#\n+# Copyright (c) 2002-2014 John D. Hunter, Michael Droettboom and the Matplotlib development team; all rights reserved.\n+#\n+# Redistribution and use in source and binary forms, with or without modification,\n+# are permitted provided that the following conditions are met:\n+#\n+#     * Redistributions of source code must retain the above copyright notice, this\n+#       list of conditions and the following disclaimer.\n+#     * Redistributions in binary form must reproduce the above copyright notice,\n+#       this list of conditions and the following disclaimer in the documentation\n+#       and/or other materials provided with the distribution.\n+#\n+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\" AND\n+# ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED\n+# WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\n+# DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR\n+# ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES\n+# (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;\n+# LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON\n+# ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING\n+# NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,\n+# EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n+\"\"\"\n+import numpy as np\n+from matplotlib import cbook, rcParams\n+from matplotlib.collections import PolyCollection\n+\n+class Art3d(object):\n+    def __init__(self, *args, **kwargs):\n+        super(Art3d, self).__init__(*args, **kwargs)\n+\n+    @property\n+    def offsets(self):\n+        return self._offsets\n+\n+    @offsets.setter\n+    def offsets(self, value):\n+        self._offsets = value\n+        self.stale = True\n+\n+class Line3D(Art3d):\n+    pass\n+\n+def _line(xs, ys, zs, *args, **kwargs):\n+    return Line3D([list(zip(xs, ys, zs))], *args, **kwargs)\n+\n+# Rest of the code...\n",
+    "model": "ollama_chat/mistral-small",
+    "temperature": 0,
+    "cost": 0.0,
+    "added_files": [
+        "mpl_toolkits/mplot3d/art3d.py"
+    ],
+    "gold_files": [
+        "lib/mpl_toolkits/mplot3d/art3d.py"
+    ],
+    "edited_files": [
+        "mpl_toolkits/mplot3d/art3d.py"
+    ],
+    "edit_outcome": true,
+    "lint_outcome": false,
+    "test_outcome": null,
+    "try": 1,
+    "tries": 1,
+    "all_results": [
+        {
+            "instance_id": "matplotlib__matplotlib-23562",
+            "model_name_or_path": "aider--ollama_chat-mistral-small",
+            "model_patch": "diff --git a/mpl_toolkits/mplot3d/art3d.py b/mpl_toolkits/mplot3d/art3d.py\nnew file mode 100644\nindex 0000000000..482ecfdea6\n--- /dev/null\n+++ b/mpl_toolkits/mplot3d/art3d.py\n@@ -0,0 +1,48 @@\n+# This file is part of matplotlib.\n+#\n+# Copyright (c) 2002-2014 John D. Hunter, Michael Droettboom and the Matplotlib development team; all rights reserved.\n+#\n+# Redistribution and use in source and binary forms, with or without modification,\n+# are permitted provided that the following conditions are met:\n+#\n+#     * Redistributions of source code must retain the above copyright notice, this\n+#       list of conditions and the following disclaimer.\n+#     * Redistributions in binary form must reproduce the above copyright notice,\n+#       this list of conditions and the following disclaimer in the documentation\n+#       and/or other materials provided with the distribution.\n+#\n+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS \"AS IS\" AND\n+# ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED\n+# WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE\n+# DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR\n+# ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES\n+# (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;\n+# LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON\n+# ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING\n+# NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,\n+# EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.\n+\"\"\"\n+import numpy as np\n+from matplotlib import cbook, rcParams\n+from matplotlib.collections import PolyCollection\n+\n+class Art3d(object):\n+    def __init__(self, *args, **kwargs):\n+        super(Art3d, self).__init__(*args, **kwargs)\n+\n+    @property\n+    def offsets(self):\n+        return self._offsets\n+\n+    @offsets.setter\n+    def offsets(self, value):\n+        self._offsets = value\n+        self.stale = True\n+\n+class Line3D(Art3d):\n+    pass\n+\n+def _line(xs, ys, zs, *args, **kwargs):\n+    return Line3D([list(zip(xs, ys, zs))], *args, **kwargs)\n+\n+# Rest of the code...\n",
+            "model": "ollama_chat/mistral-small",
+            "temperature": 0,
+            "cost": 0.0,
+            "added_files": [
+                "mpl_toolkits/mplot3d/art3d.py"
+            ],
+            "gold_files": [
+                "lib/mpl_toolkits/mplot3d/art3d.py"
+            ],
+            "edited_files": [
+                "mpl_toolkits/mplot3d/art3d.py"
+            ],
+            "edit_outcome": true,
+            "lint_outcome": false,
+            "test_outcome": null,
+            "try": 1
+        }
+    ]
+}

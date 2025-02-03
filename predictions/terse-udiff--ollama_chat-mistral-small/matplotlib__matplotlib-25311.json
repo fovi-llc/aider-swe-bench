@@ -1,0 +1,49 @@
+{
+    "instance_id": "matplotlib__matplotlib-25311",
+    "model_name_or_path": "aider--ollama_chat-mistral-small",
+    "model_patch": "diff --git a/You can install `dill` using pip b/You can install `dill` using pip\nnew file mode 100644\nindex 0000000000..26e39c7c63\n--- /dev/null\n+++ b/You can install `dill` using pip\t\n@@ -0,0 +1 @@\n+pip install dill\ndiff --git a/matplotlib_draggable_legend.py b/matplotlib_draggable_legend.py\nnew file mode 100644\nindex 0000000000..3649d68be0\n--- /dev/null\n+++ b/matplotlib_draggable_legend.py\n@@ -0,0 +1,16 @@\n+import matplotlib.pyplot as plt\n+import dill\n+\n+fig = plt.figure()\n+ax = fig.add_subplot(111)\n+\n+time=[0,1,2,3,4]\n+speed=[40,43,45,47,48]\n+\n+ax.plot(time,speed,label=\"speed\")\n+\n+leg=ax.legend()\n+leg.set_draggable(True) #pickling works after removing this line\n+\n+dill.dumps(fig)\n+plt.show()\n",
+    "model": "ollama_chat/mistral-small",
+    "temperature": 0,
+    "cost": 0.0,
+    "added_files": [
+        "You can install `dill` using pip",
+        "matplotlib_draggable_legend.py"
+    ],
+    "gold_files": [
+        "lib/matplotlib/offsetbox.py"
+    ],
+    "edited_files": [
+        "You can install `dill` using pip\t",
+        "matplotlib_draggable_legend.py"
+    ],
+    "edit_outcome": false,
+    "lint_outcome": true,
+    "test_outcome": false,
+    "try": 1,
+    "tries": 1,
+    "all_results": [
+        {
+            "instance_id": "matplotlib__matplotlib-25311",
+            "model_name_or_path": "aider--ollama_chat-mistral-small",
+            "model_patch": "diff --git a/You can install `dill` using pip b/You can install `dill` using pip\nnew file mode 100644\nindex 0000000000..26e39c7c63\n--- /dev/null\n+++ b/You can install `dill` using pip\t\n@@ -0,0 +1 @@\n+pip install dill\ndiff --git a/matplotlib_draggable_legend.py b/matplotlib_draggable_legend.py\nnew file mode 100644\nindex 0000000000..3649d68be0\n--- /dev/null\n+++ b/matplotlib_draggable_legend.py\n@@ -0,0 +1,16 @@\n+import matplotlib.pyplot as plt\n+import dill\n+\n+fig = plt.figure()\n+ax = fig.add_subplot(111)\n+\n+time=[0,1,2,3,4]\n+speed=[40,43,45,47,48]\n+\n+ax.plot(time,speed,label=\"speed\")\n+\n+leg=ax.legend()\n+leg.set_draggable(True) #pickling works after removing this line\n+\n+dill.dumps(fig)\n+plt.show()\n",
+            "model": "ollama_chat/mistral-small",
+            "temperature": 0,
+            "cost": 0.0,
+            "added_files": [
+                "You can install `dill` using pip",
+                "matplotlib_draggable_legend.py"
+            ],
+            "gold_files": [
+                "lib/matplotlib/offsetbox.py"
+            ],
+            "edited_files": [
+                "You can install `dill` using pip\t",
+                "matplotlib_draggable_legend.py"
+            ],
+            "edit_outcome": false,
+            "lint_outcome": true,
+            "test_outcome": false,
+            "try": 1
+        }
+    ]
+}

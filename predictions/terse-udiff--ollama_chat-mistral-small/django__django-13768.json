@@ -1,0 +1,45 @@
+{
+    "instance_id": "django__django-13768",
+    "model_name_or_path": "aider--ollama_chat-mistral-small",
+    "model_patch": "diff --git a/django/dispatch/signal.py b/django/dispatch/signal.py\nnew file mode 100644\nindex 0000000000..30674a3d39\n--- /dev/null\n+++ b/django/dispatch/signal.py\n@@ -0,0 +1,53 @@\n+# Django dispatch signal module\n+\n+import logging\n+from django.utils import six\n+from django.core.exceptions import SuspiciousOperation\n+\n+logger = logging.getLogger(__name__)\n+\n+class Signal(object):\n+    def __init__(self, sender=None):\n+        self.receivers = []\n+        self.sender = sender\n+\n+    def connect(self, receiver, sender=None, weak=False, dispatch_uid=None):\n+        if isinstance(receiver, six.string_types):\n+            raise TypeError(\"receiver must be a callable or an instance with a `__call__` method, not a string.\")\n+        if dispatch_uid is None:\n+            dispatch_uid = receiver\n+        self.receivers.append((dispatch_uid, receiver))\n+        return receiver\n+\n+    def disconnect(self, receiver=None, sender=None, dispatch_uid=None):\n+        if receiver is None and dispatch_uid is None:\n+            raise ValueError(\"Either 'receiver' or 'dispatch_uid' must be provided.\")\n+        for i in range(len(self.receivers) - 1, -1, -1):\n+            if (sender is None or self.sender == sender) and \\\n+               ((receiver is not None and self.receivers[i][1] == receiver) or\n+                (dispatch_uid is not None and self.receivers[i][0] == dispatch_uid)):\n+                del self.receivers[i]\n+\n+    def send(self, sender=None, **named):\n+        if sender is None:\n+            raise ValueError(\"Sender must be provided.\")\n+        return [receiver(sender=sender, **named) for receiver in self.receivers]\n+\n+    def send_robust(self, sender=None, **named):\n+        if sender is None:\n+            raise ValueError(\"Sender must be provided.\")\n+\n+        responses = []\n+        for receiver, bound_args in self._iter_receivers(sender, **named):\n+            try:\n+                response = receiver(**bound_args)\n+                responses.append(response)\n+            except Exception as exc:\n+                logger.exception(f\"Exception raised in receiver {receiver}\")\n+                if isinstance(exc, SuspiciousOperation):\n+                    raise\n+        return responses\n+\n+    def _iter_receivers(self, sender, **named):\n+        for dispatch_uid, receiver in self.receivers:\n+            yield (receiver, named)\n",
+    "model": "ollama_chat/mistral-small",
+    "temperature": 0,
+    "cost": 0.0,
+    "added_files": [
+        "django/dispatch/signal.py"
+    ],
+    "gold_files": [
+        "django/dispatch/dispatcher.py"
+    ],
+    "edited_files": [
+        "django/dispatch/signal.py"
+    ],
+    "edit_outcome": true,
+    "lint_outcome": true,
+    "test_outcome": true,
+    "try": 1,
+    "tries": 1,
+    "all_results": [
+        {
+            "instance_id": "django__django-13768",
+            "model_name_or_path": "aider--ollama_chat-mistral-small",
+            "model_patch": "diff --git a/django/dispatch/signal.py b/django/dispatch/signal.py\nnew file mode 100644\nindex 0000000000..30674a3d39\n--- /dev/null\n+++ b/django/dispatch/signal.py\n@@ -0,0 +1,53 @@\n+# Django dispatch signal module\n+\n+import logging\n+from django.utils import six\n+from django.core.exceptions import SuspiciousOperation\n+\n+logger = logging.getLogger(__name__)\n+\n+class Signal(object):\n+    def __init__(self, sender=None):\n+        self.receivers = []\n+        self.sender = sender\n+\n+    def connect(self, receiver, sender=None, weak=False, dispatch_uid=None):\n+        if isinstance(receiver, six.string_types):\n+            raise TypeError(\"receiver must be a callable or an instance with a `__call__` method, not a string.\")\n+        if dispatch_uid is None:\n+            dispatch_uid = receiver\n+        self.receivers.append((dispatch_uid, receiver))\n+        return receiver\n+\n+    def disconnect(self, receiver=None, sender=None, dispatch_uid=None):\n+        if receiver is None and dispatch_uid is None:\n+            raise ValueError(\"Either 'receiver' or 'dispatch_uid' must be provided.\")\n+        for i in range(len(self.receivers) - 1, -1, -1):\n+            if (sender is None or self.sender == sender) and \\\n+               ((receiver is not None and self.receivers[i][1] == receiver) or\n+                (dispatch_uid is not None and self.receivers[i][0] == dispatch_uid)):\n+                del self.receivers[i]\n+\n+    def send(self, sender=None, **named):\n+        if sender is None:\n+            raise ValueError(\"Sender must be provided.\")\n+        return [receiver(sender=sender, **named) for receiver in self.receivers]\n+\n+    def send_robust(self, sender=None, **named):\n+        if sender is None:\n+            raise ValueError(\"Sender must be provided.\")\n+\n+        responses = []\n+        for receiver, bound_args in self._iter_receivers(sender, **named):\n+            try:\n+                response = receiver(**bound_args)\n+                responses.append(response)\n+            except Exception as exc:\n+                logger.exception(f\"Exception raised in receiver {receiver}\")\n+                if isinstance(exc, SuspiciousOperation):\n+                    raise\n+        return responses\n+\n+    def _iter_receivers(self, sender, **named):\n+        for dispatch_uid, receiver in self.receivers:\n+            yield (receiver, named)\n",
+            "model": "ollama_chat/mistral-small",
+            "temperature": 0,
+            "cost": 0.0,
+            "added_files": [
+                "django/dispatch/signal.py"
+            ],
+            "gold_files": [
+                "django/dispatch/dispatcher.py"
+            ],
+            "edited_files": [
+                "django/dispatch/signal.py"
+            ],
+            "edit_outcome": true,
+            "lint_outcome": true,
+            "test_outcome": true,
+            "try": 1
+        }
+    ]
+}

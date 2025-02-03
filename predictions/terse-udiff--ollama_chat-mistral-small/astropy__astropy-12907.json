@@ -1,0 +1,47 @@
+{
+    "instance_id": "astropy__astropy-12907",
+    "model_name_or_path": "aider--ollama_chat-mistral-small",
+    "model_patch": "diff --git a/### astropy/modeling/separable.py b/### astropy/modeling/separable.py\nnew file mode 100644\nindex 0000000000..4e4e1394bf\n--- /dev/null\n+++ b/### astropy/modeling/separable.py\t\n@@ -0,0 +1,49 @@\n+from __future__ import division, print_function\n+\n+import numpy as np\n+from .core import Model\n+from .separable import SeparableModel\n+\n+def separability_matrix(model):\n+    \"\"\"\n+    Compute the separability matrix for a given model.\n+    \"\"\"\n+    if isinstance(model, CompoundModel):\n+        # Recursively compute the separability matrix for each sub-model\n+        sub_matrices = [separability_matrix(sub_model) for sub_model in model.models]\n+        # Combine the sub-matrices into a single matrix\n+        combined_matrix = np.block([sub_matrices])\n+    else:\n+        # Compute the separability matrix for a single model\n+        combined_matrix = _compute_separability_matrix(model)\n+\n+    return combined_matrix\n+\n+def _compute_separability_matrix(model):\n+    \"\"\"\n+    Helper function to compute the separability matrix for a single model.\n+    \"\"\"\n+    if isinstance(model, SeparableModel):\n+        # For separable models, the separability matrix is diagonal\n+        n_inputs = len(model.inputs)\n+        n_outputs = len(model.outputs)\n+        return np.eye(n_inputs + n_outputs, dtype=bool)\n+    else:\n+        # For non-separable models, the separability matrix is all False\n+        n_params = model.n_params\n+        return np.zeros((n_params, n_params), dtype=bool)\n+\n+class CompoundModel(Model):\n+    \"\"\"\n+    A compound model that combines multiple sub-models.\n+    \"\"\"\n+    def __init__(self, *models):\n+        self.models = models\n+\n+    @property\n+    def inputs(self):\n+        return [model.inputs for model in self.models]\n+\n+    @property\n+    def outputs(self):\n+        return [model.outputs for model in self.models]\n",
+    "model": "ollama_chat/mistral-small",
+    "temperature": 0,
+    "cost": 0.0,
+    "added_files": [
+        "### astropy/modeling/separable.py",
+        "astropy/modeling/separable.py"
+    ],
+    "gold_files": [
+        "astropy/modeling/separable.py"
+    ],
+    "edited_files": [
+        "### astropy/modeling/separable.py\t"
+    ],
+    "edit_outcome": true,
+    "lint_outcome": true,
+    "test_outcome": true,
+    "try": 1,
+    "tries": 1,
+    "all_results": [
+        {
+            "instance_id": "astropy__astropy-12907",
+            "model_name_or_path": "aider--ollama_chat-mistral-small",
+            "model_patch": "diff --git a/### astropy/modeling/separable.py b/### astropy/modeling/separable.py\nnew file mode 100644\nindex 0000000000..4e4e1394bf\n--- /dev/null\n+++ b/### astropy/modeling/separable.py\t\n@@ -0,0 +1,49 @@\n+from __future__ import division, print_function\n+\n+import numpy as np\n+from .core import Model\n+from .separable import SeparableModel\n+\n+def separability_matrix(model):\n+    \"\"\"\n+    Compute the separability matrix for a given model.\n+    \"\"\"\n+    if isinstance(model, CompoundModel):\n+        # Recursively compute the separability matrix for each sub-model\n+        sub_matrices = [separability_matrix(sub_model) for sub_model in model.models]\n+        # Combine the sub-matrices into a single matrix\n+        combined_matrix = np.block([sub_matrices])\n+    else:\n+        # Compute the separability matrix for a single model\n+        combined_matrix = _compute_separability_matrix(model)\n+\n+    return combined_matrix\n+\n+def _compute_separability_matrix(model):\n+    \"\"\"\n+    Helper function to compute the separability matrix for a single model.\n+    \"\"\"\n+    if isinstance(model, SeparableModel):\n+        # For separable models, the separability matrix is diagonal\n+        n_inputs = len(model.inputs)\n+        n_outputs = len(model.outputs)\n+        return np.eye(n_inputs + n_outputs, dtype=bool)\n+    else:\n+        # For non-separable models, the separability matrix is all False\n+        n_params = model.n_params\n+        return np.zeros((n_params, n_params), dtype=bool)\n+\n+class CompoundModel(Model):\n+    \"\"\"\n+    A compound model that combines multiple sub-models.\n+    \"\"\"\n+    def __init__(self, *models):\n+        self.models = models\n+\n+    @property\n+    def inputs(self):\n+        return [model.inputs for model in self.models]\n+\n+    @property\n+    def outputs(self):\n+        return [model.outputs for model in self.models]\n",
+            "model": "ollama_chat/mistral-small",
+            "temperature": 0,
+            "cost": 0.0,
+            "added_files": [
+                "### astropy/modeling/separable.py",
+                "astropy/modeling/separable.py"
+            ],
+            "gold_files": [
+                "astropy/modeling/separable.py"
+            ],
+            "edited_files": [
+                "### astropy/modeling/separable.py\t"
+            ],
+            "edit_outcome": true,
+            "lint_outcome": true,
+            "test_outcome": true,
+            "try": 1
+        }
+    ]
+}

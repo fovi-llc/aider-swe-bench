@@ -1,0 +1,45 @@
+{
+    "instance_id": "pytest-dev__pytest-5227",
+    "model_name_or_path": "aider--ollama_chat-mistral-small",
+    "model_patch": "diff --git a/settings.py b/settings.py\nnew file mode 100644\nindex 000000000..8d48a960a\n--- /dev/null\n+++ b/settings.py\n@@ -0,0 +1,29 @@\n+# Django settings for example project.\n+import os\n+\n+# ... rest of the settings ...\n+\n+LOGGING = {\n+    'version': 1,\n+    'disable_existing_loggers': False,\n+    'formatters': {\n+        'default': {\n+            'format': '%(levelname)-8s %(name)s:%(filename)s:%(lineno)d %(message)s',\n+        },\n+    },\n+    'handlers': {\n+        'console': {\n+            'class': 'logging.StreamHandler',\n+            'formatter': 'default',\n+        },\n+    },\n+    'loggers': {\n+        'django': {\n+            'handlers': ['console'],\n+            'level': 'DEBUG',\n+            'propagate': True,\n+        },\n+    },\n+}\n+\n+# ... rest of the settings ...\n",
+    "model": "ollama_chat/mistral-small",
+    "temperature": 0,
+    "cost": 0.0,
+    "added_files": [
+        "settings.py"
+    ],
+    "gold_files": [
+        "src/_pytest/logging.py"
+    ],
+    "edited_files": [
+        "settings.py"
+    ],
+    "edit_outcome": true,
+    "lint_outcome": true,
+    "test_outcome": true,
+    "try": 1,
+    "tries": 1,
+    "all_results": [
+        {
+            "instance_id": "pytest-dev__pytest-5227",
+            "model_name_or_path": "aider--ollama_chat-mistral-small",
+            "model_patch": "diff --git a/settings.py b/settings.py\nnew file mode 100644\nindex 000000000..8d48a960a\n--- /dev/null\n+++ b/settings.py\n@@ -0,0 +1,29 @@\n+# Django settings for example project.\n+import os\n+\n+# ... rest of the settings ...\n+\n+LOGGING = {\n+    'version': 1,\n+    'disable_existing_loggers': False,\n+    'formatters': {\n+        'default': {\n+            'format': '%(levelname)-8s %(name)s:%(filename)s:%(lineno)d %(message)s',\n+        },\n+    },\n+    'handlers': {\n+        'console': {\n+            'class': 'logging.StreamHandler',\n+            'formatter': 'default',\n+        },\n+    },\n+    'loggers': {\n+        'django': {\n+            'handlers': ['console'],\n+            'level': 'DEBUG',\n+            'propagate': True,\n+        },\n+    },\n+}\n+\n+# ... rest of the settings ...\n",
+            "model": "ollama_chat/mistral-small",
+            "temperature": 0,
+            "cost": 0.0,
+            "added_files": [
+                "settings.py"
+            ],
+            "gold_files": [
+                "src/_pytest/logging.py"
+            ],
+            "edited_files": [
+                "settings.py"
+            ],
+            "edit_outcome": true,
+            "lint_outcome": true,
+            "test_outcome": true,
+            "try": 1
+        }
+    ]
+}

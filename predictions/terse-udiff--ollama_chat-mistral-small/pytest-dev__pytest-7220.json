@@ -1,0 +1,45 @@
+{
+    "instance_id": "pytest-dev__pytest-7220",
+    "model_name_or_path": "aider--ollama_chat-mistral-small",
+    "model_patch": "diff --git a/test_path_error.py b/test_path_error.py\nnew file mode 100644\nindex 000000000..84cc69b78\n--- /dev/null\n+++ b/test_path_error.py\n@@ -0,0 +1,28 @@\n+import os\n+import errno\n+import shutil\n+\n+import pytest\n+\n+@pytest.fixture\n+def private_dir():\n+    out_dir = 'ddd'\n+\n+    try:\n+        shutil.rmtree(out_dir)\n+    except OSError as ex:\n+        if ex.errno != errno.ENOENT:\n+            raise\n+    os.mkdir(out_dir)\n+\n+    old_dir = os.getcwd()\n+    os.chdir(out_dir)\n+    yield (out_dir, old_dir)\n+    os.chdir(old_dir)\n+\n+def test_show_wrong_path(private_dir):\n+    out_dir, original_dir = private_dir\n+\n+    # Change to the original directory for reporting purposes\n+    os.chdir(original_dir)\n+    assert False\n",
+    "model": "ollama_chat/mistral-small",
+    "temperature": 0,
+    "cost": 0.0,
+    "added_files": [
+        "test_path_error.py"
+    ],
+    "gold_files": [
+        "src/_pytest/nodes.py"
+    ],
+    "edited_files": [
+        "test_path_error.py"
+    ],
+    "edit_outcome": true,
+    "lint_outcome": true,
+    "test_outcome": true,
+    "try": 1,
+    "tries": 1,
+    "all_results": [
+        {
+            "instance_id": "pytest-dev__pytest-7220",
+            "model_name_or_path": "aider--ollama_chat-mistral-small",
+            "model_patch": "diff --git a/test_path_error.py b/test_path_error.py\nnew file mode 100644\nindex 000000000..84cc69b78\n--- /dev/null\n+++ b/test_path_error.py\n@@ -0,0 +1,28 @@\n+import os\n+import errno\n+import shutil\n+\n+import pytest\n+\n+@pytest.fixture\n+def private_dir():\n+    out_dir = 'ddd'\n+\n+    try:\n+        shutil.rmtree(out_dir)\n+    except OSError as ex:\n+        if ex.errno != errno.ENOENT:\n+            raise\n+    os.mkdir(out_dir)\n+\n+    old_dir = os.getcwd()\n+    os.chdir(out_dir)\n+    yield (out_dir, old_dir)\n+    os.chdir(old_dir)\n+\n+def test_show_wrong_path(private_dir):\n+    out_dir, original_dir = private_dir\n+\n+    # Change to the original directory for reporting purposes\n+    os.chdir(original_dir)\n+    assert False\n",
+            "model": "ollama_chat/mistral-small",
+            "temperature": 0,
+            "cost": 0.0,
+            "added_files": [
+                "test_path_error.py"
+            ],
+            "gold_files": [
+                "src/_pytest/nodes.py"
+            ],
+            "edited_files": [
+                "test_path_error.py"
+            ],
+            "edit_outcome": true,
+            "lint_outcome": true,
+            "test_outcome": true,
+            "try": 1
+        }
+    ]
+}

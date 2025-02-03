@@ -1,0 +1,57 @@
+{
+    "instance_id": "pytest-dev__pytest-8906",
+    "model_name_or_path": "aider--ollama_chat-mistral-small",
+    "model_patch": "diff --git a/### New File: pytest/skip.py b/### New File: pytest/skip.py\nnew file mode 100644\nindex 000000000..4f8d2f315\n--- /dev/null\n+++ b/### New File: pytest/skip.py\t\n@@ -0,0 +1,6 @@\n+import sys\n+from pytest import mark\n+\n+def skip_module(msg):\n+    if sys.version_info < (3, 8):\n+        raise mark.skip(msg=msg, allow_module_level=True)\ndiff --git a/### Updated File: docs/usage.rst b/### Updated File: docs/usage.rst\nnew file mode 100644\nindex 000000000..54f1f50ee\n--- /dev/null\n+++ b/### Updated File: docs/usage.rst\t\n@@ -0,0 +1,10 @@\n+Usage Guide\n+===========\n+\n+...\n+\n+Skipping Tests\n+--------------\n+\n+To skip tests based on certain conditions, you can use the `pytest.skip` function. For example:\n+\ndiff --git a/### Updated File: pytest/raises.py b/### Updated File: pytest/raises.py\nnew file mode 100644\nindex 000000000..e2075de8e\n--- /dev/null\n+++ b/### Updated File: pytest/raises.py\t\n@@ -0,0 +1,5 @@\n+import sys\n+\n+def raises(exception):\n+    if isinstance(exception, str):\n+        raise ValueError(f\"Using pytest.skip outside of a test is not allowed. To decorate a test function, use the @pytest.mark.skip or @pytest.mark.skipif decorators instead, and to skip a module use `skip_module('reason')`.\")\ndiff --git \"a/skip(msg=\\\"Requires Python >= 3.8\\\", allow_module_level=True)\" \"b/skip(msg=\\\"Requires Python >= 3.8\\\", allow_module_level=True)\"\nnew file mode 100644\nindex 000000000..fe61f1d96\n--- /dev/null\n+++ \"b/skip(msg=\\\"Requires Python >= 3.8\\\", allow_module_level=True)\"\t\n@@ -0,0 +1,5 @@\n+\n+Note that using `skip` with `allow_module_level=True` allows you to skip an entire module if the condition is met.\n+\n+For a more convenient way to skip an entire module, you can use the `skip_module` function:\n+\ndiff --git \"a/skip_module(\\\"Requires Python >= 3.8\\\")\" \"b/skip_module(\\\"Requires Python >= 3.8\\\")\"\nnew file mode 100644\nindex 000000000..9ae8788a1\n--- /dev/null\n+++ \"b/skip_module(\\\"Requires Python >= 3.8\\\")\"\t\n@@ -0,0 +1,5 @@\n+\n+This will raise a `pytest.mark.skip` exception with `allow_module_level=True`, effectively skipping the entire module.\n+\n+...\n+\n",
+    "model": "ollama_chat/mistral-small",
+    "temperature": 0,
+    "cost": 0.0,
+    "added_files": [
+        "### New File: pytest/skip.py",
+        "### Updated File: docs/usage.rst",
+        "### Updated File: pytest/raises.py",
+        "skip(msg=\"Requires Python >= 3.8\", allow_module_level=True)",
+        "skip_module(\"Requires Python >= 3.8\")"
+    ],
+    "gold_files": [
+        "src/_pytest/python.py"
+    ],
+    "edited_files": [
+        "### New File: pytest/skip.py\t",
+        "### Updated File: docs/usage.rst\t",
+        "### Updated File: pytest/raises.py\t"
+    ],
+    "edit_outcome": true,
+    "lint_outcome": true,
+    "test_outcome": true,
+    "try": 1,
+    "tries": 1,
+    "all_results": [
+        {
+            "instance_id": "pytest-dev__pytest-8906",
+            "model_name_or_path": "aider--ollama_chat-mistral-small",
+            "model_patch": "diff --git a/### New File: pytest/skip.py b/### New File: pytest/skip.py\nnew file mode 100644\nindex 000000000..4f8d2f315\n--- /dev/null\n+++ b/### New File: pytest/skip.py\t\n@@ -0,0 +1,6 @@\n+import sys\n+from pytest import mark\n+\n+def skip_module(msg):\n+    if sys.version_info < (3, 8):\n+        raise mark.skip(msg=msg, allow_module_level=True)\ndiff --git a/### Updated File: docs/usage.rst b/### Updated File: docs/usage.rst\nnew file mode 100644\nindex 000000000..54f1f50ee\n--- /dev/null\n+++ b/### Updated File: docs/usage.rst\t\n@@ -0,0 +1,10 @@\n+Usage Guide\n+===========\n+\n+...\n+\n+Skipping Tests\n+--------------\n+\n+To skip tests based on certain conditions, you can use the `pytest.skip` function. For example:\n+\ndiff --git a/### Updated File: pytest/raises.py b/### Updated File: pytest/raises.py\nnew file mode 100644\nindex 000000000..e2075de8e\n--- /dev/null\n+++ b/### Updated File: pytest/raises.py\t\n@@ -0,0 +1,5 @@\n+import sys\n+\n+def raises(exception):\n+    if isinstance(exception, str):\n+        raise ValueError(f\"Using pytest.skip outside of a test is not allowed. To decorate a test function, use the @pytest.mark.skip or @pytest.mark.skipif decorators instead, and to skip a module use `skip_module('reason')`.\")\ndiff --git \"a/skip(msg=\\\"Requires Python >= 3.8\\\", allow_module_level=True)\" \"b/skip(msg=\\\"Requires Python >= 3.8\\\", allow_module_level=True)\"\nnew file mode 100644\nindex 000000000..fe61f1d96\n--- /dev/null\n+++ \"b/skip(msg=\\\"Requires Python >= 3.8\\\", allow_module_level=True)\"\t\n@@ -0,0 +1,5 @@\n+\n+Note that using `skip` with `allow_module_level=True` allows you to skip an entire module if the condition is met.\n+\n+For a more convenient way to skip an entire module, you can use the `skip_module` function:\n+\ndiff --git \"a/skip_module(\\\"Requires Python >= 3.8\\\")\" \"b/skip_module(\\\"Requires Python >= 3.8\\\")\"\nnew file mode 100644\nindex 000000000..9ae8788a1\n--- /dev/null\n+++ \"b/skip_module(\\\"Requires Python >= 3.8\\\")\"\t\n@@ -0,0 +1,5 @@\n+\n+This will raise a `pytest.mark.skip` exception with `allow_module_level=True`, effectively skipping the entire module.\n+\n+...\n+\n",
+            "model": "ollama_chat/mistral-small",
+            "temperature": 0,
+            "cost": 0.0,
+            "added_files": [
+                "### New File: pytest/skip.py",
+                "### Updated File: docs/usage.rst",
+                "### Updated File: pytest/raises.py",
+                "skip(msg=\"Requires Python >= 3.8\", allow_module_level=True)",
+                "skip_module(\"Requires Python >= 3.8\")"
+            ],
+            "gold_files": [
+                "src/_pytest/python.py"
+            ],
+            "edited_files": [
+                "### New File: pytest/skip.py\t",
+                "### Updated File: docs/usage.rst\t",
+                "### Updated File: pytest/raises.py\t"
+            ],
+            "edit_outcome": true,
+            "lint_outcome": true,
+            "test_outcome": true,
+            "try": 1
+        }
+    ]
+}

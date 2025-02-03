@@ -1,0 +1,49 @@
+{
+    "instance_id": "django__django-14155",
+    "model_name_or_path": "aider--ollama_chat-mistral-small",
+    "model_patch": "diff --git a/### resolver.py b/### resolver.py\nnew file mode 100644\nindex 0000000000..ebb7060ce2\n--- /dev/null\n+++ b/### resolver.py\t\n@@ -0,0 +1,20 @@\n+import functools\n+\n+class ResolverMatch:\n+    def __init__(self, view):\n+        if isinstance(view, functools.partial):\n+            self.view = view.func  # Unwrap the partial function\n+            self.args = view.args  # Store the arguments provided to partial\n+            self.keywords = view.keywords  # Store the keyword arguments provided to partial\n+        else:\n+            self.view = view\n+            self.args = ()\n+            self.keywords = {}\n+\n+    def __repr__(self):\n+        if isinstance(self.view, functools.partial):\n+            return f\"ResolverMatch(view={self.view.__name__}, args={self.args}, keywords={self.keywords})\"\n+        else:\n+            return f\"ResolverMatch(view={self.view.__name__})\"\n+\n+# Rest of the code...\ndiff --git a/### utils.py b/### utils.py\nnew file mode 100644\nindex 0000000000..19aed5c7c6\n--- /dev/null\n+++ b/### utils.py\t\n@@ -0,0 +1,7 @@\n+from resolver import ResolverMatch\n+\n+def some_function():\n+    # Some utility function implementation\n+    pass\n+\n+# Rest of the code...\n",
+    "model": "ollama_chat/mistral-small",
+    "temperature": 0,
+    "cost": 0.0,
+    "added_files": [
+        "### resolver.py",
+        "### utils.py"
+    ],
+    "gold_files": [
+        "django/urls/resolvers.py"
+    ],
+    "edited_files": [
+        "### resolver.py\t",
+        "### utils.py\t"
+    ],
+    "edit_outcome": true,
+    "lint_outcome": true,
+    "test_outcome": true,
+    "try": 1,
+    "tries": 1,
+    "all_results": [
+        {
+            "instance_id": "django__django-14155",
+            "model_name_or_path": "aider--ollama_chat-mistral-small",
+            "model_patch": "diff --git a/### resolver.py b/### resolver.py\nnew file mode 100644\nindex 0000000000..ebb7060ce2\n--- /dev/null\n+++ b/### resolver.py\t\n@@ -0,0 +1,20 @@\n+import functools\n+\n+class ResolverMatch:\n+    def __init__(self, view):\n+        if isinstance(view, functools.partial):\n+            self.view = view.func  # Unwrap the partial function\n+            self.args = view.args  # Store the arguments provided to partial\n+            self.keywords = view.keywords  # Store the keyword arguments provided to partial\n+        else:\n+            self.view = view\n+            self.args = ()\n+            self.keywords = {}\n+\n+    def __repr__(self):\n+        if isinstance(self.view, functools.partial):\n+            return f\"ResolverMatch(view={self.view.__name__}, args={self.args}, keywords={self.keywords})\"\n+        else:\n+            return f\"ResolverMatch(view={self.view.__name__})\"\n+\n+# Rest of the code...\ndiff --git a/### utils.py b/### utils.py\nnew file mode 100644\nindex 0000000000..19aed5c7c6\n--- /dev/null\n+++ b/### utils.py\t\n@@ -0,0 +1,7 @@\n+from resolver import ResolverMatch\n+\n+def some_function():\n+    # Some utility function implementation\n+    pass\n+\n+# Rest of the code...\n",
+            "model": "ollama_chat/mistral-small",
+            "temperature": 0,
+            "cost": 0.0,
+            "added_files": [
+                "### resolver.py",
+                "### utils.py"
+            ],
+            "gold_files": [
+                "django/urls/resolvers.py"
+            ],
+            "edited_files": [
+                "### resolver.py\t",
+                "### utils.py\t"
+            ],
+            "edit_outcome": true,
+            "lint_outcome": true,
+            "test_outcome": true,
+            "try": 1
+        }
+    ]
+}

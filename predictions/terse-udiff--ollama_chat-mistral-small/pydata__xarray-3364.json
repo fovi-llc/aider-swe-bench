@@ -1,0 +1,63 @@
+{
+    "instance_id": "pydata__xarray-3364",
+    "model_name_or_path": "aider--ollama_chat-mistral-small",
+    "model_patch": "diff --git a/### New file: xarray/core/utils.py b/### New file: xarray/core/utils.py\nnew file mode 100644\nindex 00000000..f6469711\n--- /dev/null\n+++ b/### New file: xarray/core/utils.py\t\n@@ -0,0 +1,7 @@\n+# xarray/core/utils.py\n+\n+def ensure_ndarray_like(obj):\n+    if isinstance(obj, np.ndarray):\n+        return obj\n+    else:\n+        return np.array(obj)\ndiff --git a/### xarray/core/concat.py b/### xarray/core/concat.py\nnew file mode 100644\nindex 00000000..0f379aaf\n--- /dev/null\n+++ b/### xarray/core/concat.py\t\n@@ -0,0 +1,37 @@\n+# xarray/core/concat.py\n+\n+import numpy as np\n+from . import common\n+from ..core.utils import ensure_ndarray_like\n+from ..core.dataarray import DataArray\n+from ..core.dataset import Dataset\n+from ..core.variable import Variable\n+from ..core.indexes import IndexVariable\n+from ..core.common import _infer_concat_dim\n+\n+def concat(datasets, ignore_missing_vars=False):\n+    if not datasets:\n+        return Dataset()\n+\n+    # Ensure all datasets are of type Dataset\n+    datasets = [ensure_ndarray_like(dataset) for dataset in datasets]\n+\n+    # If ignore_missing_vars is True, handle missing variables by filling them with a default value\n+    if ignore_missing_vars:\n+        fill_value = np.nan  # or any other default value you prefer\n+        all_variables = set()\n+        for dataset in datasets:\n+            all_variables.update(dataset.data_vars.keys())\n+\n+        for variable in all_variables:\n+            for dataset in datasets:\n+                if variable not in dataset.data_vars:\n+                    dataset.data_vars[variable] = Variable((), fill_value)\n+\n+    # Concatenate the datasets\n+    concatenated = Dataset()\n+    for dataset in datasets:\n+        concatenated = concatenated.merge(dataset)\n+\n+    return concatenated\n+\ndiff --git a/### xarray/core/dataset.py b/### xarray/core/dataset.py\nnew file mode 100644\nindex 00000000..47a527a0\n--- /dev/null\n+++ b/### xarray/core/dataset.py\t\n@@ -0,0 +1,19 @@\n+# xarray/core/dataset.py\n+\n+import numpy as np\n+from . import common\n+from ..core.utils import ensure_ndarray_like\n+from ..core.dataarray import DataArray\n+from ..core.variable import Variable\n+from ..core.indexes import IndexVariable\n+from ..core.common import _infer_concat_dim\n+\n+class Dataset:\n+    def __init__(self, data_vars=None, coords=None):\n+        self.data_vars = data_vars or {}\n+        self.coords = coords or {}\n+\n+    def merge(self, other):\n+        merged_data_vars = {**self.data_vars, **other.data_vars}\n+        merged_coords = {**self.coords, **other.coords}\n+        return Dataset(merged_data_vars, merged_coords)\ndiff --git a/### xarray/core/utils.py b/### xarray/core/utils.py\nnew file mode 100644\nindex 00000000..177aeb6c\n--- /dev/null\n+++ b/### xarray/core/utils.py\t\n@@ -0,0 +1,9 @@\n+# xarray/core/utils.py\n+\n+import numpy as np\n+\n+def ensure_ndarray_like(obj):\n+    if isinstance(obj, np.ndarray):\n+        return obj\n+    else:\n+        return np.array(obj)\n",
+    "model": "ollama_chat/mistral-small",
+    "temperature": 0,
+    "cost": 0.0,
+    "added_files": [
+        "### New file: xarray/core/utils.py",
+        "### xarray/core/concat.py",
+        "### xarray/core/dataset.py",
+        "### xarray/core/utils.py",
+        "xarray/core/concat.py",
+        "xarray/core/dataset.py",
+        "xarray/core/utils.py"
+    ],
+    "gold_files": [
+        "xarray/core/concat.py"
+    ],
+    "edited_files": [
+        "### New file: xarray/core/utils.py\t",
+        "### xarray/core/concat.py\t",
+        "### xarray/core/dataset.py\t",
+        "### xarray/core/utils.py\t"
+    ],
+    "edit_outcome": true,
+    "lint_outcome": true,
+    "test_outcome": true,
+    "try": 1,
+    "tries": 1,
+    "all_results": [
+        {
+            "instance_id": "pydata__xarray-3364",
+            "model_name_or_path": "aider--ollama_chat-mistral-small",
+            "model_patch": "diff --git a/### New file: xarray/core/utils.py b/### New file: xarray/core/utils.py\nnew file mode 100644\nindex 00000000..f6469711\n--- /dev/null\n+++ b/### New file: xarray/core/utils.py\t\n@@ -0,0 +1,7 @@\n+# xarray/core/utils.py\n+\n+def ensure_ndarray_like(obj):\n+    if isinstance(obj, np.ndarray):\n+        return obj\n+    else:\n+        return np.array(obj)\ndiff --git a/### xarray/core/concat.py b/### xarray/core/concat.py\nnew file mode 100644\nindex 00000000..0f379aaf\n--- /dev/null\n+++ b/### xarray/core/concat.py\t\n@@ -0,0 +1,37 @@\n+# xarray/core/concat.py\n+\n+import numpy as np\n+from . import common\n+from ..core.utils import ensure_ndarray_like\n+from ..core.dataarray import DataArray\n+from ..core.dataset import Dataset\n+from ..core.variable import Variable\n+from ..core.indexes import IndexVariable\n+from ..core.common import _infer_concat_dim\n+\n+def concat(datasets, ignore_missing_vars=False):\n+    if not datasets:\n+        return Dataset()\n+\n+    # Ensure all datasets are of type Dataset\n+    datasets = [ensure_ndarray_like(dataset) for dataset in datasets]\n+\n+    # If ignore_missing_vars is True, handle missing variables by filling them with a default value\n+    if ignore_missing_vars:\n+        fill_value = np.nan  # or any other default value you prefer\n+        all_variables = set()\n+        for dataset in datasets:\n+            all_variables.update(dataset.data_vars.keys())\n+\n+        for variable in all_variables:\n+            for dataset in datasets:\n+                if variable not in dataset.data_vars:\n+                    dataset.data_vars[variable] = Variable((), fill_value)\n+\n+    # Concatenate the datasets\n+    concatenated = Dataset()\n+    for dataset in datasets:\n+        concatenated = concatenated.merge(dataset)\n+\n+    return concatenated\n+\ndiff --git a/### xarray/core/dataset.py b/### xarray/core/dataset.py\nnew file mode 100644\nindex 00000000..47a527a0\n--- /dev/null\n+++ b/### xarray/core/dataset.py\t\n@@ -0,0 +1,19 @@\n+# xarray/core/dataset.py\n+\n+import numpy as np\n+from . import common\n+from ..core.utils import ensure_ndarray_like\n+from ..core.dataarray import DataArray\n+from ..core.variable import Variable\n+from ..core.indexes import IndexVariable\n+from ..core.common import _infer_concat_dim\n+\n+class Dataset:\n+    def __init__(self, data_vars=None, coords=None):\n+        self.data_vars = data_vars or {}\n+        self.coords = coords or {}\n+\n+    def merge(self, other):\n+        merged_data_vars = {**self.data_vars, **other.data_vars}\n+        merged_coords = {**self.coords, **other.coords}\n+        return Dataset(merged_data_vars, merged_coords)\ndiff --git a/### xarray/core/utils.py b/### xarray/core/utils.py\nnew file mode 100644\nindex 00000000..177aeb6c\n--- /dev/null\n+++ b/### xarray/core/utils.py\t\n@@ -0,0 +1,9 @@\n+# xarray/core/utils.py\n+\n+import numpy as np\n+\n+def ensure_ndarray_like(obj):\n+    if isinstance(obj, np.ndarray):\n+        return obj\n+    else:\n+        return np.array(obj)\n",
+            "model": "ollama_chat/mistral-small",
+            "temperature": 0,
+            "cost": 0.0,
+            "added_files": [
+                "### New file: xarray/core/utils.py",
+                "### xarray/core/concat.py",
+                "### xarray/core/dataset.py",
+                "### xarray/core/utils.py",
+                "xarray/core/concat.py",
+                "xarray/core/dataset.py",
+                "xarray/core/utils.py"
+            ],
+            "gold_files": [
+                "xarray/core/concat.py"
+            ],
+            "edited_files": [
+                "### New file: xarray/core/utils.py\t",
+                "### xarray/core/concat.py\t",
+                "### xarray/core/dataset.py\t",
+                "### xarray/core/utils.py\t"
+            ],
+            "edit_outcome": true,
+            "lint_outcome": true,
+            "test_outcome": true,
+            "try": 1
+        }
+    ]
+}

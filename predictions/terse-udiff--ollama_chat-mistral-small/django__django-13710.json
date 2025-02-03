@@ -1,0 +1,55 @@
+{
+    "instance_id": "django__django-13710",
+    "model_name_or_path": "aider--ollama_chat-mistral-small",
+    "model_patch": "diff --git a/### File: django/contrib/admin/options.py b/### File: django/contrib/admin/options.py\nnew file mode 100644\nindex 0000000000..44228bc663\n--- /dev/null\n+++ b/### File: django/contrib/admin/options.py\t\n@@ -0,0 +1,14 @@\n+from django.contrib.admin.options import BaseModelAdmin\n+\n+# ... rest of code ...\n+\n+class InlineModelAdmin(BaseModelAdmin):\n+    def __init__(self, model, admin_site):\n+        # Call the superclass constructor\n+        super().__init__(model, admin_site)\n+\n+        # Set default verbose_name_plural if not specified and verbose_name is set\n+        if self.verbose_name and not self.verbose_name_plural:\n+            self.verbose_name_plural = f\"{self.verbose_name}s\"\n+\n+# ... rest of code ...\ndiff --git a/### File: tests/admin_tests.py b/### File: tests/admin_tests.py\nnew file mode 100644\nindex 0000000000..3c6c184d2c\n--- /dev/null\n+++ b/### File: tests/admin_tests.py\t\n@@ -0,0 +1,23 @@\n+from django.contrib.admin import site\n+from django.test import TestCase\n+from .models import MyModel, InlineModel\n+\n+class AdminInlineTests(TestCase):\n+    def setUp(self):\n+        self.model_admin = site._registry[MyModel]\n+        self.inline_model_admin = site._registry[InlineModel]\n+\n+    def test_verbose_name_plural_defaults_to_verbose_name(self):\n+        inline_admin = self.inline_model_admin\n+        inline_admin.verbose_name = 'Test Inline'\n+        self.assertEqual(inline_admin.verbose_name, 'Test Inline')\n+        self.assertEqual(inline_admin.verbose_name_plural, 'Test Inlines')\n+\n+    def test_verbose_name_plural_overrides_default(self):\n+        inline_admin = self.inline_model_admin\n+        inline_admin.verbose_name = 'Test Inline'\n+        inline_admin.verbose_name_plural = 'Custom Plurals'\n+        self.assertEqual(inline_admin.verbose_name, 'Test Inline')\n+        self.assertEqual(inline_admin.verbose_name_plural, 'Custom Plurals')\n+\n+# ... rest of code ...\ndiff --git a/### File: tests/models.py b/### File: tests/models.py\nnew file mode 100644\nindex 0000000000..fc519d85b9\n--- /dev/null\n+++ b/### File: tests/models.py\t\n@@ -0,0 +1,10 @@\n+from django.db import models\n+\n+class MyModel(models.Model):\n+    name = models.CharField(max_length=100)\n+\n+class InlineModel(models.Model):\n+    my_model = models.ForeignKey(MyModel, on_delete=models.CASCADE)\n+    description = models.TextField()\n+\n+# ... rest of code ...\n",
+    "model": "ollama_chat/mistral-small",
+    "temperature": 0,
+    "cost": 0.0,
+    "added_files": [
+        "### File: django/contrib/admin/options.py",
+        "### File: tests/admin_tests.py",
+        "### File: tests/models.py",
+        "django/contrib/admin/options.py"
+    ],
+    "gold_files": [
+        "django/contrib/admin/options.py"
+    ],
+    "edited_files": [
+        "### File: django/contrib/admin/options.py\t",
+        "### File: tests/admin_tests.py\t",
+        "### File: tests/models.py\t"
+    ],
+    "edit_outcome": true,
+    "lint_outcome": true,
+    "test_outcome": true,
+    "try": 1,
+    "tries": 1,
+    "all_results": [
+        {
+            "instance_id": "django__django-13710",
+            "model_name_or_path": "aider--ollama_chat-mistral-small",
+            "model_patch": "diff --git a/### File: django/contrib/admin/options.py b/### File: django/contrib/admin/options.py\nnew file mode 100644\nindex 0000000000..44228bc663\n--- /dev/null\n+++ b/### File: django/contrib/admin/options.py\t\n@@ -0,0 +1,14 @@\n+from django.contrib.admin.options import BaseModelAdmin\n+\n+# ... rest of code ...\n+\n+class InlineModelAdmin(BaseModelAdmin):\n+    def __init__(self, model, admin_site):\n+        # Call the superclass constructor\n+        super().__init__(model, admin_site)\n+\n+        # Set default verbose_name_plural if not specified and verbose_name is set\n+        if self.verbose_name and not self.verbose_name_plural:\n+            self.verbose_name_plural = f\"{self.verbose_name}s\"\n+\n+# ... rest of code ...\ndiff --git a/### File: tests/admin_tests.py b/### File: tests/admin_tests.py\nnew file mode 100644\nindex 0000000000..3c6c184d2c\n--- /dev/null\n+++ b/### File: tests/admin_tests.py\t\n@@ -0,0 +1,23 @@\n+from django.contrib.admin import site\n+from django.test import TestCase\n+from .models import MyModel, InlineModel\n+\n+class AdminInlineTests(TestCase):\n+    def setUp(self):\n+        self.model_admin = site._registry[MyModel]\n+        self.inline_model_admin = site._registry[InlineModel]\n+\n+    def test_verbose_name_plural_defaults_to_verbose_name(self):\n+        inline_admin = self.inline_model_admin\n+        inline_admin.verbose_name = 'Test Inline'\n+        self.assertEqual(inline_admin.verbose_name, 'Test Inline')\n+        self.assertEqual(inline_admin.verbose_name_plural, 'Test Inlines')\n+\n+    def test_verbose_name_plural_overrides_default(self):\n+        inline_admin = self.inline_model_admin\n+        inline_admin.verbose_name = 'Test Inline'\n+        inline_admin.verbose_name_plural = 'Custom Plurals'\n+        self.assertEqual(inline_admin.verbose_name, 'Test Inline')\n+        self.assertEqual(inline_admin.verbose_name_plural, 'Custom Plurals')\n+\n+# ... rest of code ...\ndiff --git a/### File: tests/models.py b/### File: tests/models.py\nnew file mode 100644\nindex 0000000000..fc519d85b9\n--- /dev/null\n+++ b/### File: tests/models.py\t\n@@ -0,0 +1,10 @@\n+from django.db import models\n+\n+class MyModel(models.Model):\n+    name = models.CharField(max_length=100)\n+\n+class InlineModel(models.Model):\n+    my_model = models.ForeignKey(MyModel, on_delete=models.CASCADE)\n+    description = models.TextField()\n+\n+# ... rest of code ...\n",
+            "model": "ollama_chat/mistral-small",
+            "temperature": 0,
+            "cost": 0.0,
+            "added_files": [
+                "### File: django/contrib/admin/options.py",
+                "### File: tests/admin_tests.py",
+                "### File: tests/models.py",
+                "django/contrib/admin/options.py"
+            ],
+            "gold_files": [
+                "django/contrib/admin/options.py"
+            ],
+            "edited_files": [
+                "### File: django/contrib/admin/options.py\t",
+                "### File: tests/admin_tests.py\t",
+                "### File: tests/models.py\t"
+            ],
+            "edit_outcome": true,
+            "lint_outcome": true,
+            "test_outcome": true,
+            "try": 1
+        }
+    ]
+}

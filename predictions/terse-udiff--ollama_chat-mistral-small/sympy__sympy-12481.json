@@ -1,0 +1,45 @@
+{
+    "instance_id": "sympy__sympy-12481",
+    "model_name_or_path": "aider--ollama_chat-mistral-small",
+    "model_patch": "diff --git a/permutation.py b/permutation.py\nnew file mode 100644\nindex 0000000000..6b34e0641a\n--- /dev/null\n+++ b/permutation.py\n@@ -0,0 +1,28 @@\n+from sage.all import Permutation as SagePermutation\n+\n+class Permutation:\n+    def __init__(self, cycles):\n+        if not all(isinstance(cycle, list) for cycle in cycles):\n+            raise ValueError(\"All elements of cycles must be lists.\")\n+\n+        # Flatten the cycles into a single list\n+        flat_cycles = [item for sublist in cycles for item in sublist]\n+\n+        # Create a dictionary to track the mapping\n+        mapping = {}\n+\n+        # Apply each cycle in left-to-right order\n+        for cycle in cycles:\n+            for i in range(len(cycle)):\n+                if cycle[i] not in mapping:\n+                    mapping[cycle[i]] = cycle[(i + 1) % len(cycle)]\n+\n+        # Create a permutation object from the mapping\n+        self.perm = SagePermutation(mapping)\n+\n+    def __repr__(self):\n+        return f\"Permutation({list(self.perm)})\"\n+\n+# Example usage:\n+perm = Permutation([[0, 1], [0, 1]])\n+print(perm)\n",
+    "model": "ollama_chat/mistral-small",
+    "temperature": 0,
+    "cost": 0.0,
+    "added_files": [
+        "permutation.py"
+    ],
+    "gold_files": [
+        "sympy/combinatorics/permutations.py"
+    ],
+    "edited_files": [
+        "permutation.py"
+    ],
+    "edit_outcome": true,
+    "lint_outcome": true,
+    "test_outcome": true,
+    "try": 1,
+    "tries": 1,
+    "all_results": [
+        {
+            "instance_id": "sympy__sympy-12481",
+            "model_name_or_path": "aider--ollama_chat-mistral-small",
+            "model_patch": "diff --git a/permutation.py b/permutation.py\nnew file mode 100644\nindex 0000000000..6b34e0641a\n--- /dev/null\n+++ b/permutation.py\n@@ -0,0 +1,28 @@\n+from sage.all import Permutation as SagePermutation\n+\n+class Permutation:\n+    def __init__(self, cycles):\n+        if not all(isinstance(cycle, list) for cycle in cycles):\n+            raise ValueError(\"All elements of cycles must be lists.\")\n+\n+        # Flatten the cycles into a single list\n+        flat_cycles = [item for sublist in cycles for item in sublist]\n+\n+        # Create a dictionary to track the mapping\n+        mapping = {}\n+\n+        # Apply each cycle in left-to-right order\n+        for cycle in cycles:\n+            for i in range(len(cycle)):\n+                if cycle[i] not in mapping:\n+                    mapping[cycle[i]] = cycle[(i + 1) % len(cycle)]\n+\n+        # Create a permutation object from the mapping\n+        self.perm = SagePermutation(mapping)\n+\n+    def __repr__(self):\n+        return f\"Permutation({list(self.perm)})\"\n+\n+# Example usage:\n+perm = Permutation([[0, 1], [0, 1]])\n+print(perm)\n",
+            "model": "ollama_chat/mistral-small",
+            "temperature": 0,
+            "cost": 0.0,
+            "added_files": [
+                "permutation.py"
+            ],
+            "gold_files": [
+                "sympy/combinatorics/permutations.py"
+            ],
+            "edited_files": [
+                "permutation.py"
+            ],
+            "edit_outcome": true,
+            "lint_outcome": true,
+            "test_outcome": true,
+            "try": 1
+        }
+    ]
+}
