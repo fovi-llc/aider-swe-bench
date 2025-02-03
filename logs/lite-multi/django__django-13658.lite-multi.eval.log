@@ -1,0 +1,69 @@
+[django__django__3.2] [django__django-13658] Task Metadata:
+	- Instance ID: django__django-13658
+	- Testbed: django__django__3.2
+	- Evaluation Model: aider--ollama_chat-mistral-small
+	- Python version: Python 3.6.15
+ 
+[django__django__3.2] [django__django-13658] Command: git -c advice.detachedHead=false checkout 0773837e15bb632afffb6848a58c59a791008fa1 
+[django__django__3.2] [django__django-13658] Subprocess args: {"cwd": "/opt/django__django", "check": true, "shell": false, "universal_newlines": true, "stdout": -1, "stderr": -2} 
+[django__django__3.2] [django__django-13658] Std. Output:
+Previous HEAD position was 65dfb06a1a [3.2.x] Fixed #32648 -- Fixed VariableDoesNotExist rendering sitemaps template.
+HEAD is now at 0773837e15 Fixed #32182 -- Fixed crash of JSONField nested key transforms with subquery annotations on PostgreSQL.
+ 
+[django__django__3.2] [django__django-13658] Return Code: 0 
+[django__django__3.2] [django__django-13658] Command: git apply -v /opt/temp_django__django-13658_pred_try.patch 
+[django__django__3.2] [django__django-13658] Subprocess args: {"cwd": "/opt/django__django", "check": false, "shell": false, "universal_newlines": true, "stdout": -1, "stderr": -2} 
+[django__django__3.2] [django__django-13658] Std. Output:
+Checking patch ### django/test/__init__.py...
+Checking patch django/core/management/__init__.py...
+Applied patch ### django/test/__init__.py cleanly.
+Applied patch django/core/management/__init__.py cleanly.
+ 
+[django__django__3.2] [django__django-13658] Return Code: 0 
+[django__django__3.2] [django__django-13658] Apply patch successful (pred_try) 
+>>>>> Applied Patch (pred_try)
+[django__django__3.2] [django__django-13658] Command: git apply -v -R /opt/temp_django__django-13658_pred_try.patch 
+[django__django__3.2] [django__django-13658] Subprocess args: {"cwd": "/opt/django__django", "check": false, "shell": false, "universal_newlines": true, "stdout": -1, "stderr": -2} 
+[django__django__3.2] [django__django-13658] Std. Output:
+Checking patch django/core/management/__init__.py...
+Checking patch ### django/test/__init__.py...
+Applied patch django/core/management/__init__.py cleanly.
+Applied patch ### django/test/__init__.py cleanly.
+ 
+[django__django__3.2] [django__django-13658] Return Code: 0 
+[django__django__3.2] [django__django-13658] Revert patch successful (pred_try) 
+>>>>> Applied Patch (pred_try)
+[django__django__3.2] [django__django-13658] Command: git apply -v /opt/temp_django__django-13658_pred.patch 
+[django__django__3.2] [django__django-13658] Subprocess args: {"cwd": "/opt/django__django", "check": false, "shell": false, "universal_newlines": true, "stdout": -1, "stderr": -2} 
+[django__django__3.2] [django__django-13658] Std. Output:
+Checking patch ### django/test/__init__.py...
+Checking patch django/core/management/__init__.py...
+Applied patch ### django/test/__init__.py cleanly.
+Applied patch django/core/management/__init__.py cleanly.
+ 
+[django__django__3.2] [django__django-13658] Return Code: 0 
+[django__django__3.2] [django__django-13658] Apply patch successful (pred) 
+>>>>> Applied Patch (pred)
+[django__django__3.2] [django__django-13658] Command: git apply -v /opt/temp_django__django-13658_test.patch 
+[django__django__3.2] [django__django-13658] Subprocess args: {"cwd": "/opt/django__django", "check": false, "shell": false, "universal_newlines": true, "stdout": -1, "stderr": -2} 
+[django__django__3.2] [django__django-13658] Std. Output:
+Checking patch tests/admin_scripts/tests.py...
+Applied patch tests/admin_scripts/tests.py cleanly.
+ 
+[django__django__3.2] [django__django-13658] Return Code: 0 
+[django__django__3.2] [django__django-13658] Apply patch successful (test) 
+>>>>> Applied Patch (test)
+Test Script:  ./tests/runtests.py --verbosity 2 admin_scripts.tests;
+[django__django__3.2] [django__django-13658] Command: ./tests/runtests.py --verbosity 2 admin_scripts.tests 
+[django__django__3.2] [django__django-13658] Subprocess args: {"cwd": "/opt/django__django", "check": false, "shell": false, "universal_newlines": true, "stdout": -1, "stderr": -2, "timeout": 1800} 
+[django__django__3.2] [django__django-13658] Std. Output:
+Creating test database for alias 'default' ('file:memorydb_default?mode=memory&cache=shared')...
+Couldn't import migrate: No module named 'migrate'
+Testing against Django installed in '/opt/django__django/django' with up to 8 processes
+Importing application admin_scripts
+Skipping setup of unused database(s): other.
+ 
+[django__django__3.2] [django__django-13658] Return Code: 1 
+
+>>>>> Some Tests Failed
+[django__django__3.2] [django__django-13658] Test script run successful 

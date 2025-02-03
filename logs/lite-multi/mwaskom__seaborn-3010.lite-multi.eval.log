@@ -1,0 +1,274 @@
+[mwaskom__seaborn__0.12] [mwaskom__seaborn-3010] Task Metadata:
+	- Instance ID: mwaskom__seaborn-3010
+	- Testbed: mwaskom__seaborn__0.12
+	- Evaluation Model: aider--ollama_chat-mistral-small
+	- Python version: Python 3.11.8
+ 
+[mwaskom__seaborn__0.12] [mwaskom__seaborn-3010] Command: git -c advice.detachedHead=false checkout 0f5a013e2cf43562deec3b879458e59a73853813 
+[mwaskom__seaborn__0.12] [mwaskom__seaborn-3010] Subprocess args: {"cwd": "/home/swe-bench/mwaskom__seaborn", "check": true, "shell": false, "universal_newlines": true, "stdout": -1, "stderr": -2} 
+[mwaskom__seaborn__0.12] [mwaskom__seaborn-3010] Std. Output:
+Previous HEAD position was d25872b0 fix typos (#3193)
+HEAD is now at 0f5a013e Bump version
+ 
+[mwaskom__seaborn__0.12] [mwaskom__seaborn-3010] Return Code: 0 
+[mwaskom__seaborn__0.12] [mwaskom__seaborn-3010] Command: git apply -v /home/swe-bench/temp_mwaskom__seaborn-3010_pred_try.patch 
+[mwaskom__seaborn__0.12] [mwaskom__seaborn-3010] Subprocess args: {"cwd": "/home/swe-bench/mwaskom__seaborn", "check": false, "shell": false, "universal_newlines": true, "stdout": -1, "stderr": -2} 
+[mwaskom__seaborn__0.12] [mwaskom__seaborn-3010] Std. Output:
+Checking patch ### seaborn/_core/groupby.py...
+Checking patch ### seaborn/_core/rules.py...
+Checking patch ### tests/_stats/test_regression.py...
+Checking patch seaborn/_stats/regression.py...
+Applied patch ### seaborn/_core/groupby.py cleanly.
+Applied patch ### seaborn/_core/rules.py cleanly.
+Applied patch ### tests/_stats/test_regression.py cleanly.
+Applied patch seaborn/_stats/regression.py cleanly.
+ 
+[mwaskom__seaborn__0.12] [mwaskom__seaborn-3010] Return Code: 0 
+[mwaskom__seaborn__0.12] [mwaskom__seaborn-3010] Apply patch successful (pred_try) 
+>>>>> Applied Patch (pred_try)
+[mwaskom__seaborn__0.12] [mwaskom__seaborn-3010] Command: git apply -v -R /home/swe-bench/temp_mwaskom__seaborn-3010_pred_try.patch 
+[mwaskom__seaborn__0.12] [mwaskom__seaborn-3010] Subprocess args: {"cwd": "/home/swe-bench/mwaskom__seaborn", "check": false, "shell": false, "universal_newlines": true, "stdout": -1, "stderr": -2} 
+[mwaskom__seaborn__0.12] [mwaskom__seaborn-3010] Std. Output:
+Checking patch seaborn/_stats/regression.py...
+Checking patch ### tests/_stats/test_regression.py...
+Checking patch ### seaborn/_core/rules.py...
+Checking patch ### seaborn/_core/groupby.py...
+Applied patch seaborn/_stats/regression.py cleanly.
+Applied patch ### tests/_stats/test_regression.py cleanly.
+Applied patch ### seaborn/_core/rules.py cleanly.
+Applied patch ### seaborn/_core/groupby.py cleanly.
+ 
+[mwaskom__seaborn__0.12] [mwaskom__seaborn-3010] Return Code: 0 
+[mwaskom__seaborn__0.12] [mwaskom__seaborn-3010] Revert patch successful (pred_try) 
+>>>>> Applied Patch (pred_try)
+[mwaskom__seaborn__0.12] [mwaskom__seaborn-3010] Command: git apply -v /home/swe-bench/temp_mwaskom__seaborn-3010_pred.patch 
+[mwaskom__seaborn__0.12] [mwaskom__seaborn-3010] Subprocess args: {"cwd": "/home/swe-bench/mwaskom__seaborn", "check": false, "shell": false, "universal_newlines": true, "stdout": -1, "stderr": -2} 
+[mwaskom__seaborn__0.12] [mwaskom__seaborn-3010] Std. Output:
+Checking patch ### seaborn/_core/groupby.py...
+Checking patch ### seaborn/_core/rules.py...
+Checking patch ### tests/_stats/test_regression.py...
+Checking patch seaborn/_stats/regression.py...
+Applied patch ### seaborn/_core/groupby.py cleanly.
+Applied patch ### seaborn/_core/rules.py cleanly.
+Applied patch ### tests/_stats/test_regression.py cleanly.
+Applied patch seaborn/_stats/regression.py cleanly.
+ 
+[mwaskom__seaborn__0.12] [mwaskom__seaborn-3010] Return Code: 0 
+[mwaskom__seaborn__0.12] [mwaskom__seaborn-3010] Apply patch successful (pred) 
+>>>>> Applied Patch (pred)
+[mwaskom__seaborn__0.12] [mwaskom__seaborn-3010] Command: git restore tests/_stats/test_regression.py 
+[mwaskom__seaborn__0.12] [mwaskom__seaborn-3010] Subprocess args: {"cwd": "/home/swe-bench/mwaskom__seaborn", "check": true, "shell": false, "universal_newlines": true, "stdout": -1, "stderr": -2} 
+[mwaskom__seaborn__0.12] [mwaskom__seaborn-3010] Std. Output:
+ 
+[mwaskom__seaborn__0.12] [mwaskom__seaborn-3010] Return Code: 0 
+[mwaskom__seaborn__0.12] [mwaskom__seaborn-3010] Command: git apply -v /home/swe-bench/temp_mwaskom__seaborn-3010_test.patch 
+[mwaskom__seaborn__0.12] [mwaskom__seaborn-3010] Subprocess args: {"cwd": "/home/swe-bench/mwaskom__seaborn", "check": false, "shell": false, "universal_newlines": true, "stdout": -1, "stderr": -2} 
+[mwaskom__seaborn__0.12] [mwaskom__seaborn-3010] Std. Output:
+Checking patch tests/_stats/test_regression.py...
+Applied patch tests/_stats/test_regression.py cleanly.
+ 
+[mwaskom__seaborn__0.12] [mwaskom__seaborn-3010] Return Code: 0 
+[mwaskom__seaborn__0.12] [mwaskom__seaborn-3010] Apply patch successful (test) 
+>>>>> Applied Patch (test)
+Test Script: conda run -n mwaskom__seaborn__0.12  pytest --no-header -rA tests/_stats/test_regression.py;
+[mwaskom__seaborn__0.12] [mwaskom__seaborn-3010] Command: conda run -n mwaskom__seaborn__0.12 pytest --no-header -rA tests/_stats/test_regression.py 
+[mwaskom__seaborn__0.12] [mwaskom__seaborn-3010] Subprocess args: {"cwd": "/home/swe-bench/mwaskom__seaborn", "check": false, "shell": false, "universal_newlines": true, "stdout": -1, "stderr": -2, "timeout": 1800} 
+[mwaskom__seaborn__0.12] [mwaskom__seaborn-3010] Std. Output:
+ERROR conda.cli.main_run:execute(124): `conda run pytest --no-header -rA tests/_stats/test_regression.py` failed. (See above for error)
+============================= test session starts ==============================
+collected 3 items
+
+tests/_stats/test_regression.py FFF                                      [100%]
+
+=================================== FAILURES ===================================
+_________________________ TestPolyFit.test_no_grouper __________________________
+
+self = <tests._stats.test_regression.TestPolyFit object at 0x7fffce5ee820>
+df =            x         y color group
+0   1.449377 -1.164349     b     y
+1   0.547052 -0.550104     a     y
+2  -1.238494 ...600 -0.364542     c     y
+98 -1.887821 -0.068687     b     x
+99 -0.596893  0.767449     c     x
+
+[100 rows x 4 columns]
+
+    def test_no_grouper(self, df):
+    
+        groupby = GroupBy(["group"])
+>       res = PolyFit(order=1, gridsize=100)(df[["x", "y"]], groupby, "x", {})
+
+tests/_stats/test_regression.py:29: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+seaborn/_stats/regression.py:25: in __call__
+    return groupby.apply(data, self._fit_predict)
+seaborn/_core/groupby.py:109: in apply
+    return self._reorder_columns(func(data, *args, **kwargs), data)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <seaborn._core.groupby.GroupBy object at 0x7fffce5ee9d0>
+res = {'x': array([-2.266657  , -2.22171592, -2.17677483, -2.13183374, -2.08689266,
+       -2.04195157, -1.99701049, -1.9520...04109, -0.514222  , -0.52440291, -0.53458382,
+       -0.54476473, -0.55494564, -0.56512655, -0.57530746, -0.58548837])}
+data =            x         y
+0   1.449377 -1.164349
+1   0.547052 -0.550104
+2  -1.238494 -1.142441
+3   0.004240 -0.961407
+4  ...361
+96  0.420363  0.808001
+97  1.788600 -0.364542
+98 -1.887821 -0.068687
+99 -0.596893  0.767449
+
+[100 rows x 2 columns]
+
+    def _reorder_columns(self, res, data):
+        """Reorder result columns to match original order with new columns appended."""
+        cols = [c for c in data if c in res]
+        cols += [c for c in res if c not in data]
+>       return res.reindex(columns=pd.Index(cols))
+E       AttributeError: 'dict' object has no attribute 'reindex'
+
+seaborn/_core/groupby.py:73: AttributeError
+_________________________ TestPolyFit.test_one_grouper _________________________
+
+self = <tests._stats.test_regression.TestPolyFit object at 0x7fffce5ee130>
+df =            x         y color group
+0   1.449377 -1.164349     b     y
+1   0.547052 -0.550104     a     y
+2  -1.238494 ...600 -0.364542     c     y
+98 -1.887821 -0.068687     b     x
+99 -0.596893  0.767449     c     x
+
+[100 rows x 4 columns]
+
+    def test_one_grouper(self, df):
+    
+        groupby = GroupBy(["group"])
+        gridsize = 50
+>       res = PolyFit(gridsize=gridsize)(df, groupby, "x", {})
+
+tests/_stats/test_regression.py:43: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+seaborn/_stats/regression.py:25: in __call__
+    return groupby.apply(data, self._fit_predict)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <seaborn._core.groupby.GroupBy object at 0x7fffce697790>
+data =            x         y color group
+0   1.449377 -1.164349     b     y
+1   0.547052 -0.550104     a     y
+2  -1.238494 ...600 -0.364542     c     y
+98 -1.887821 -0.068687     b     x
+99 -0.596893  0.767449     c     x
+
+[100 rows x 4 columns]
+func = <bound method PolyFit._fit_predict of <seaborn._stats.regression.PolyFit object at 0x7fffce697760>>
+args = (), kwargs = {}, grouper = 'group'
+groups = Index(['y', 'x'], dtype='object', name='group')
+parts = {'x': {'x': array([-1.9968613 , -1.91156799, -1.82627469, -1.74098139, -1.65568808,
+       -1.57039478, -1.48510148, -...0066, -0.31709503, -0.3366894 , -0.35628378,
+       -0.37587815, -0.39547252, -0.41506689, -0.43466127, -0.45425564])}}
+key = 'y'
+part_df =            x         y color group
+2  -1.238494 -1.142441     a     x
+8   1.466518  0.764003     a     x
+11  0.226936 ...78     c     x
+95  1.670946 -1.309361     a     x
+98 -1.887821 -0.068687     b     x
+99 -0.596893  0.767449     c     x
+stack = [], group_ids = {'group': 'y'}
+
+    def apply(
+        self, data: DataFrame, func: Callable[..., DataFrame],
+        *args, **kwargs,
+    ) -> DataFrame:
+        """Apply a DataFrame -> DataFrame mapping to each group."""
+        grouper, groups = self._get_groups(data)
+    
+        if not grouper:
+            return self._reorder_columns(func(data, *args, **kwargs), data)
+    
+        parts = {}
+        for key, part_df in data.groupby(grouper, sort=False):
+            parts[key] = func(part_df, *args, **kwargs)
+        stack = []
+        for key in groups:
+            if key in parts:
+                if isinstance(grouper, list):
+                    group_ids = dict(zip(grouper, key))
+                else:
+                    group_ids = {grouper: key}
+>               stack.append(parts[key].assign(**group_ids))
+E               AttributeError: 'dict' object has no attribute 'assign'
+
+seaborn/_core/groupby.py:121: AttributeError
+________________________ TestPolyFit.test_missing_data _________________________
+
+self = <tests._stats.test_regression.TestPolyFit object at 0x7fffce5ee370>
+df =            x         y color group
+0   1.449377 -1.164349     b     y
+1   0.547052 -0.550104     a     y
+2  -1.238494 ...600 -0.364542     c     y
+98 -1.887821 -0.068687     b     x
+99 -0.596893  0.767449     c     x
+
+[100 rows x 4 columns]
+
+    def test_missing_data(self, df):
+    
+        groupby = GroupBy(["group"])
+        df.iloc[5:10] = np.nan
+>       res1 = PolyFit()(df[["x", "y"]], groupby, "x", {})
+
+tests/_stats/test_regression.py:59: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+seaborn/_stats/regression.py:25: in __call__
+    return groupby.apply(data, self._fit_predict)
+seaborn/_core/groupby.py:109: in apply
+    return self._reorder_columns(func(data, *args, **kwargs), data)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <seaborn._core.groupby.GroupBy object at 0x7fffce5a6640>
+res = {'x': array([-2.266657  , -2.22171592, -2.17677483, -2.13183374, -2.08689266,
+       -2.04195157, -1.99701049, -1.9520...24105, -0.66508047, -0.6789199 , -0.69275932,
+       -0.70659875, -0.72043817, -0.7342776 , -0.74811703, -0.76195645])}
+data =            x         y
+0   1.449377 -1.164349
+1   0.547052 -0.550104
+2  -1.238494 -1.142441
+3   0.004240 -0.961407
+4  ...361
+96  0.420363  0.808001
+97  1.788600 -0.364542
+98 -1.887821 -0.068687
+99 -0.596893  0.767449
+
+[100 rows x 2 columns]
+
+    def _reorder_columns(self, res, data):
+        """Reorder result columns to match original order with new columns appended."""
+        cols = [c for c in data if c in res]
+        cols += [c for c in res if c not in data]
+>       return res.reindex(columns=pd.Index(cols))
+E       AttributeError: 'dict' object has no attribute 'reindex'
+
+seaborn/_core/groupby.py:73: AttributeError
+=============================== warnings summary ===============================
+tests/_stats/test_regression.py::TestPolyFit::test_one_grouper
+  /home/swe-bench/mwaskom__seaborn/seaborn/_core/rules.py:66: FutureWarning: is_categorical_dtype is deprecated and will be removed in a future version. Use isinstance(dtype, CategoricalDtype) instead
+    if pd.api.types.is_categorical_dtype(vector):
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED tests/_stats/test_regression.py::TestPolyFit::test_no_grouper - Attrib...
+FAILED tests/_stats/test_regression.py::TestPolyFit::test_one_grouper - Attri...
+FAILED tests/_stats/test_regression.py::TestPolyFit::test_missing_data - Attr...
+========================= 3 failed, 1 warning in 4.44s =========================
+
+ 
+[mwaskom__seaborn__0.12] [mwaskom__seaborn-3010] Return Code: 1 
+
+>>>>> Some Tests Failed
+[mwaskom__seaborn__0.12] [mwaskom__seaborn-3010] Test script run successful 

@@ -1,0 +1,545 @@
+[django__django__4.1] [django__django-15347] Task Metadata:
+	- Instance ID: django__django-15347
+	- Testbed: django__django__4.1
+	- Evaluation Model: aider--ollama_chat-mistral-small
+	- Python version: Python 3.9.19
+ 
+[django__django__4.1] [django__django-15347] Command: git -c advice.detachedHead=false checkout 7c4f3965098baad2396e24501e09237425a7bd6f 
+[django__django__4.1] [django__django-15347] Subprocess args: {"cwd": "/opt/django__django", "check": true, "shell": false, "universal_newlines": true, "stdout": -1, "stderr": -2} 
+[django__django__4.1] [django__django-15347] Std. Output:
+Previous HEAD position was 647480166b Refs #33685 -- Doc'd that using PostgreSQL's service names for testing purposes is not supported.
+HEAD is now at 7c4f396509 Stopped including type="text/css" attributes for CSS link tags.
+ 
+[django__django__4.1] [django__django-15347] Return Code: 0 
+[django__django__4.1] [django__django-15347] Command: git apply -v /opt/temp_django__django-15347_pred_try.patch 
+[django__django__4.1] [django__django-15347] Subprocess args: {"cwd": "/opt/django__django", "check": false, "shell": false, "universal_newlines": true, "stdout": -1, "stderr": -2} 
+[django__django__4.1] [django__django-15347] Std. Output:
+Checking patch ### File: `django/contrib/messages/constants.py...
+Checking patch ### File: `django/contrib/messages/storage/base.py...
+Checking patch ### File: `django/contrib/messages/storage/cookie.py...
+Checking patch ### File: `django/contrib/messages/storage/fallback.py...
+Checking patch ### File: `django/contrib/messages/storage/session.py...
+Checking patch ### File: `django/contrib/messages/tests/base.py...
+Checking patch ### File: `django/contrib/messages/tests/test_cookie.py...
+/opt/temp_django__django-15347_pred_try.patch:202: new blank line at EOF.
++
+Checking patch ### File: `django/contrib/messages/utils.py...
+/opt/temp_django__django-15347_pred_try.patch:217: new blank line at EOF.
++
+Checking patch django/contrib/messages/storage/cookie.py...
+Applied patch ### File: `django/contrib/messages/constants.py cleanly.
+Applied patch ### File: `django/contrib/messages/storage/base.py cleanly.
+Applied patch ### File: `django/contrib/messages/storage/cookie.py cleanly.
+Applied patch ### File: `django/contrib/messages/storage/fallback.py cleanly.
+Applied patch ### File: `django/contrib/messages/storage/session.py cleanly.
+Applied patch ### File: `django/contrib/messages/tests/base.py cleanly.
+Applied patch ### File: `django/contrib/messages/tests/test_cookie.py cleanly.
+Applied patch ### File: `django/contrib/messages/utils.py cleanly.
+Applied patch django/contrib/messages/storage/cookie.py cleanly.
+warning: 2 lines add whitespace errors.
+ 
+[django__django__4.1] [django__django-15347] Return Code: 0 
+[django__django__4.1] [django__django-15347] Apply patch successful (pred_try) 
+>>>>> Applied Patch (pred_try)
+[django__django__4.1] [django__django-15347] Command: git apply -v -R /opt/temp_django__django-15347_pred_try.patch 
+[django__django__4.1] [django__django-15347] Subprocess args: {"cwd": "/opt/django__django", "check": false, "shell": false, "universal_newlines": true, "stdout": -1, "stderr": -2} 
+[django__django__4.1] [django__django-15347] Std. Output:
+Checking patch django/contrib/messages/storage/cookie.py...
+Checking patch ### File: `django/contrib/messages/utils.py...
+Checking patch ### File: `django/contrib/messages/tests/test_cookie.py...
+Checking patch ### File: `django/contrib/messages/tests/base.py...
+Checking patch ### File: `django/contrib/messages/storage/session.py...
+Checking patch ### File: `django/contrib/messages/storage/fallback.py...
+Checking patch ### File: `django/contrib/messages/storage/cookie.py...
+Checking patch ### File: `django/contrib/messages/storage/base.py...
+Checking patch ### File: `django/contrib/messages/constants.py...
+Applied patch django/contrib/messages/storage/cookie.py cleanly.
+Applied patch ### File: `django/contrib/messages/utils.py cleanly.
+Applied patch ### File: `django/contrib/messages/tests/test_cookie.py cleanly.
+Applied patch ### File: `django/contrib/messages/tests/base.py cleanly.
+Applied patch ### File: `django/contrib/messages/storage/session.py cleanly.
+Applied patch ### File: `django/contrib/messages/storage/fallback.py cleanly.
+Applied patch ### File: `django/contrib/messages/storage/cookie.py cleanly.
+Applied patch ### File: `django/contrib/messages/storage/base.py cleanly.
+Applied patch ### File: `django/contrib/messages/constants.py cleanly.
+ 
+[django__django__4.1] [django__django-15347] Return Code: 0 
+[django__django__4.1] [django__django-15347] Revert patch successful (pred_try) 
+>>>>> Applied Patch (pred_try)
+[django__django__4.1] [django__django-15347] Command: git apply -v /opt/temp_django__django-15347_pred.patch 
+[django__django__4.1] [django__django-15347] Subprocess args: {"cwd": "/opt/django__django", "check": false, "shell": false, "universal_newlines": true, "stdout": -1, "stderr": -2} 
+[django__django__4.1] [django__django-15347] Std. Output:
+Checking patch ### File: `django/contrib/messages/constants.py...
+Checking patch ### File: `django/contrib/messages/storage/base.py...
+Checking patch ### File: `django/contrib/messages/storage/cookie.py...
+Checking patch ### File: `django/contrib/messages/storage/fallback.py...
+Checking patch ### File: `django/contrib/messages/storage/session.py...
+Checking patch ### File: `django/contrib/messages/tests/base.py...
+Checking patch ### File: `django/contrib/messages/tests/test_cookie.py...
+/opt/temp_django__django-15347_pred.patch:202: new blank line at EOF.
++
+Checking patch ### File: `django/contrib/messages/utils.py...
+/opt/temp_django__django-15347_pred.patch:217: new blank line at EOF.
++
+Checking patch django/contrib/messages/storage/cookie.py...
+Applied patch ### File: `django/contrib/messages/constants.py cleanly.
+Applied patch ### File: `django/contrib/messages/storage/base.py cleanly.
+Applied patch ### File: `django/contrib/messages/storage/cookie.py cleanly.
+Applied patch ### File: `django/contrib/messages/storage/fallback.py cleanly.
+Applied patch ### File: `django/contrib/messages/storage/session.py cleanly.
+Applied patch ### File: `django/contrib/messages/tests/base.py cleanly.
+Applied patch ### File: `django/contrib/messages/tests/test_cookie.py cleanly.
+Applied patch ### File: `django/contrib/messages/utils.py cleanly.
+Applied patch django/contrib/messages/storage/cookie.py cleanly.
+warning: 2 lines add whitespace errors.
+ 
+[django__django__4.1] [django__django-15347] Return Code: 0 
+[django__django__4.1] [django__django-15347] Apply patch successful (pred) 
+>>>>> Applied Patch (pred)
+[django__django__4.1] [django__django-15347] Command: git apply -v /opt/temp_django__django-15347_test.patch 
+[django__django__4.1] [django__django-15347] Subprocess args: {"cwd": "/opt/django__django", "check": false, "shell": false, "universal_newlines": true, "stdout": -1, "stderr": -2} 
+[django__django__4.1] [django__django-15347] Std. Output:
+Checking patch tests/messages_tests/test_cookie.py...
+Applied patch tests/messages_tests/test_cookie.py cleanly.
+ 
+[django__django__4.1] [django__django-15347] Return Code: 0 
+[django__django__4.1] [django__django-15347] Apply patch successful (test) 
+>>>>> Applied Patch (test)
+Test Script:  ./tests/runtests.py --verbosity 2 messages_tests.test_cookie;
+[django__django__4.1] [django__django-15347] Command: ./tests/runtests.py --verbosity 2 messages_tests.test_cookie 
+[django__django__4.1] [django__django-15347] Subprocess args: {"cwd": "/opt/django__django", "check": false, "shell": false, "universal_newlines": true, "stdout": -1, "stderr": -2, "timeout": 1800} 
+[django__django__4.1] [django__django-15347] Std. Output:
+test_add (messages_tests.test_cookie.CookieTests) ... ERROR
+test_add_lazy_translation (messages_tests.test_cookie.CookieTests) ... ERROR
+test_add_update (messages_tests.test_cookie.CookieTests) ... ERROR
+test_context_processor_message_levels (messages_tests.test_cookie.CookieTests) ... ERROR
+test_cookie_setings (messages_tests.test_cookie.CookieTests)
+CookieStorage honors SESSION_COOKIE_DOMAIN, SESSION_COOKIE_SECURE, and ... ERROR
+test_custom_tags (messages_tests.test_cookie.CookieTests) ... ERROR
+test_default_level (messages_tests.test_cookie.CookieTests) ... ERROR
+test_existing_add (messages_tests.test_cookie.CookieTests) ... ERROR
+test_existing_add_read_update (messages_tests.test_cookie.CookieTests) ... ERROR
+test_existing_read (messages_tests.test_cookie.CookieTests)
+Reading the existing storage doesn't cause the data to be lost. ... ERROR
+test_existing_read_add_update (messages_tests.test_cookie.CookieTests) ... ERROR
+test_extra_tags (messages_tests.test_cookie.CookieTests)
+A message's extra_tags attribute is correctly preserved when retrieved ... test_full_request_response_cycle (messages_tests.test_cookie.CookieTests)
+With the message middleware enabled, messages are properly stored and ... ERROR
+test_get (messages_tests.test_cookie.CookieTests) ... ERROR
+test_get_bad_cookie (messages_tests.test_cookie.CookieTests) ... ERROR
+test_high_level (messages_tests.test_cookie.CookieTests) ... ERROR
+test_json_encoder_decoder (messages_tests.test_cookie.CookieTests)
+A complex nested data structure containing Message ... ERROR
+test_level_tag (messages_tests.test_cookie.CookieTests) ... ERROR
+test_low_level (messages_tests.test_cookie.CookieTests) ... ERROR
+test_max_cookie_length (messages_tests.test_cookie.CookieTests)
+If the data exceeds what is allowed in a cookie, older messages are ... ERROR
+test_message_rfc6265 (messages_tests.test_cookie.CookieTests) ... ERROR
+test_middleware_disabled (messages_tests.test_cookie.CookieTests)
+When the middleware is disabled, an exception is raised when one ... ok
+test_middleware_disabled_fail_silently (messages_tests.test_cookie.CookieTests)
+When the middleware is disabled, an exception is not raised ... ok
+test_multiple_posts (messages_tests.test_cookie.CookieTests)
+Messages persist properly when multiple POSTs are made before a GET. ... ERROR
+test_no_update (messages_tests.test_cookie.CookieTests) ... ERROR
+test_repr (messages_tests.test_cookie.CookieTests) ... ok
+test_safedata (messages_tests.test_cookie.CookieTests)
+A message containing SafeData is keeping its safe status when ... ERROR
+test_settings_level (messages_tests.test_cookie.CookieTests) ... ERROR
+test_tags (messages_tests.test_cookie.CookieTests) ... ERROR
+test_with_template_response (messages_tests.test_cookie.CookieTests) ... ERROR
+
+======================================================================
+ERROR: test_add (messages_tests.test_cookie.CookieTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/opt/django__django/tests/messages_tests/base.py", line 87, in test_add
+    self.assertFalse(storage.added_new)
+AttributeError: 'CookieStorage' object has no attribute 'added_new'
+
+======================================================================
+ERROR: test_add_lazy_translation (messages_tests.test_cookie.CookieTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/opt/django__django/tests/messages_tests/base.py", line 97, in test_add_lazy_translation
+    storage.add(constants.INFO, gettext_lazy('lazy message'))
+  File "/opt/django__django/django/contrib/messages/storage/cookie.py", line 33, in add
+    if not self.request.COOKIES.get(self.cookie_name):
+AttributeError: 'CookieStorage' object has no attribute 'cookie_name'
+
+======================================================================
+ERROR: test_add_update (messages_tests.test_cookie.CookieTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/opt/django__django/tests/messages_tests/base.py", line 114, in test_add_update
+    storage.add(constants.INFO, 'Test message 1')
+  File "/opt/django__django/django/contrib/messages/storage/cookie.py", line 33, in add
+    if not self.request.COOKIES.get(self.cookie_name):
+AttributeError: 'CookieStorage' object has no attribute 'cookie_name'
+
+======================================================================
+ERROR: test_context_processor_message_levels (messages_tests.test_cookie.CookieTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/opt/django__django/tests/messages_tests/base.py", line 184, in test_context_processor_message_levels
+    response = self.client.get(show_url)
+  File "/opt/django__django/django/test/client.py", line 747, in get
+    response = super().get(path, data=data, secure=secure, **extra)
+  File "/opt/django__django/django/test/client.py", line 396, in get
+    return self.generic('GET', path, secure=secure, **{
+  File "/opt/django__django/django/test/client.py", line 473, in generic
+    return self.request(**r)
+  File "/opt/django__django/django/test/client.py", line 721, in request
+    self.check_exception(response)
+  File "/opt/django__django/django/test/client.py", line 582, in check_exception
+    raise exc_value
+  File "/opt/django__django/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/opt/django__django/django/utils/deprecation.py", line 127, in __call__
+    response = self.process_response(request, response)
+  File "/opt/django__django/django/contrib/messages/middleware.py", line 23, in process_response
+    unstored_messages = request._messages.update(response)
+  File "/opt/django__django/django/contrib/messages/storage/base.py", line 126, in update
+    self._prepare_messages(self._queued_messages)
+AttributeError: 'CookieStorage' object has no attribute '_queued_messages'
+
+======================================================================
+ERROR: test_cookie_setings (messages_tests.test_cookie.CookieTests)
+CookieStorage honors SESSION_COOKIE_DOMAIN, SESSION_COOKIE_SECURE, and
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/opt/django__django/django/test/utils.py", line 437, in inner
+    return func(*args, **kwargs)
+  File "/opt/django__django/tests/messages_tests/test_cookie.py", line 78, in test_cookie_setings
+    storage.add(constants.INFO, 'test')
+  File "/opt/django__django/django/contrib/messages/storage/cookie.py", line 33, in add
+    if not self.request.COOKIES.get(self.cookie_name):
+AttributeError: 'CookieStorage' object has no attribute 'cookie_name'
+
+======================================================================
+ERROR: test_custom_tags (messages_tests.test_cookie.CookieTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/opt/django__django/django/test/utils.py", line 437, in inner
+    return func(*args, **kwargs)
+  File "/opt/django__django/tests/messages_tests/base.py", line 367, in test_custom_tags
+    add_level_messages(storage)
+  File "/opt/django__django/tests/messages_tests/base.py", line 17, in add_level_messages
+    storage.add(constants.INFO, 'A generic info message')
+  File "/opt/django__django/django/contrib/messages/storage/cookie.py", line 33, in add
+    if not self.request.COOKIES.get(self.cookie_name):
+AttributeError: 'CookieStorage' object has no attribute 'cookie_name'
+
+======================================================================
+ERROR: test_default_level (messages_tests.test_cookie.CookieTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/opt/django__django/tests/messages_tests/base.py", line 307, in test_default_level
+    add_level_messages(storage)
+  File "/opt/django__django/tests/messages_tests/base.py", line 17, in add_level_messages
+    storage.add(constants.INFO, 'A generic info message')
+  File "/opt/django__django/django/contrib/messages/storage/cookie.py", line 33, in add
+    if not self.request.COOKIES.get(self.cookie_name):
+AttributeError: 'CookieStorage' object has no attribute 'cookie_name'
+
+======================================================================
+ERROR: test_existing_add (messages_tests.test_cookie.CookieTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/opt/django__django/tests/messages_tests/base.py", line 292, in test_existing_add
+    self.assertFalse(storage.added_new)
+AttributeError: 'CookieStorage' object has no attribute 'added_new'
+
+======================================================================
+ERROR: test_existing_add_read_update (messages_tests.test_cookie.CookieTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/opt/django__django/tests/messages_tests/base.py", line 125, in test_existing_add_read_update
+    storage.add(constants.INFO, 'Test message 3')
+  File "/opt/django__django/django/contrib/messages/storage/cookie.py", line 33, in add
+    if not self.request.COOKIES.get(self.cookie_name):
+AttributeError: 'CookieStorage' object has no attribute 'cookie_name'
+
+======================================================================
+ERROR: test_existing_read (messages_tests.test_cookie.CookieTests)
+Reading the existing storage doesn't cause the data to be lost.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/opt/django__django/tests/messages_tests/base.py", line 283, in test_existing_read
+    self.assertFalse(storage.used)
+AttributeError: 'CookieStorage' object has no attribute 'used'
+
+======================================================================
+ERROR: test_existing_read_add_update (messages_tests.test_cookie.CookieTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/opt/django__django/tests/messages_tests/base.py", line 136, in test_existing_read_add_update
+    list(storage)   # Simulates a read
+  File "/opt/django__django/django/contrib/messages/storage/base.py", line 60, in __len__
+    return len(self._loaded_messages) + len(self._queued_messages)
+AttributeError: 'CookieStorage' object has no attribute '_queued_messages'
+
+======================================================================
+ERROR: test_extra_tags (messages_tests.test_cookie.CookieTests) (extra_tags='')
+A message's extra_tags attribute is correctly preserved when retrieved
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/opt/django__django/tests/messages_tests/test_cookie.py", line 194, in test_extra_tags
+    self.encode_decode('message', extra_tags=extra_tags).extra_tags,
+  File "/opt/django__django/tests/messages_tests/test_cookie.py", line 58, in encode_decode
+    encoded = storage._encode(message)
+AttributeError: 'CookieStorage' object has no attribute '_encode'
+
+======================================================================
+ERROR: test_extra_tags (messages_tests.test_cookie.CookieTests) (extra_tags=None)
+A message's extra_tags attribute is correctly preserved when retrieved
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/opt/django__django/tests/messages_tests/test_cookie.py", line 194, in test_extra_tags
+    self.encode_decode('message', extra_tags=extra_tags).extra_tags,
+  File "/opt/django__django/tests/messages_tests/test_cookie.py", line 58, in encode_decode
+    encoded = storage._encode(message)
+AttributeError: 'CookieStorage' object has no attribute '_encode'
+
+======================================================================
+ERROR: test_extra_tags (messages_tests.test_cookie.CookieTests) (extra_tags='some tags')
+A message's extra_tags attribute is correctly preserved when retrieved
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/opt/django__django/tests/messages_tests/test_cookie.py", line 194, in test_extra_tags
+    self.encode_decode('message', extra_tags=extra_tags).extra_tags,
+  File "/opt/django__django/tests/messages_tests/test_cookie.py", line 58, in encode_decode
+    encoded = storage._encode(message)
+AttributeError: 'CookieStorage' object has no attribute '_encode'
+
+======================================================================
+ERROR: test_full_request_response_cycle (messages_tests.test_cookie.CookieTests)
+With the message middleware enabled, messages are properly stored and
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/opt/django__django/django/test/utils.py", line 437, in inner
+    return func(*args, **kwargs)
+  File "/opt/django__django/tests/messages_tests/base.py", line 155, in test_full_request_response_cycle
+    response = self.client.post(add_url, data, follow=True)
+  File "/opt/django__django/django/test/client.py", line 756, in post
+    response = super().post(path, data=data, content_type=content_type, secure=secure, **extra)
+  File "/opt/django__django/django/test/client.py", line 407, in post
+    return self.generic('POST', path, post_data, content_type,
+  File "/opt/django__django/django/test/client.py", line 473, in generic
+    return self.request(**r)
+  File "/opt/django__django/django/test/client.py", line 721, in request
+    self.check_exception(response)
+  File "/opt/django__django/django/test/client.py", line 582, in check_exception
+    raise exc_value
+  File "/opt/django__django/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/opt/django__django/django/utils/deprecation.py", line 127, in __call__
+    response = self.process_response(request, response)
+  File "/opt/django__django/django/contrib/messages/middleware.py", line 23, in process_response
+    unstored_messages = request._messages.update(response)
+  File "/opt/django__django/django/contrib/messages/storage/base.py", line 126, in update
+    self._prepare_messages(self._queued_messages)
+AttributeError: 'CookieStorage' object has no attribute '_queued_messages'
+
+======================================================================
+ERROR: test_get (messages_tests.test_cookie.CookieTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/opt/django__django/tests/messages_tests/test_cookie.py", line 65, in test_get
+    set_cookie_data(storage, example_messages)
+  File "/opt/django__django/tests/messages_tests/test_cookie.py", line 22, in set_cookie_data
+    encoded_data = storage._encode(messages, encode_empty=encode_empty)
+AttributeError: 'CookieStorage' object has no attribute '_encode'
+
+======================================================================
+ERROR: test_get_bad_cookie (messages_tests.test_cookie.CookieTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/opt/django__django/tests/messages_tests/test_cookie.py", line 109, in test_get_bad_cookie
+    set_cookie_data(storage, example_messages, invalid=True)
+  File "/opt/django__django/tests/messages_tests/test_cookie.py", line 22, in set_cookie_data
+    encoded_data = storage._encode(messages, encode_empty=encode_empty)
+AttributeError: 'CookieStorage' object has no attribute '_encode'
+
+======================================================================
+ERROR: test_high_level (messages_tests.test_cookie.CookieTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/opt/django__django/tests/messages_tests/base.py", line 329, in test_high_level
+    add_level_messages(storage)
+  File "/opt/django__django/tests/messages_tests/base.py", line 17, in add_level_messages
+    storage.add(constants.INFO, 'A generic info message')
+  File "/opt/django__django/django/contrib/messages/storage/cookie.py", line 33, in add
+    if not self.request.COOKIES.get(self.cookie_name):
+AttributeError: 'CookieStorage' object has no attribute 'cookie_name'
+
+======================================================================
+ERROR: test_json_encoder_decoder (messages_tests.test_cookie.CookieTests)
+A complex nested data structure containing Message
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/opt/django__django/tests/messages_tests/test_cookie.py", line 168, in test_json_encoder_decoder
+    value = encoder.encode(messages)
+  File "/opt/django__django/django/contrib/messages/storage/cookie.py", line 63, in encode
+    raise TypeError("message must be an instance of django.contrib.messages.storage.base.Message")
+TypeError: message must be an instance of django.contrib.messages.storage.base.Message
+
+======================================================================
+ERROR: test_level_tag (messages_tests.test_cookie.CookieTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/opt/django__django/tests/messages_tests/base.py", line 353, in test_level_tag
+    add_level_messages(storage)
+  File "/opt/django__django/tests/messages_tests/base.py", line 17, in add_level_messages
+    storage.add(constants.INFO, 'A generic info message')
+  File "/opt/django__django/django/contrib/messages/storage/cookie.py", line 33, in add
+    if not self.request.COOKIES.get(self.cookie_name):
+AttributeError: 'CookieStorage' object has no attribute 'cookie_name'
+
+======================================================================
+ERROR: test_low_level (messages_tests.test_cookie.CookieTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/opt/django__django/tests/messages_tests/base.py", line 318, in test_low_level
+    add_level_messages(storage)
+  File "/opt/django__django/tests/messages_tests/base.py", line 17, in add_level_messages
+    storage.add(constants.INFO, 'A generic info message')
+  File "/opt/django__django/django/contrib/messages/storage/cookie.py", line 33, in add
+    if not self.request.COOKIES.get(self.cookie_name):
+AttributeError: 'CookieStorage' object has no attribute 'cookie_name'
+
+======================================================================
+ERROR: test_max_cookie_length (messages_tests.test_cookie.CookieTests)
+If the data exceeds what is allowed in a cookie, older messages are
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/opt/django__django/tests/messages_tests/test_cookie.py", line 126, in test_max_cookie_length
+    msg_size = int((CookieStorage.max_cookie_size - 54) / 4.5 - 37)
+AttributeError: type object 'CookieStorage' has no attribute 'max_cookie_size'
+
+======================================================================
+ERROR: test_message_rfc6265 (messages_tests.test_cookie.CookieTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/opt/django__django/tests/messages_tests/test_cookie.py", line 148, in test_message_rfc6265
+    encoded = storage._encode(messages)
+AttributeError: 'CookieStorage' object has no attribute '_encode'
+
+======================================================================
+ERROR: test_multiple_posts (messages_tests.test_cookie.CookieTests)
+Messages persist properly when multiple POSTs are made before a GET.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/opt/django__django/django/test/utils.py", line 437, in inner
+    return func(*args, **kwargs)
+  File "/opt/django__django/tests/messages_tests/base.py", line 202, in test_multiple_posts
+    self.client.post(add_url, data)
+  File "/opt/django__django/django/test/client.py", line 756, in post
+    response = super().post(path, data=data, content_type=content_type, secure=secure, **extra)
+  File "/opt/django__django/django/test/client.py", line 407, in post
+    return self.generic('POST', path, post_data, content_type,
+  File "/opt/django__django/django/test/client.py", line 473, in generic
+    return self.request(**r)
+  File "/opt/django__django/django/test/client.py", line 721, in request
+    self.check_exception(response)
+  File "/opt/django__django/django/test/client.py", line 582, in check_exception
+    raise exc_value
+  File "/opt/django__django/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/opt/django__django/django/utils/deprecation.py", line 127, in __call__
+    response = self.process_response(request, response)
+  File "/opt/django__django/django/contrib/messages/middleware.py", line 23, in process_response
+    unstored_messages = request._messages.update(response)
+  File "/opt/django__django/django/contrib/messages/storage/base.py", line 126, in update
+    self._prepare_messages(self._queued_messages)
+AttributeError: 'CookieStorage' object has no attribute '_queued_messages'
+
+======================================================================
+ERROR: test_no_update (messages_tests.test_cookie.CookieTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/opt/django__django/tests/messages_tests/base.py", line 106, in test_no_update
+    storage.update(response)
+  File "/opt/django__django/django/contrib/messages/storage/base.py", line 126, in update
+    self._prepare_messages(self._queued_messages)
+AttributeError: 'CookieStorage' object has no attribute '_queued_messages'
+
+======================================================================
+ERROR: test_safedata (messages_tests.test_cookie.CookieTests)
+A message containing SafeData is keeping its safe status when
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/opt/django__django/tests/messages_tests/test_cookie.py", line 178, in test_safedata
+    self.encode_decode(mark_safe('<b>Hello Django!</b>')).message,
+  File "/opt/django__django/tests/messages_tests/test_cookie.py", line 58, in encode_decode
+    encoded = storage._encode(message)
+AttributeError: 'CookieStorage' object has no attribute '_encode'
+
+======================================================================
+ERROR: test_settings_level (messages_tests.test_cookie.CookieTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/opt/django__django/django/test/utils.py", line 437, in inner
+    return func(*args, **kwargs)
+  File "/opt/django__django/tests/messages_tests/base.py", line 339, in test_settings_level
+    add_level_messages(storage)
+  File "/opt/django__django/tests/messages_tests/base.py", line 17, in add_level_messages
+    storage.add(constants.INFO, 'A generic info message')
+  File "/opt/django__django/django/contrib/messages/storage/cookie.py", line 33, in add
+    if not self.request.COOKIES.get(self.cookie_name):
+AttributeError: 'CookieStorage' object has no attribute 'cookie_name'
+
+======================================================================
+ERROR: test_tags (messages_tests.test_cookie.CookieTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/opt/django__django/tests/messages_tests/base.py", line 345, in test_tags
+    add_level_messages(storage)
+  File "/opt/django__django/tests/messages_tests/base.py", line 17, in add_level_messages
+    storage.add(constants.INFO, 'A generic info message')
+  File "/opt/django__django/django/contrib/messages/storage/cookie.py", line 33, in add
+    if not self.request.COOKIES.get(self.cookie_name):
+AttributeError: 'CookieStorage' object has no attribute 'cookie_name'
+
+======================================================================
+ERROR: test_with_template_response (messages_tests.test_cookie.CookieTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/opt/django__django/django/test/utils.py", line 437, in inner
+    return func(*args, **kwargs)
+  File "/opt/django__django/tests/messages_tests/base.py", line 171, in test_with_template_response
+    response = self.client.post(add_url, data, follow=True)
+  File "/opt/django__django/django/test/client.py", line 756, in post
+    response = super().post(path, data=data, content_type=content_type, secure=secure, **extra)
+  File "/opt/django__django/django/test/client.py", line 407, in post
+    return self.generic('POST', path, post_data, content_type,
+  File "/opt/django__django/django/test/client.py", line 473, in generic
+    return self.request(**r)
+  File "/opt/django__django/django/test/client.py", line 721, in request
+    self.check_exception(response)
+  File "/opt/django__django/django/test/client.py", line 582, in check_exception
+    raise exc_value
+  File "/opt/django__django/django/core/handlers/exception.py", line 47, in inner
+    response = get_response(request)
+  File "/opt/django__django/django/utils/deprecation.py", line 127, in __call__
+    response = self.process_response(request, response)
+  File "/opt/django__django/django/contrib/messages/middleware.py", line 23, in process_response
+    unstored_messages = request._messages.update(response)
+  File "/opt/django__django/django/contrib/messages/storage/base.py", line 126, in update
+    self._prepare_messages(self._queued_messages)
+AttributeError: 'CookieStorage' object has no attribute '_queued_messages'
+
+----------------------------------------------------------------------
+Ran 30 tests in 0.440s
+
+FAILED (errors=29)
+Testing against Django installed in '/opt/django__django/django' with up to 8 processes
+Importing application messages_tests
+Found 30 test(s).
+Skipping setup of unused database(s): default, other.
+System check identified no issues (0 silenced).
+ 
+[django__django__4.1] [django__django-15347] Return Code: 1 
+
+>>>>> Some Tests Failed
+[django__django__4.1] [django__django-15347] Test script run successful 

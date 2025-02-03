@@ -1,0 +1,90 @@
+[django__django__3.1] [django__django-12700] Task Metadata:
+	- Instance ID: django__django-12700
+	- Testbed: django__django__3.1
+	- Evaluation Model: aider--ollama_chat-mistral-small
+	- Python version: Python 3.6.15
+ 
+[django__django__3.1] [django__django-12700] Command: git -c advice.detachedHead=false checkout d51c50d836c5cf8db5566da17963f871be554615 
+[django__django__3.1] [django__django-12700] Subprocess args: {"cwd": "/opt/django__django", "check": true, "shell": false, "universal_newlines": true, "stdout": -1, "stderr": -2} 
+[django__django__3.1] [django__django-12700] Std. Output:
+Previous HEAD position was 0668164b4a Fixed E128, E741 flake8 warnings.
+HEAD is now at d51c50d836 Fixed #31462 -- Allowed overriding autocomplete/raw_id_fields/filter widgets for ManyToManyFields with formfield_overrides.
+ 
+[django__django__3.1] [django__django-12700] Return Code: 0 
+[django__django__3.1] [django__django-12700] Command: git apply -v /opt/temp_django__django-12700_pred_try.patch 
+[django__django__3.1] [django__django-12700] Subprocess args: {"cwd": "/opt/django__django", "check": false, "shell": false, "universal_newlines": true, "stdout": -1, "stderr": -2} 
+[django__django__3.1] [django__django-12700] Std. Output:
+Checking patch django/core/handlers/asgi.py...
+Checking patch django/core/handlers/base.py...
+Checking patch django/utils/log.py...
+Checking patch django/views/debug.py...
+Applied patch django/core/handlers/asgi.py cleanly.
+Applied patch django/core/handlers/base.py cleanly.
+Applied patch django/utils/log.py cleanly.
+Applied patch django/views/debug.py cleanly.
+ 
+[django__django__3.1] [django__django-12700] Return Code: 0 
+[django__django__3.1] [django__django-12700] Apply patch successful (pred_try) 
+>>>>> Applied Patch (pred_try)
+[django__django__3.1] [django__django-12700] Command: git apply -v -R /opt/temp_django__django-12700_pred_try.patch 
+[django__django__3.1] [django__django-12700] Subprocess args: {"cwd": "/opt/django__django", "check": false, "shell": false, "universal_newlines": true, "stdout": -1, "stderr": -2} 
+[django__django__3.1] [django__django-12700] Std. Output:
+Checking patch django/views/debug.py...
+Checking patch django/utils/log.py...
+Checking patch django/core/handlers/base.py...
+Checking patch django/core/handlers/asgi.py...
+Applied patch django/views/debug.py cleanly.
+Applied patch django/utils/log.py cleanly.
+Applied patch django/core/handlers/base.py cleanly.
+Applied patch django/core/handlers/asgi.py cleanly.
+ 
+[django__django__3.1] [django__django-12700] Return Code: 0 
+[django__django__3.1] [django__django-12700] Revert patch successful (pred_try) 
+>>>>> Applied Patch (pred_try)
+[django__django__3.1] [django__django-12700] Command: git apply -v /opt/temp_django__django-12700_pred.patch 
+[django__django__3.1] [django__django-12700] Subprocess args: {"cwd": "/opt/django__django", "check": false, "shell": false, "universal_newlines": true, "stdout": -1, "stderr": -2} 
+[django__django__3.1] [django__django-12700] Std. Output:
+Checking patch django/core/handlers/asgi.py...
+Checking patch django/core/handlers/base.py...
+Checking patch django/utils/log.py...
+Checking patch django/views/debug.py...
+Applied patch django/core/handlers/asgi.py cleanly.
+Applied patch django/core/handlers/base.py cleanly.
+Applied patch django/utils/log.py cleanly.
+Applied patch django/views/debug.py cleanly.
+ 
+[django__django__3.1] [django__django-12700] Return Code: 0 
+[django__django__3.1] [django__django-12700] Apply patch successful (pred) 
+>>>>> Applied Patch (pred)
+[django__django__3.1] [django__django-12700] Command: git apply -v /opt/temp_django__django-12700_test.patch 
+[django__django__3.1] [django__django-12700] Subprocess args: {"cwd": "/opt/django__django", "check": false, "shell": false, "universal_newlines": true, "stdout": -1, "stderr": -2} 
+[django__django__3.1] [django__django-12700] Std. Output:
+Checking patch tests/view_tests/tests/test_debug.py...
+Applied patch tests/view_tests/tests/test_debug.py cleanly.
+ 
+[django__django__3.1] [django__django-12700] Return Code: 0 
+[django__django__3.1] [django__django-12700] Apply patch successful (test) 
+>>>>> Applied Patch (test)
+Test Script:  ./tests/runtests.py --verbosity 2 view_tests.tests.test_debug;
+[django__django__3.1] [django__django-12700] Command: ./tests/runtests.py --verbosity 2 view_tests.tests.test_debug 
+[django__django__3.1] [django__django-12700] Subprocess args: {"cwd": "/opt/django__django", "check": false, "shell": false, "universal_newlines": true, "stdout": -1, "stderr": -2, "timeout": 1800} 
+[django__django__3.1] [django__django-12700] Std. Output:
+Traceback (most recent call last):
+  File "./tests/runtests.py", line 23, in <module>
+    from django.test import TestCase, TransactionTestCase
+  File "/opt/django__django/django/test/__init__.py", line 3, in <module>
+    from django.test.client import (
+  File "/opt/django__django/django/test/client.py", line 15, in <module>
+    from django.core.handlers.asgi import ASGIRequest
+  File "/opt/django__django/django/core/handlers/asgi.py", line 1, in <module>
+    from django.core.handlers.base import BaseHandler
+  File "/opt/django__django/django/core/handlers/base.py", line 1, in <module>
+    from django.core.handlers.wsgi import WSGIHandler
+  File "/opt/django__django/django/core/handlers/wsgi.py", line 122, in <module>
+    class WSGIHandler(base.BaseHandler):
+AttributeError: module 'django.core.handlers.base' has no attribute 'BaseHandler'
+ 
+[django__django__3.1] [django__django-12700] Return Code: 1 
+
+>>>>> Some Tests Failed
+[django__django__3.1] [django__django-12700] Test script run successful 

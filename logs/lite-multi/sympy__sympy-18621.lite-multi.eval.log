@@ -1,0 +1,99 @@
+[sympy__sympy__1.6] [sympy__sympy-18621] Task Metadata:
+	- Instance ID: sympy__sympy-18621
+	- Testbed: sympy__sympy__1.6
+	- Evaluation Model: aider--ollama_chat-mistral-small
+	- Python version: Python 3.11.8
+ 
+[sympy__sympy__1.6] [sympy__sympy-18621] Command: git -c advice.detachedHead=false checkout b17ef6effe278d5b861d65896cc53442a6370d8f 
+[sympy__sympy__1.6] [sympy__sympy-18621] Subprocess args: {"cwd": "/home/swe-bench/sympy__sympy", "check": true, "shell": false, "universal_newlines": true, "stdout": -1, "stderr": -2} 
+[sympy__sympy__1.6] [sympy__sympy-18621] Std. Output:
+Previous HEAD position was 28b41c73c1 Merge pull request #19598 from oscarbenjamin/pr_bump_version_161rc1
+HEAD is now at b17ef6effe Merge pull request #18597 from Smit-create/14815
+ 
+[sympy__sympy__1.6] [sympy__sympy-18621] Return Code: 0 
+[sympy__sympy__1.6] [sympy__sympy-18621] Command: git apply -v /home/swe-bench/temp_sympy__sympy-18621_pred_try.patch 
+[sympy__sympy__1.6] [sympy__sympy-18621] Subprocess args: {"cwd": "/home/swe-bench/sympy__sympy", "check": false, "shell": false, "universal_newlines": true, "stdout": -1, "stderr": -2} 
+[sympy__sympy__1.6] [sympy__sympy-18621] Std. Output:
+Checking patch sympy/matrices/expressions/__init__.py...
+Checking patch sympy/matrices/expressions/blockmatrix.py...
+Checking patch sympy/matrices/immutable.py...
+Checking patch sympy/utilities/decorator.py...
+Applied patch sympy/matrices/expressions/__init__.py cleanly.
+Applied patch sympy/matrices/expressions/blockmatrix.py cleanly.
+Applied patch sympy/matrices/immutable.py cleanly.
+Applied patch sympy/utilities/decorator.py cleanly.
+ 
+[sympy__sympy__1.6] [sympy__sympy-18621] Return Code: 0 
+[sympy__sympy__1.6] [sympy__sympy-18621] Apply patch successful (pred_try) 
+>>>>> Applied Patch (pred_try)
+[sympy__sympy__1.6] [sympy__sympy-18621] Command: git apply -v -R /home/swe-bench/temp_sympy__sympy-18621_pred_try.patch 
+[sympy__sympy__1.6] [sympy__sympy-18621] Subprocess args: {"cwd": "/home/swe-bench/sympy__sympy", "check": false, "shell": false, "universal_newlines": true, "stdout": -1, "stderr": -2} 
+[sympy__sympy__1.6] [sympy__sympy-18621] Std. Output:
+Checking patch sympy/utilities/decorator.py...
+Checking patch sympy/matrices/immutable.py...
+Checking patch sympy/matrices/expressions/blockmatrix.py...
+Checking patch sympy/matrices/expressions/__init__.py...
+Applied patch sympy/utilities/decorator.py cleanly.
+Applied patch sympy/matrices/immutable.py cleanly.
+Applied patch sympy/matrices/expressions/blockmatrix.py cleanly.
+Applied patch sympy/matrices/expressions/__init__.py cleanly.
+ 
+[sympy__sympy__1.6] [sympy__sympy-18621] Return Code: 0 
+[sympy__sympy__1.6] [sympy__sympy-18621] Revert patch successful (pred_try) 
+>>>>> Applied Patch (pred_try)
+[sympy__sympy__1.6] [sympy__sympy-18621] Command: git apply -v /home/swe-bench/temp_sympy__sympy-18621_pred.patch 
+[sympy__sympy__1.6] [sympy__sympy-18621] Subprocess args: {"cwd": "/home/swe-bench/sympy__sympy", "check": false, "shell": false, "universal_newlines": true, "stdout": -1, "stderr": -2} 
+[sympy__sympy__1.6] [sympy__sympy-18621] Std. Output:
+Checking patch sympy/matrices/expressions/__init__.py...
+Checking patch sympy/matrices/expressions/blockmatrix.py...
+Checking patch sympy/matrices/immutable.py...
+Checking patch sympy/utilities/decorator.py...
+Applied patch sympy/matrices/expressions/__init__.py cleanly.
+Applied patch sympy/matrices/expressions/blockmatrix.py cleanly.
+Applied patch sympy/matrices/immutable.py cleanly.
+Applied patch sympy/utilities/decorator.py cleanly.
+ 
+[sympy__sympy__1.6] [sympy__sympy-18621] Return Code: 0 
+[sympy__sympy__1.6] [sympy__sympy-18621] Apply patch successful (pred) 
+>>>>> Applied Patch (pred)
+[sympy__sympy__1.6] [sympy__sympy-18621] Command: git restore sympy/matrices/expressions/tests/test_blockmatrix.py 
+[sympy__sympy__1.6] [sympy__sympy-18621] Subprocess args: {"cwd": "/home/swe-bench/sympy__sympy", "check": true, "shell": false, "universal_newlines": true, "stdout": -1, "stderr": -2} 
+[sympy__sympy__1.6] [sympy__sympy-18621] Std. Output:
+ 
+[sympy__sympy__1.6] [sympy__sympy-18621] Return Code: 0 
+[sympy__sympy__1.6] [sympy__sympy-18621] Command: git apply -v /home/swe-bench/temp_sympy__sympy-18621_test.patch 
+[sympy__sympy__1.6] [sympy__sympy-18621] Subprocess args: {"cwd": "/home/swe-bench/sympy__sympy", "check": false, "shell": false, "universal_newlines": true, "stdout": -1, "stderr": -2} 
+[sympy__sympy__1.6] [sympy__sympy-18621] Std. Output:
+Checking patch sympy/matrices/expressions/tests/test_blockmatrix.py...
+Applied patch sympy/matrices/expressions/tests/test_blockmatrix.py cleanly.
+ 
+[sympy__sympy__1.6] [sympy__sympy-18621] Return Code: 0 
+[sympy__sympy__1.6] [sympy__sympy-18621] Apply patch successful (test) 
+>>>>> Applied Patch (test)
+Test Script: conda run -n sympy__sympy__1.6  bin/test -C --verbose sympy/matrices/expressions/tests/test_blockmatrix.py;
+[sympy__sympy__1.6] [sympy__sympy-18621] Command: conda run -n sympy__sympy__1.6 bin/test -C --verbose sympy/matrices/expressions/tests/test_blockmatrix.py 
+[sympy__sympy__1.6] [sympy__sympy-18621] Subprocess args: {"cwd": "/home/swe-bench/sympy__sympy", "check": false, "shell": false, "universal_newlines": true, "stdout": -1, "stderr": -2, "timeout": 1800} 
+[sympy__sympy__1.6] [sympy__sympy-18621] Std. Output:
+Traceback (most recent call last):
+  File "/home/swe-bench/sympy__sympy/bin/test", line 105, in <module>
+    import sympy
+  File "/home/swe-bench/sympy__sympy/sympy/__init__.py", line 51, in <module>
+    from .core import (sympify, SympifyError, cacheit, Basic, Atom,
+  File "/home/swe-bench/sympy__sympy/sympy/core/__init__.py", line 8, in <module>
+    from .expr import Expr, AtomicExpr, UnevaluatedExpr
+  File "/home/swe-bench/sympy__sympy/sympy/core/expr.py", line 8, in <module>
+    from .evalf import EvalfMixin, pure_complex
+  File "/home/swe-bench/sympy__sympy/sympy/core/evalf.py", line 30, in <module>
+    from sympy.utilities.iterables import is_sequence
+  File "/home/swe-bench/sympy__sympy/sympy/utilities/__init__.py", line 13, in <module>
+    from .lambdify import lambdify
+  File "/home/swe-bench/sympy__sympy/sympy/utilities/lambdify.py", line 18, in <module>
+    from sympy.utilities.decorator import doctest_depends_on
+ImportError: cannot import name 'doctest_depends_on' from 'sympy.utilities.decorator' (/home/swe-bench/sympy__sympy/sympy/utilities/decorator.py)
+
+ERROR conda.cli.main_run:execute(124): `conda run bin/test -C --verbose sympy/matrices/expressions/tests/test_blockmatrix.py` failed. (See above for error)
+ 
+[sympy__sympy__1.6] [sympy__sympy-18621] Return Code: 1 
+
+>>>>> Some Tests Failed
+[sympy__sympy__1.6] [sympy__sympy-18621] Test script run successful 

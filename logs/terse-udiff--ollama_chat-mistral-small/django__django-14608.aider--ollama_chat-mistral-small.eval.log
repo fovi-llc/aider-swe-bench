@@ -1,0 +1,12 @@
+[django__django__4.0] [django__django-14608] Command: python --version 
+[django__django__4.0] [django__django-14608] Subprocess args: {"cwd": "/opt/django__django", "check": true, "shell": false, "universal_newlines": true, "stdout": -1, "stderr": -2} 
+[django__django__4.0] [django__django-14608] Error: Command '['python', '--version']' returned non-zero exit status 132. 
+[django__django__4.0] [django__django-14608] Error stdout:  
+[django__django__4.0] [django__django-14608] Error traceback: Traceback (most recent call last):
+  File "/opt/swebench_docker/context_manager.py", line 58, in __call__
+    output = subprocess.run(cmd, **combined_args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/pyenv/versions/3.11.9/lib/python3.11/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['python', '--version']' returned non-zero exit status 132.
+ 
